@@ -62,7 +62,7 @@ export const RealmSelector = () => {
         <Divider key={1} />,
         <DropdownItem component="div" key="add">
           <Button
-            className="realmSelectButton"
+            isBlock
             onClick={() => history.push("/add-realm")}
           >
             Create Realm
