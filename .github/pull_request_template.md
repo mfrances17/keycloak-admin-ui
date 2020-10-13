@@ -1,21 +1,21 @@
 ## Motivation
-<!-- Add references to relevant tickets, issues, or design specs and/or a short description of what motivated you to do it. -->
+<!-- Add references to relevant tickets, issues, design specs and/or a short description of what motivated you to do it. -->
 
 ## Brief Description
 <!-- Add a short answer for: 
-What was done in this PR? (e.g Don't allow users has access to the feature X.)
-Why it was done? (e.g The feature X was deprecated.)
-How it was done? (e.g By removing this feature from ... OR By removing just the button but not its implementation ... )
+What was done in this PR? (e.g Fix to prevent users from accessing feature X.)
+Why it was done? (e.g Feature X was deprecated.)
 -->
 
 ## Verification Steps
 <!--
-Add the steps required to check this change. Following an example.
+Add the steps required to verify this change. Keep in mind that these steps should be written so groups unfamiliar with the 
+new functionality can follow them, such as QE or documentation.
 
-1. Go to `XX >> YY >> SS`
-2. Create a new item `N` with the info `X`
-3. Try to edit this item
-4. Check if in the left menu the feature X is not so long present.
+1. Go to `XX >> YY >> SS`.
+2. Create a new item `N` with info `X`.
+3. Right-click the item and select Delete.
+4. Verify that the item is no longer present in the left navigation menu.
 -->
 
 ## Checklist:
@@ -37,5 +37,5 @@ Add the steps required to check this change. Following an example.
 
 ## Additional Notes
 <!-- 
-Add images and/or .gifs to illustrate what was changed if this pull request modifies the appearance/output of something presented to the users. 
+Add images and/or screen caps to illustrate what was changed if this pull request adds to or modifies existing user-visible appearance/output. 
 -->
