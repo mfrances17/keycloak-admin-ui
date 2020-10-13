@@ -28,12 +28,7 @@ new functionality can follow them, such as QE or documentation.
 - [ ] axe report has been run and resulting a11y issues have been resolved
 - [ ] Unit tests have been created/updated
 - [ ] Formatting has been performed via prettier/eslint
-
-
-## Progress
-
-- [x] Finished task
-- [ ] TODO
+- [ ] Type checking has been performed via 'yarn check-types'
 
 ## Additional Notes
 <!-- 
