@@ -4,20 +4,20 @@ import {
   AlertVariant,
   Dropdown,
   DropdownItem,
-  DropdownToggle,
+  DropdownToggle
 } from "@patternfly/react-core";
 import {
   Table,
   TableBody,
   TableHeader,
-  TableVariant,
+  TableVariant
 } from "@patternfly/react-table";
 import { CaretDownIcon } from "@patternfly/react-icons";
 
 import { useServerInfo } from "../../context/server-info/ServerInfoProvider";
 import {
   ClientScopeRepresentation,
-  ProtocolMapperRepresentation,
+  ProtocolMapperRepresentation
 } from "../models/client-scope";
 import { TableToolbar } from "../../components/table-toolbar/TableToolbar";
 import { ListEmptyState } from "../../components/list-empty-state/ListEmptyState";
@@ -25,16 +25,16 @@ import { HttpClientContext } from "../../context/http-service/HttpClientContext"
 import { RealmContext } from "../../context/realm-context/RealmContext";
 import { useAlerts } from "../../components/alert/Alerts";
 
-type MapperListProps = {
+interface MapperListProps {
   clientScope: ClientScopeRepresentation;
-};
+}
 
-type Row = {
+interface Row {
   name: string;
   category: string;
   type: string;
   priority: number;
-};
+}
 
 export const MapperList = ({ clientScope }: MapperListProps) => {
   const { t } = useTranslation("client-scopes");
@@ -63,9 +63,9 @@ export const MapperList = ({ clientScope }: MapperListProps) => {
   }
 
   const data = mapperList
-    .map((mapper) => {
+    .map(mapper => {
       const mapperType = mapperTypes.filter(
-        (type) => type.id === mapper.protocolMapper
+        type => type.id === mapper.protocolMapper
       )[0];
       return {
         mapper,
@@ -73,15 +73,15 @@ export const MapperList = ({ clientScope }: MapperListProps) => {
           name: mapper.name,
           category: mapperType.category,
           type: mapperType.name,
-          priority: mapperType.priority,
-        } as Row,
+          priority: mapperType.priority
+        } as Row
       };
     })
     .sort((a, b) => a.cells.priority - b.cells.priority);
 
   const filterData = (search: string) => {
     setFilteredData(
-      data.filter((column) =>
+      data.filter(column =>
         column.cells.name.toLowerCase().includes(search.toLowerCase())
       )
     );
@@ -112,7 +112,7 @@ export const MapperList = ({ clientScope }: MapperListProps) => {
             </DropdownItem>,
             <DropdownItem key="byConfiguration">
               {t("byConfiguration")}
-            </DropdownItem>,
+            </DropdownItem>
           ]}
         />
       }
@@ -120,9 +120,10 @@ export const MapperList = ({ clientScope }: MapperListProps) => {
       <Table
         variant={TableVariant.compact}
         cells={[t("name"), t("category"), t("type"), t("priority")]}
-        rows={(filteredData || data).map((cell) => {
-          return { cells: Object.values(cell.cells), mapper: cell.mapper };
-        })}
+        rows={(filteredData || data).map(cell => ({
+          cells: Object.values(cell.cells),
+          mapper: cell.mapper
+        }))}
         aria-label={t("clientScopeList")}
         actions={[
           {
@@ -139,8 +140,8 @@ export const MapperList = ({ clientScope }: MapperListProps) => {
                   AlertVariant.danger
                 );
               }
-            },
-          },
+            }
+          }
         ]}
       >
         <TableHeader />
