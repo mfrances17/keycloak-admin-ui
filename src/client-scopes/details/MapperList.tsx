@@ -25,16 +25,16 @@ import { HttpClientContext } from "../../context/http-service/HttpClientContext"
 import { RealmContext } from "../../context/realm-context/RealmContext";
 import { useAlerts } from "../../components/alert/Alerts";
 
-interface MapperListProps {
+type MapperListProps = {
   clientScope: ClientScopeRepresentation;
-}
+};
 
-interface Row {
+type Row = {
   name: string;
   category: string;
   type: string;
   priority: number;
-}
+};
 
 export const MapperList = ({ clientScope }: MapperListProps) => {
   const { t } = useTranslation("client-scopes");
