@@ -21,10 +21,8 @@ new functionality can follow them, such as QE or documentation.
 ## Checklist:
 
 - [ ] Code has been tested locally by PR requester
-- [ ] Changes have been successfully verified by another team member
 - [ ] User-visible strings are using the react-i18next framework (useTranslation)
 - [ ] Help has been implemented
-- [ ] Storybook has been added
 - [ ] axe report has been run and resulting a11y issues have been resolved
 - [ ] Unit tests have been created/updated
 - [ ] Formatting has been performed via prettier/eslint
