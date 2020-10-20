@@ -25,23 +25,21 @@ const AppContexts = ({ children }: { children: ReactNode }) => (
   </WhoAmIContextProvider>
 );
 
-export const App = () => {
-  return (
-    <AppContexts>
-      <Router>
-        <Page
-          header={<Header />}
-          isManagedSidebar
-          sidebar={<PageNav />}
-          breadcrumb={<PageBreadCrumbs />}
-        >
-          <Switch>
-            {routes(() => {}).map((route, i) => (
-              <Route key={i} {...route} exact />
-            ))}
-          </Switch>
-        </Page>
-      </Router>
-    </AppContexts>
-  );
-};
+export const App = () => (
+  <AppContexts>
+    <Router>
+      <Page
+        header={<Header />}
+        isManagedSidebar
+        sidebar={<PageNav />}
+        breadcrumb={<PageBreadCrumbs />}
+      >
+        <Switch>
+          {routes(() => {}).map((route, i) => (
+            <Route key={i} {...route} exact />
+          ))}
+        </Switch>
+      </Page>
+    </Router>
+  </AppContexts>
+);

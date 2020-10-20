@@ -6,7 +6,7 @@ import {
   AlertVariant,
   WizardFooter,
   WizardContextConsumer,
-  Button,
+  Button
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -35,7 +35,7 @@ export const NewClientForm = () => {
     serviceAccountsEnabled: false,
     implicitFlowEnabled: false,
     directAccessGrantsEnabled: false,
-    standardFlowEnabled: false,
+    standardFlowEnabled: false
   });
   const { addAlert } = useAlerts();
   const methods = useForm<ClientRepresentation>({ defaultValues: client });
@@ -52,40 +52,38 @@ export const NewClientForm = () => {
   const Footer = () => (
     <WizardFooter>
       <WizardContextConsumer>
-        {({ activeStep, onNext, onBack, onClose }) => {
-          return (
-            <>
-              <Button
-                variant="primary"
-                type="submit"
-                onClick={async () => {
-                  if (await methods.trigger()) {
-                    setClient({ ...client, ...methods.getValues() });
-                    onNext();
-                  }
-                }}
-              >
-                {activeStep.name === t("capabilityConfig")
-                  ? t("common:save")
-                  : t("common:next")}
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => {
+        {({ activeStep, onNext, onBack, onClose }) => (
+          <>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={async () => {
+                if (await methods.trigger()) {
                   setClient({ ...client, ...methods.getValues() });
-                  methods.reset({ ...client, ...methods.getValues() });
-                  onBack();
-                }}
-                isDisabled={activeStep.name === t("generalSettings")}
-              >
-                {t("common:back")}
-              </Button>
-              <Button variant="link" onClick={onClose}>
-                {t("common:cancel")}
-              </Button>
-            </>
-          );
-        }}
+                  onNext();
+                }
+              }}
+            >
+              {activeStep.name === t("capabilityConfig")
+                ? t("common:save")
+                : t("common:next")}
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setClient({ ...client, ...methods.getValues() });
+                methods.reset({ ...client, ...methods.getValues() });
+                onBack();
+              }}
+              isDisabled={activeStep.name === t("generalSettings")}
+            >
+              {t("common:back")}
+            </Button>
+            <Button variant="link" onClick={onClose}>
+              {t("common:cancel")}
+            </Button>
+          </>
+        )}
       </WizardContextConsumer>
     </WizardFooter>
   );
@@ -105,12 +103,12 @@ export const NewClientForm = () => {
           steps={[
             {
               name: t("generalSettings"),
-              component: <GeneralSettings form={methods} />,
+              component: <GeneralSettings form={methods} />
             },
             {
               name: t("capabilityConfig"),
-              component: <CapabilityConfig form={methods} />,
-            },
+              component: <CapabilityConfig form={methods} />
+            }
           ]}
           footer={<Footer />}
           onSave={() => save()}

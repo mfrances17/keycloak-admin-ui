@@ -3,7 +3,7 @@ import {
   AlertGroup,
   Alert,
   AlertActionCloseButton,
-  AlertVariant,
+  AlertVariant
 } from "@patternfly/react-core";
 
 export type AlertType = {

@@ -5,31 +5,31 @@ import { ButtonProps } from "@patternfly/react-core";
 
 export default {
   title: "External link",
-  component: ExternalLink,
+  component: ExternalLink
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => <ExternalLink {...args} />;
+const Template: Story<ButtonProps> = args => <ExternalLink {...args} />;
 
 export const WithTitle = Template.bind({});
 WithTitle.args = {
   title: "With title",
-  href: "http://test.nl",
+  href: "http://test.nl"
 };
 
 export const WithoutTitle = Template.bind({});
 WithoutTitle.args = {
-  href: "http://some-other-link.nl/super",
+  href: "http://some-other-link.nl/super"
 };
 
 export const ApplicationLink = Template.bind({});
 ApplicationLink.args = {
   title: "Application link",
-  href: "/application/main",
+  href: "/application/main"
 };
 
 export const DisabledLink = Template.bind({});
 DisabledLink.args = {
   title: "Disabled link",
   href: "http://some-other-link.nl/super",
-  isAriaDisabled: true,
+  isAriaDisabled: true
 };

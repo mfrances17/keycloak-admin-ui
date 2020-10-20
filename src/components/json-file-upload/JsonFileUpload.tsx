@@ -4,7 +4,7 @@ import {
   FileUpload,
   Modal,
   ModalVariant,
-  Button,
+  Button
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 
@@ -37,7 +37,7 @@ export const JsonFileUpload = ({
     value: "",
     filename: "",
     isLoading: false,
-    modal: false,
+    modal: false
   };
   const [fileUpload, setFileUpload] = useState<FileUpload>(defaultUpload);
   const removeDialog = () => setFileUpload({ ...fileUpload, modal: false });
@@ -55,7 +55,7 @@ export const JsonFileUpload = ({
       setFileUpload({
         ...fileUpload,
         value,
-        filename,
+        filename
       });
       onChange(value, filename, event);
     }
@@ -73,7 +73,7 @@ export const JsonFileUpload = ({
             <Button
               key="confirm"
               variant="primary"
-              onClick={(event) => {
+              onClick={event => {
                 setFileUpload(defaultUpload);
                 onChange("", "", event);
               }}
@@ -82,7 +82,7 @@ export const JsonFileUpload = ({
             </Button>,
             <Button key="cancel" variant="link" onClick={removeDialog}>
               {t("cancel")}
-            </Button>,
+            </Button>
           ]}
         >
           {t("Are you sure you want to clear this file?")}
@@ -109,7 +109,7 @@ export const JsonFileUpload = ({
           }
           isLoading={fileUpload.isLoading}
           dropzoneProps={{
-            accept: ".json",
+            accept: ".json"
           }}
         />
       </FormGroup>

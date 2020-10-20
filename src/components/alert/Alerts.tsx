@@ -7,7 +7,7 @@ type AlertProps = {
 };
 
 export const AlertContext = createContext<AlertProps>({
-  addAlert: () => {},
+  addAlert: () => {}
 });
 
 export const useAlerts = () => useContext(AlertContext);
@@ -17,7 +17,8 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
   const createId = () => new Date().getTime();
 
   const hideAlert = (key: number) => {
-    setAlerts((alerts) => [...alerts.filter((el) => el.key !== key)]);
+    // eslint-disable-next-line no-shadow
+    setAlerts(alerts => [...alerts.filter(el => el.key !== key)]);
   };
 
   const addAlert = (

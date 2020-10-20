@@ -11,7 +11,7 @@ import {
   PageHeader,
   PageHeaderTools,
   PageHeaderToolsItem,
-  PageHeaderToolsGroup,
+  PageHeaderToolsGroup
 } from "@patternfly/react-core";
 import { HelpIcon } from "@patternfly/react-icons";
 import { KeycloakContext } from "./context/auth/KeycloakContext";
@@ -19,20 +19,18 @@ import { WhoAmIContext } from "./context/whoami/WhoAmI";
 import { HelpHeader } from "./components/help-enabler/HelpHeader";
 import { Link } from "react-router-dom";
 
-export const Header = () => {
-  return (
-    <PageHeader
-      showNavToggle
-      logo={
-        <Link to="/">
-          <Brand src="/logo.svg" alt="Logo" />
-        </Link>
-      }
-      logoComponent="div"
-      headerTools={headerTools()}
-    />
-  );
-};
+export const Header = () => (
+  <PageHeader
+    showNavToggle
+    logo={
+      <Link to="/">
+        <Brand src="/logo.svg" alt="Logo" />
+      </Link>
+    }
+    logoComponent="div"
+    headerTools={headerTools()}
+  />
+);
 
 const ManageAccountDropdownItem = () => {
   const keycloak = useContext(KeycloakContext);
@@ -69,51 +67,49 @@ const kebabDropdownItems = [
   <ServerInfoDropdownItem key="kebab Server Info" />,
   <HelpDropdownItem key="kebab Help" />,
   <DropdownSeparator key="kebab sign out seperator" />,
-  <SignOutDropdownItem key="kebab Sign out" />,
+  <SignOutDropdownItem key="kebab Sign out" />
 ];
 
 const userDropdownItems = [
   <ManageAccountDropdownItem key="Manage Account" />,
   <ServerInfoDropdownItem key="Server info" />,
   <DropdownSeparator key="sign out seperator" />,
-  <SignOutDropdownItem key="Sign out" />,
+  <SignOutDropdownItem key="Sign out" />
 ];
 
-const headerTools = () => {
-  return (
-    <PageHeaderTools>
-      <PageHeaderToolsGroup
+const headerTools = () => (
+  <PageHeaderTools>
+    <PageHeaderToolsGroup
+      visibility={{
+        default: "hidden",
+        md: "visible"
+      }} /** the settings and help icon buttons are only visible on desktop sizes and replaced by a kebab dropdown for other sizes */
+    >
+      <PageHeaderToolsItem>
+        <HelpHeader />
+      </PageHeaderToolsItem>
+    </PageHeaderToolsGroup>
+
+    <PageHeaderToolsGroup>
+      <PageHeaderToolsItem
+        visibility={{
+          md: "hidden"
+        }} /** this kebab dropdown replaces the icon buttons and is hidden for desktop sizes */
+      >
+        <KebabDropdown />
+      </PageHeaderToolsItem>
+      <PageHeaderToolsItem
         visibility={{
           default: "hidden",
-          md: "visible",
-        }} /** the settings and help icon buttons are only visible on desktop sizes and replaced by a kebab dropdown for other sizes */
+          md: "visible"
+        }} /** this user dropdown is hidden on mobile sizes */
       >
-        <PageHeaderToolsItem>
-          <HelpHeader />
-        </PageHeaderToolsItem>
-      </PageHeaderToolsGroup>
-
-      <PageHeaderToolsGroup>
-        <PageHeaderToolsItem
-          visibility={{
-            md: "hidden",
-          }} /** this kebab dropdown replaces the icon buttons and is hidden for desktop sizes */
-        >
-          <KebabDropdown />
-        </PageHeaderToolsItem>
-        <PageHeaderToolsItem
-          visibility={{
-            default: "hidden",
-            md: "visible",
-          }} /** this user dropdown is hidden on mobile sizes */
-        >
-          <UserDropdown />
-        </PageHeaderToolsItem>
-      </PageHeaderToolsGroup>
-      <Avatar src="/img_avatar.svg" alt="Avatar image" />
-    </PageHeaderTools>
-  );
-};
+        <UserDropdown />
+      </PageHeaderToolsItem>
+    </PageHeaderToolsGroup>
+    <Avatar src="/img_avatar.svg" alt="Avatar image" />
+  </PageHeaderTools>
+);
 
 const KebabDropdown = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -134,7 +130,6 @@ const KebabDropdown = () => {
 };
 
 const UserDropdown = () => {
-  const keycloak = useContext(KeycloakContext);
   const whoami = useContext(WhoAmIContext);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 

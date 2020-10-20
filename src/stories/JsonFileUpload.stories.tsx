@@ -3,20 +3,20 @@ import { Meta, Story } from "@storybook/react";
 
 import {
   JsonFileUpload,
-  JsonFileUploadProps,
+  JsonFileUploadProps
 } from "../components/json-file-upload/JsonFileUpload";
 
 export default {
-  title: "Json file upload dailog",
+  title: "Json file upload dialog",
   component: JsonFileUpload,
-  parameters: { actions: { argTypesRegex: "^on.*" } },
+  parameters: { actions: { argTypesRegex: "^on.*" } }
 } as Meta;
 
-const Template: Story<JsonFileUploadProps> = (args) => (
+const Template: Story<JsonFileUploadProps> = args => (
   <JsonFileUpload {...args} />
 );
 
 export const Dialog = Template.bind({});
 Dialog.args = {
-  id: "jsonFile",
+  id: "jsonFile"
 };

@@ -5,7 +5,7 @@ import { DataLoader } from "../components/data-loader/DataLoader";
 
 export default {
   title: "Data Loader",
-  component: DataLoader,
+  component: DataLoader
 } as Meta;
 
 type Post = {
@@ -17,10 +17,10 @@ export const loadPosts = () => {
   const PostLoader = (props: { url: string; children: ReactNode }) => {
     const loader = async () => {
       const wait = (ms: number, value: Post) =>
-        new Promise((resolve) => setTimeout(resolve, ms, value));
+        new Promise(resolve => setTimeout(resolve, ms, value));
       return await fetch(props.url)
-        .then((res) => res.json())
-        .then((value) => wait(3000, value));
+        .then(res => res.json())
+        .then(value => wait(3000, value));
     };
     return <DataLoader loader={loader}>{props.children}</DataLoader>;
   };

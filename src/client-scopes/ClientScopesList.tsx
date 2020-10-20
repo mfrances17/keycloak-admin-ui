@@ -5,7 +5,7 @@ import {
   Table,
   TableBody,
   TableHeader,
-  TableVariant,
+  TableVariant
 } from "@patternfly/react-table";
 
 import { ClientScopeRepresentation } from "./models/client-scope";
@@ -20,25 +20,23 @@ export const ClientScopeList = ({ clientScopes }: ClientScopeListProps) => {
   const columns: (keyof ClientScopeRepresentation)[] = [
     "name",
     "description",
-    "protocol",
+    "protocol"
   ];
 
-  const data = clientScopes.map((c) => {
-    return {
-      cells: columns.map((col) => {
-        if (col === "name") {
-          return (
-            <>
-              <Link key={c.id} to={`/client-scopes/${c.id}`}>
-                {c[col]}
-              </Link>
-            </>
-          );
-        }
-        return c[col];
-      }),
-    };
-  });
+  const data = clientScopes.map(c => ({
+    cells: columns.map(col => {
+      if (col === "name") {
+        return (
+          <>
+            <Link key={c.id} to={`/client-scopes/${c.id}`}>
+              {c[col]}
+            </Link>
+          </>
+        );
+      }
+      return c[col];
+    })
+  }));
 
   return (
     <>
@@ -48,19 +46,19 @@ export const ClientScopeList = ({ clientScopes }: ClientScopeListProps) => {
           { title: t("name") },
           { title: t("description") },
           {
-            title: t("protocol"),
-          },
+            title: t("protocol")
+          }
         ]}
         rows={data}
         actions={[
           {
             title: t("common:export"),
-            onClick: () => {},
+            onClick: () => {}
           },
           {
             title: t("common:delete"),
-            onClick: () => {},
-          },
+            onClick: () => {}
+          }
         ]}
         aria-label={t("clientScopeList")}
       >

@@ -11,7 +11,7 @@ import {
   SelectOption,
   SelectVariant,
   Switch,
-  TextInput,
+  TextInput
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import { Controller, useForm } from "react-hook-form";
@@ -47,9 +47,9 @@ export const ClientScopeForm = () => {
           `/admin/realms/${realm}/client-scopes/${id}`
         );
         if (response.data) {
-          Object.entries(response.data).map((entry) => {
+          Object.entries(response.data).map(entry => {
             if (entry[0] === "attributes") {
-              Object.keys(entry[1]).map((key) => {
+              Object.keys(entry[1]).map(key => {
                 const newKey = key.replace(/\./g, "_");
                 setValue("attributes." + newKey, entry[1][key]);
               });
@@ -63,7 +63,7 @@ export const ClientScopeForm = () => {
 
   const save = async (clientScopes: ClientScopeRepresentation) => {
     try {
-      const keyValues = Object.keys(clientScopes.attributes!).map((key) => {
+      const keyValues = Object.keys(clientScopes.attributes!).map(key => {
         const newKey = key.replace(/_/g, ".");
         return { [newKey]: clientScopes.attributes![key] };
       });
@@ -152,6 +152,7 @@ export const ClientScopeForm = () => {
                   toggleId="kc-protocol"
                   required
                   onToggle={() => isOpen(!open)}
+                  // eslint-disable-next-line no-shadow
                   onSelect={(_, value, isPlaceholder) => {
                     onChange(isPlaceholder ? "" : (value as string));
                     isOpen(false);
@@ -162,7 +163,7 @@ export const ClientScopeForm = () => {
                   placeholderText={t("common:selectOne")}
                   isOpen={open}
                 >
-                  {providers.map((option) => (
+                  {providers.map(option => (
                     <SelectOption
                       selected={option === value}
                       key={option}
@@ -240,7 +241,8 @@ export const ClientScopeForm = () => {
                   label={t("common:on")}
                   labelOff={t("common:off")}
                   isChecked={value === "true"}
-                  onChange={(value) => onChange("" + value)}
+                  // eslint-disable-next-line no-shadow
+                  onChange={value => onChange("" + value)}
                 />
               )}
             />

@@ -3,7 +3,7 @@ import {
   TextContent,
   Text,
   TextVariants,
-  ButtonVariant,
+  ButtonVariant
 } from "@patternfly/react-core";
 import { Meta, Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -11,15 +11,15 @@ import { action } from "@storybook/addon-actions";
 import {
   ConfirmDialogModal,
   ConfirmDialogModalProps,
-  useConfirmDialog,
+  useConfirmDialog
 } from "../components/confirm-dialog/ConfirmDialog";
 
 export default {
   title: "Confirmation Dialog",
-  component: ConfirmDialogModal,
+  component: ConfirmDialogModal
 } as Meta;
 
-const Template: Story<ConfirmDialogModalProps> = (args) => (
+const Template: Story<ConfirmDialogModalProps> = args => (
   <ConfirmDialogModal {...args} />
 );
 
@@ -28,7 +28,7 @@ Simple.args = {
   titleKey: "Delete app02?",
   messageKey: "If you delete this client, all associated data will be removed.",
   continueButtonLabel: "Delete",
-  continueButtonVariant: ButtonVariant.danger,
+  continueButtonVariant: ButtonVariant.danger
 };
 
 export const Children = Template.bind({});
@@ -42,7 +42,7 @@ Children.args = {
       </TextContent>
       <p>Example of some other patternfly components.</p>
     </>
-  ),
+  )
 };
 
 const Test = () => {
@@ -52,7 +52,7 @@ const Test = () => {
       "If you delete this client, all associated data will be removed.",
     continueButtonLabel: "Delete",
     onConfirm: action("confirm"),
-    onCancel: action("cancel"),
+    onCancel: action("cancel")
   });
   return (
     <>

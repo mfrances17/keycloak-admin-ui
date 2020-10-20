@@ -10,7 +10,7 @@ import {
   SplitItem,
   Split,
   ContextSelector,
-  ContextSelectorItem,
+  ContextSelectorItem
 } from "@patternfly/react-core";
 import { CheckIcon } from "@patternfly/react-icons";
 
@@ -58,7 +58,7 @@ export const RealmSelector = ({ realmList }: RealmSelectorProps) => {
       search === ""
         ? realmList
         : realmList.filter(
-            (r) => r.realm.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            r => r.realm.toLowerCase().indexOf(search.toLowerCase()) !== -1
           );
     setFilteredItems(filtered || []);
   };
@@ -67,7 +67,7 @@ export const RealmSelector = ({ realmList }: RealmSelectorProps) => {
     onFilter();
   }, [search]);
 
-  const dropdownItems = realmList.map((r) => (
+  const dropdownItems = realmList.map(r => (
     <DropdownItem
       key={r.id}
       onClick={() => {
@@ -106,11 +106,11 @@ export const RealmSelector = ({ realmList }: RealmSelectorProps) => {
             setOpen(!open);
           }}
           searchInputValue={search}
-          onSearchInputChange={(value) => setSearch(value)}
+          onSearchInputChange={value => setSearch(value)}
           onSearchButtonClick={() => onFilter()}
           className="keycloak__realm_selector__context_selector"
         >
-          {filteredItems.map((item) => (
+          {filteredItems.map(item => (
             <ContextSelectorItem key={item.id}>
               <RealmText value={item.realm} />
             </ContextSelectorItem>

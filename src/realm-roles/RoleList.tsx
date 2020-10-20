@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableVariant,
   IFormatter,
-  IFormatterValueType,
+  IFormatterValueType
 } from "@patternfly/react-table";
 
 import { ExternalLink } from "../components/external-link/ExternalLink";
@@ -26,7 +26,7 @@ type RolesListProps = {
 const columns: (keyof RoleRepresentation)[] = [
   "name",
   "composite",
-  "description",
+  "description"
 ];
 
 export const RolesList = ({ roles, refresh }: RolesListProps) => {
@@ -36,15 +36,11 @@ export const RolesList = ({ roles, refresh }: RolesListProps) => {
   const { addAlert } = useAlerts();
   const [selectedRowId, setSelectedRowId] = useState(-1);
 
-  const emptyFormatter = (): IFormatter => (data?: IFormatterValueType) => {
-    return data ? data : "—";
-  };
+  const emptyFormatter = (): IFormatter => (data?: IFormatterValueType) =>
+    data ? data : "—";
 
-  const externalLink = (): IFormatter => (data?: IFormatterValueType) => {
-    return (data ? (
-      <ExternalLink href={data.toString()} />
-    ) : undefined) as object;
-  };
+  const externalLink = (): IFormatter => (data?: IFormatterValueType) =>
+    (data ? <ExternalLink href={data.toString()} /> : undefined) as object;
 
   const boolFormatter = (): IFormatter => (data?: IFormatterValueType) => {
     const boolVal = data?.toString();
@@ -53,14 +49,15 @@ export const RolesList = ({ roles, refresh }: RolesListProps) => {
       ? boolVal.charAt(0).toUpperCase() + boolVal.slice(1)
       : undefined) as string;
   };
-  const data = roles!.map((column) => {
-    return { cells: columns.map((col) => column[col]), role: column };
-  });
+  const data = roles!.map(column => ({
+    cells: columns.map(col => column[col]),
+    role: column
+  }));
 
   let selectedRoleName;
   if (selectedRowId === data.length) {
     selectedRoleName = data[selectedRowId - 1].role.name;
-  } else if (selectedRowId != -1) {
+  } else if (selectedRowId !== -1) {
     selectedRoleName = data[selectedRowId].role.name;
   }
 
@@ -79,7 +76,7 @@ export const RolesList = ({ roles, refresh }: RolesListProps) => {
       } catch (error) {
         addAlert(`${t("roleDeleteError")} ${error}`, AlertVariant.danger);
       }
-    },
+    }
   });
 
   return (
@@ -90,13 +87,13 @@ export const RolesList = ({ roles, refresh }: RolesListProps) => {
         cells={[
           {
             title: t("roleName"),
-            cellFormatters: [externalLink(), emptyFormatter()],
+            cellFormatters: [externalLink(), emptyFormatter()]
           },
           {
             title: t("composite"),
-            cellFormatters: [boolFormatter(), emptyFormatter()],
+            cellFormatters: [boolFormatter(), emptyFormatter()]
           },
-          { title: t("description"), cellFormatters: [emptyFormatter()] },
+          { title: t("description"), cellFormatters: [emptyFormatter()] }
         ]}
         rows={data}
         actions={[
@@ -105,8 +102,8 @@ export const RolesList = ({ roles, refresh }: RolesListProps) => {
             onClick: (_, rowId) => {
               setSelectedRowId(rowId);
               toggleDeleteDialog();
-            },
-          },
+            }
+          }
         ]}
         aria-label="Roles list"
       >

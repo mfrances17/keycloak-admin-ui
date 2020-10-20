@@ -5,7 +5,7 @@ import {
   Split,
   SplitItem,
   Button,
-  ButtonVariant,
+  ButtonVariant
 } from "@patternfly/react-core";
 import { MinusIcon, PlusIcon } from "@patternfly/react-icons";
 
@@ -14,13 +14,11 @@ type MultiLine = {
 };
 
 export function convertToMultiline(fields: string[]): MultiLine[] {
-  return fields.map((field) => {
-    return { value: field };
-  });
+  return fields.map(field => ({ value: field }));
 }
 
 export function toValue(formValue: MultiLine[]): string[] {
-  return formValue.map((field) => field.value);
+  return formValue.map(field => field.value);
 }
 
 export type MultiLineInputProps = {
@@ -32,11 +30,11 @@ export const MultiLineInput = ({ name, form }: MultiLineInputProps) => {
   const { register, control } = form;
   const { fields, append, remove } = useFieldArray({
     name,
-    control,
+    control
   });
   useEffect(() => {
     form.reset({
-      [name]: [{ value: "" }],
+      [name]: [{ value: "" }]
     });
   }, []);
   return (

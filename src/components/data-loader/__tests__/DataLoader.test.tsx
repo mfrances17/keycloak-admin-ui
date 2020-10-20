@@ -20,7 +20,7 @@ describe("<DataLoader />", () => {
     await act(async () => {
       render(
         <DataLoader loader={loader}>
-          {(result) => (
+          {result => (
             <div>
               {result.data.map((d, i) => (
                 <i key={i}>{d}</i>

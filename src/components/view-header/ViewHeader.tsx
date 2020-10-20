@@ -14,13 +14,11 @@ import {
   ButtonProps,
   Dropdown,
   DropdownToggle,
-  DropdownPosition,
+  DropdownPosition
 } from "@patternfly/react-core";
 import { HelpContext } from "../help-enabler/HelpHeader";
 import { useTranslation } from "react-i18next";
-import { PageBreadCrumbs } from "../bread-crumb/PageBreadCrumbs";
 import { ExternalLink } from "../external-link/ExternalLink";
-import { isRowExpanded } from "@patternfly/react-table";
 
 export type ViewHeaderProps = {
   titleKey: string;
@@ -39,7 +37,7 @@ export const ViewHeader = ({
   subKeyLinkProps,
   dropdownItems,
   isEnabled = true,
-  onToggle,
+  onToggle
 }: ViewHeaderProps) => {
   const { t } = useTranslation();
   const { enabled } = useContext(HelpContext);
@@ -79,7 +77,7 @@ export const ViewHeader = ({
                       labelOff={t("common:disabled")}
                       className="pf-u-mr-lg"
                       isChecked={isEnabled}
-                      onChange={(value) => {
+                      onChange={value => {
                         if (onToggle) {
                           onToggle(value);
                         }

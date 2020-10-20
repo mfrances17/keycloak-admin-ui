@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableVariant,
   IFormatter,
-  IFormatterValueType,
+  IFormatterValueType
 } from "@patternfly/react-table";
 import { Badge, AlertVariant } from "@patternfly/react-core";
 
@@ -28,7 +28,7 @@ const columns: (keyof ClientRepresentation)[] = [
   "clientId",
   "protocol",
   "description",
-  "baseUrl",
+  "baseUrl"
 ];
 
 export const ClientList = ({ baseUrl, clients, refresh }: ClientListProps) => {
@@ -37,15 +37,11 @@ export const ClientList = ({ baseUrl, clients, refresh }: ClientListProps) => {
   const { realm } = useContext(RealmContext);
   const { addAlert } = useAlerts();
 
-  const emptyFormatter = (): IFormatter => (data?: IFormatterValueType) => {
-    return data ? data : "—";
-  };
+  const emptyFormatter = (): IFormatter => (data?: IFormatterValueType) =>
+    data ? data : "—";
 
-  const externalLink = (): IFormatter => (data?: IFormatterValueType) => {
-    return (data ? (
-      <ExternalLink href={data.toString()} />
-    ) : undefined) as object;
-  };
+  const externalLink = (): IFormatter => (data?: IFormatterValueType) =>
+    (data ? <ExternalLink href={data.toString()} /> : undefined) as object;
 
   /* eslint-disable no-template-curly-in-string */
   const replaceBaseUrl = (r: ClientRepresentation) => {
@@ -62,27 +58,25 @@ export const ClientList = ({ baseUrl, clients, refresh }: ClientListProps) => {
   };
 
   const data = clients!
-    .map((client) => {
+    .map(client => {
       client.baseUrl = replaceBaseUrl(client);
       return client;
     })
-    .map((client) => {
-      return {
-        cells: columns.map((col) =>
-          col === "clientId" ? (
-            <>
-              <Link key={client.id} to={`/clients/${client.id}`}>
-                {client.clientId}
-                {!client.enabled && <Badge isRead>Disabled</Badge>}
-              </Link>
-            </>
-          ) : (
-            client[col]
-          )
-        ),
-        client,
-      };
-    });
+    .map(client => ({
+      cells: columns.map(col =>
+        col === "clientId" ? (
+          <>
+            <Link key={client.id} to={`/clients/${client.id}`}>
+              {client.clientId}
+              {!client.enabled && <Badge isRead>Disabled</Badge>}
+            </Link>
+          </>
+        ) : (
+          client[col]
+        )
+      ),
+      client
+    }));
   return (
     <>
       <Table
@@ -93,8 +87,8 @@ export const ClientList = ({ baseUrl, clients, refresh }: ClientListProps) => {
           { title: t("description"), cellFormatters: [emptyFormatter()] },
           {
             title: t("homeURL"),
-            cellFormatters: [externalLink(), emptyFormatter()],
-          },
+            cellFormatters: [externalLink(), emptyFormatter()]
+          }
         ]}
         rows={data}
         actions={[
@@ -102,7 +96,7 @@ export const ClientList = ({ baseUrl, clients, refresh }: ClientListProps) => {
             title: t("common:export"),
             onClick: (_, rowId) => {
               exportClient(data[rowId].client);
-            },
+            }
           },
           {
             title: t("common:delete"),
@@ -119,8 +113,8 @@ export const ClientList = ({ baseUrl, clients, refresh }: ClientListProps) => {
                   AlertVariant.danger
                 );
               }
-            },
-          },
+            }
+          }
         ]}
         aria-label={t("clientList")}
       >

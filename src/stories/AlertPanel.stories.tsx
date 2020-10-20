@@ -7,7 +7,7 @@ import { AlertProvider, useAlerts } from "../components/alert/Alerts";
 
 export default {
   title: "Alert Panel",
-  component: AlertPanel,
+  component: AlertPanel
 } as Meta;
 
 export const Api = () => (

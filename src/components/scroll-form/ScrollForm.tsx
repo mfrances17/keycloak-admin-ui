@@ -13,7 +13,7 @@ export const ScrollForm = ({ sections, children }: ScrollFormProps) => {
   const [active, setActive] = useState(sections[0]);
   useEffect(() => {
     const getCurrentSection = () => {
-      for (let sectionName of sections) {
+      for (const sectionName of sections) {
         const section = document.getElementById(sectionName)!;
         const startAt = section.offsetTop;
         const endAt = startAt + section.offsetHeight;
@@ -27,6 +27,7 @@ export const ScrollForm = ({ sections, children }: ScrollFormProps) => {
     };
 
     window.addEventListener("scroll", () => {
+      // eslint-disable-next-line no-shadow
       const active = getCurrentSection();
       if (active) {
         setActive(active);
@@ -41,7 +42,7 @@ export const ScrollForm = ({ sections, children }: ScrollFormProps) => {
       </Title>
       <div className="pf-c-tabs pf-m-vertical">
         <ul className="pf-c-tabs__list">
-          {sections.map((cat) => (
+          {sections.map(cat => (
             <li
               className={
                 "pf-c-tabs__item" + (active === cat ? " pf-m-current" : "")

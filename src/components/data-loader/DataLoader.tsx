@@ -27,7 +27,7 @@ export function DataLoader<T>(props: DataLoaderProps<T>) {
     if (props.children instanceof Function) {
       return props.children({
         data: data.result,
-        refresh: () => loadData(),
+        refresh: () => loadData()
       });
     }
     return props.children;

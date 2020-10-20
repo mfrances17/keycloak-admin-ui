@@ -9,7 +9,7 @@ import {
   SelectVariant,
   Stack,
   StackItem,
-  TextArea,
+  TextArea
 } from "@patternfly/react-core";
 import FileSaver from "file-saver";
 
@@ -37,7 +37,8 @@ export const useDownloadDialog = (
   const [show, setShow] = useState(false);
 
   function toggleDialog() {
-    setShow((show) => !show);
+    // eslint-disable-next-line no-shadow
+    setShow(show => !show);
   }
 
   const Dialog = () => (
@@ -50,7 +51,7 @@ export const DownloadDialog = ({
   id,
   open,
   toggleDialog,
-  protocol = "openid-connect",
+  protocol = "openid-connect"
 }: DownloadDialogModalProps) => {
   const httpClient = useContext(HttpClientContext)!;
   const { realm } = useContext(RealmContext);
@@ -78,7 +79,8 @@ export const DownloadDialog = ({
       titleKey={t("clients:downloadAdaptorTitle")}
       continueButtonLabel={t("download")}
       onConfirm={() => {
-        const config = configFormats.find((config) => config.id === selected)!;
+        // eslint-disable-next-line no-shadow
+        const config = configFormats.find(config => config.id === selected)!;
         FileSaver.saveAs(
           new Blob([snippet], { type: config.mediaType }),
           config.filename
@@ -99,7 +101,7 @@ export const DownloadDialog = ({
               >
                 {
                   configFormats.find(
-                    (configFormat) => configFormat.id === selected
+                    configFormat => configFormat.id === selected
                   )?.helpText
                 }
               </Alert>
@@ -132,7 +134,7 @@ export const DownloadDialog = ({
                 }}
                 aria-label="Select Input"
               >
-                {configFormats.map((configFormat) => (
+                {configFormats.map(configFormat => (
                   <SelectOption
                     key={configFormat.id}
                     value={configFormat.id}

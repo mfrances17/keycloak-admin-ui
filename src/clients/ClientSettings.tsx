@@ -11,7 +11,7 @@ import {
   Button,
   AlertVariant,
   ButtonVariant,
-  DropdownItem,
+  DropdownItem
 } from "@patternfly/react-core";
 import { useParams } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
@@ -25,7 +25,7 @@ import { ClientRepresentation } from "../realm/models/Realm";
 import {
   convertToMultiline,
   MultiLineInput,
-  toValue,
+  toValue
 } from "../components/multi-line-input/MultiLineInput";
 import { useAlerts } from "../components/alert/Alerts";
 import { ViewHeader } from "../components/view-header/ViewHeader";
@@ -49,7 +49,7 @@ export const ClientSettings = () => {
       const fetchedClient = await httpClient.doGet<ClientRepresentation>(url);
       if (fetchedClient.data) {
         setName(fetchedClient.data.clientId);
-        Object.entries(fetchedClient.data).map((entry) => {
+        Object.entries(fetchedClient.data).map(entry => {
           if (entry[0] !== "redirectUris") {
             form.setValue(entry[0], entry[1]);
           } else if (entry[1] && entry[1].length > 0) {
@@ -72,17 +72,17 @@ export const ClientSettings = () => {
       } catch (error) {
         addAlert(`${t("clientDeleteError")} ${error}`, AlertVariant.danger);
       }
-    },
+    }
   });
 
   const [toggleDownloadDialog, DownloadDialog] = useDownloadDialog({
     id,
-    protocol: form.getValues("protocol"),
+    protocol: form.getValues("protocol")
   });
 
   const save = async () => {
     if (await form.trigger()) {
-      const redirectUris = toValue(form.getValues()["redirectUris"]);
+      const redirectUris = toValue(form.getValues().redirectUris);
       try {
         httpClient.doPut(url, { ...form.getValues(), redirectUris });
         addAlert(t("clientSaveSuccess"), AlertVariant.success);
@@ -108,7 +108,7 @@ export const ClientSettings = () => {
             onConfirm: () => {
               onChange(!value);
               save();
-            },
+            }
           });
           return (
             <>
@@ -134,10 +134,11 @@ export const ClientSettings = () => {
                     onClick={() => toggleDeleteDialog()}
                   >
                     {t("common:delete")}
-                  </DropdownItem>,
+                  </DropdownItem>
                 ]}
                 isEnabled={value}
-                onToggle={(value) => {
+                // eslint-disable-next-line no-shadow
+                onToggle={value => {
                   if (!value) {
                     toggleDisableDialog();
                   } else {
@@ -156,7 +157,7 @@ export const ClientSettings = () => {
             t("capabilityConfig"),
             t("generalSettings"),
             t("accessSettings"),
-            t("loginSettings"),
+            t("loginSettings")
           ]}
         >
           <CapabilityConfig form={form} />

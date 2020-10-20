@@ -3,15 +3,15 @@ import { Meta, Story } from "@storybook/react";
 import { DropdownItem, Page } from "@patternfly/react-core";
 import {
   ViewHeader,
-  ViewHeaderProps,
+  ViewHeaderProps
 } from "../components/view-header/ViewHeader";
 
 export default {
   title: "View Header",
-  component: ViewHeader,
+  component: ViewHeader
 } as Meta;
 
-const Template: Story<ViewHeaderProps> = (args) => (
+const Template: Story<ViewHeaderProps> = args => (
   <Page>
     <ViewHeader {...args} />
   </Page>
@@ -24,7 +24,7 @@ Extended.args = {
   subKey: "This is the description.",
   subKeyLinkProps: {
     title: "More information",
-    href: "http://google.com",
+    href: "http://google.com"
   },
   dropdownItems: [
     <DropdownItem key="first" value="first-item" onClick={() => {}}>
@@ -32,12 +32,12 @@ Extended.args = {
     </DropdownItem>,
     <DropdownItem key="second" value="second-item" onClick={() => {}}>
       Second item
-    </DropdownItem>,
-  ],
+    </DropdownItem>
+  ]
 };
 
 export const Simple = Template.bind({});
 Simple.args = {
   titleKey: "Title simple",
-  subKey: "Some lengthy description about what this is about.",
+  subKey: "Some lengthy description about what this is about."
 };

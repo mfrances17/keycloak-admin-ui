@@ -10,7 +10,7 @@ describe("<JsonFileUpload />", () => {
   });
 
   it("upload file", async () => {
-    const onChange = jest.fn((value) => value);
+    const onChange = jest.fn(value => value);
     const comp = mount(<JsonFileUpload id="upload" onChange={onChange} />);
 
     const fileInput = comp.find('[type="file"]');
@@ -21,14 +21,14 @@ describe("<JsonFileUpload />", () => {
 
     const dummyFileReader = {
       onload: jest.fn(),
-      readAsText: () => Promise.resolve(json),
+      readAsText: () => Promise.resolve(json)
     };
     (window as any).FileReader = jest.fn(() => dummyFileReader);
 
     fileInput.simulate("change", {
       target: {
-        files: [file],
-      },
+        files: [file]
+      }
     });
     expect(comp).toMatchSnapshot();
   });

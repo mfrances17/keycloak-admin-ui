@@ -2,7 +2,7 @@ import React, { MouseEventHandler } from "react";
 import {
   Pagination,
   ToggleTemplateProps,
-  ToolbarItem,
+  ToolbarItem
 } from "@patternfly/react-core";
 import { TableToolbar } from "./TableToolbar";
 
@@ -36,7 +36,7 @@ export const PaginatingTableToolbar = ({
   inputGroupName,
   inputGroupPlaceholder,
   inputGroupOnChange,
-  inputGroupOnClick,
+  inputGroupOnClick
 }: TableToolbarProps) => {
   const page = first / max;
   const pagination = (variant: "top" | "bottom" = "top") => (

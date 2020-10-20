@@ -7,7 +7,7 @@ import {
   PageSection,
   FormGroup,
   Form,
-  TextInput,
+  TextInput
 } from "@patternfly/react-core";
 import { Meta } from "@storybook/react";
 
@@ -15,12 +15,12 @@ import { HelpItem } from "../components/help-enabler/HelpItem";
 import {
   Help,
   HelpContext,
-  HelpHeader,
+  HelpHeader
 } from "../components/help-enabler/HelpHeader";
 
 export default {
   title: "Help System Example",
-  component: HelpHeader,
+  component: HelpHeader
 } as Meta;
 
 export const HelpSystem = () => (

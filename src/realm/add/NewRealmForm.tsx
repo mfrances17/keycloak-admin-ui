@@ -8,7 +8,7 @@ import {
   Switch,
   ActionGroup,
   Button,
-  AlertVariant,
+  AlertVariant
 } from "@patternfly/react-core";
 
 import { JsonFileUpload } from "../../components/json-file-upload/JsonFileUpload";
@@ -31,7 +31,7 @@ export const NewRealmForm = () => {
     const defaultRealm = { id: "", realm: "", enabled: true };
 
     const obj = value ? JSON.parse(value as string) : defaultRealm;
-    Object.keys(obj).forEach((k) => {
+    Object.keys(obj).forEach(k => {
       setValue(k, obj[k]);
     });
   };

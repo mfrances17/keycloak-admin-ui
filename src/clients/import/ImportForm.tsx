@@ -6,7 +6,7 @@ import {
   TextInput,
   ActionGroup,
   Button,
-  AlertVariant,
+  AlertVariant
 } from "@patternfly/react-core";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -33,11 +33,11 @@ export const ImportForm = () => {
       protocol: "",
       clientId: "",
       name: "",
-      description: "",
+      description: ""
     };
 
     const obj = value ? JSON.parse(value as string) : defaultClient;
-    Object.keys(obj).forEach((k) => {
+    Object.keys(obj).forEach(k => {
       setValue(k, obj[k]);
     });
   };

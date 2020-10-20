@@ -5,7 +5,7 @@ import {
   DropdownToggle,
   Split,
   SplitItem,
-  Switch,
+  Switch
 } from "@patternfly/react-core";
 import { Trans, useTranslation } from "react-i18next";
 import { HelpIcon, ExternalLinkAltIcon } from "@patternfly/react-icons";
@@ -21,14 +21,14 @@ type HelpContextProps = {
 
 export const HelpContext = createContext<HelpContextProps>({
   enabled: true,
-  toggleHelp: () => {},
+  toggleHelp: () => {}
 });
 
 export const Help = ({ children }: HelpProps) => {
   const [enabled, setHelp] = useState(true);
 
   function toggleHelp() {
-    setHelp((help) => !help);
+    setHelp(help => !help);
   }
   return (
     <HelpContext.Provider value={{ enabled, toggleHelp }}>
@@ -72,7 +72,7 @@ export const HelpHeader = () => {
           />
         </SplitItem>
       </Split>
-    </DropdownItem>,
+    </DropdownItem>
   ];
   return (
     <Dropdown

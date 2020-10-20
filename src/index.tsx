@@ -9,8 +9,9 @@ import { KeycloakService } from "./context/auth/keycloak.service";
 import { HttpClientContext } from "./context/http-service/HttpClientContext";
 import { HttpClient } from "./context/http-service/http-client";
 
+// eslint-disable-next-line no-console
 console.info("supported languages", ...i18n.languages);
-init().then((keycloak) => {
+init().then(keycloak => {
   const keycloakService = new KeycloakService(keycloak);
   ReactDom.render(
     <KeycloakContext.Provider value={keycloakService}>

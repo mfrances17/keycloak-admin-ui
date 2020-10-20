@@ -4,15 +4,13 @@ import { ScrollForm } from "../components/scroll-form/ScrollForm";
 
 export default {
   title: "Scroll spy scroll form",
-  component: ScrollForm,
+  component: ScrollForm
 } as Meta;
 
-export const View = () => {
-  return (
-    <ScrollForm sections={["Revocation", "Clustering", "Fine grain stuff"]}>
-      <div style={{ height: "2400px" }}>One</div>
-      <div style={{ height: "2400px" }}>Two</div>
-      <div style={{ height: "2400px" }}>fine grain</div>
-    </ScrollForm>
-  );
-};
+export const View = () => (
+  <ScrollForm sections={["Revocation", "Clustering", "Fine grain stuff"]}>
+    <div style={{ height: "2400px" }}>One</div>
+    <div style={{ height: "2400px" }}>Two</div>
+    <div style={{ height: "2400px" }}>fine grain</div>
+  </ScrollForm>
+);

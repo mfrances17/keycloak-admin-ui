@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable max-classes-per-file */
 import { KeycloakService } from "../auth/keycloak.service";
 
 type ConfigResolve = (config: RequestInit) => void;
@@ -49,7 +51,7 @@ export class HttpClient {
     return this.doRequest(endpoint, {
       ...config,
       body: JSON.stringify(body),
-      method: "post",
+      method: "post"
     });
   }
 
@@ -61,7 +63,7 @@ export class HttpClient {
     return this.doRequest(endpoint, {
       ...config,
       body: JSON.stringify(body),
-      method: "put",
+      method: "put"
     });
   }
 
@@ -108,9 +110,7 @@ export class HttpClient {
     // add request params
     if (config && {}.hasOwnProperty.call(config, "params")) {
       const params: { [name: string]: string } = (config.params as {}) || {};
-      Object.keys(params).forEach((key) =>
-        searchParams.append(key, params[key])
-      );
+      Object.keys(params).forEach(key => searchParams.append(key, params[key]));
     }
 
     return url + "?" + searchParams.toString();
@@ -126,8 +126,8 @@ export class HttpClient {
             headers: {
               "Content-Type": "application/json",
               ...config.headers,
-              Authorization: "Bearer " + token,
-            },
+              Authorization: "Bearer " + token
+            }
           });
         })
         .catch(() => {
@@ -140,7 +140,7 @@ export class HttpClient {
 window.addEventListener(
   "unhandledrejection",
   (event: PromiseRejectionEvent) => {
-    event.promise.catch((error) => {
+    event.promise.catch(error => {
       if (error instanceof AccountServiceError) {
         // We already handled the error. Ignore unhandled rejection.
         event.preventDefault();

@@ -7,7 +7,7 @@ import {
   SplitItem,
   Text,
   TextContent,
-  TextVariants,
+  TextVariants
 } from "@patternfly/react-core";
 import { DatabaseIcon } from "@patternfly/react-icons";
 import { useTranslation } from "react-i18next";
@@ -18,7 +18,7 @@ export const UserFederationSection = () => {
   const { t } = useTranslation("user-federation");
   const linkArgs = {
     title: t("common:learnMore"),
-    href: "http://google.com",
+    href: "http://google.com"
   };
 
   return (

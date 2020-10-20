@@ -3,7 +3,7 @@ import {
   Button,
   ButtonVariant,
   Modal,
-  ModalVariant,
+  ModalVariant
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 
@@ -13,7 +13,8 @@ export const useConfirmDialog = (
   const [show, setShow] = useState(false);
 
   function toggleDialog() {
-    setShow((show) => !show);
+    // eslint-disable-next-line no-shadow
+    setShow(show => !show);
   }
 
   const Dialog = () => (
@@ -53,7 +54,7 @@ export const ConfirmDialogModal = ({
   onCancel,
   children,
   open = true,
-  toggleDialog,
+  toggleDialog
 }: ConfirmDialogModalProps) => {
   const { t } = useTranslation();
   return (
@@ -79,12 +80,14 @@ export const ConfirmDialogModal = ({
           key="cancel"
           variant={ButtonVariant.secondary}
           onClick={() => {
-            if (onCancel) onCancel();
+            if (onCancel) {
+              onCancel();
+            }
             toggleDialog();
           }}
         >
           {t(cancelButtonLabel || "common:cancel")}
-        </Button>,
+        </Button>
       ]}
     >
       {!messageKey && children}

@@ -22,101 +22,101 @@ export const routes = (t: TFunction) => [
   {
     path: "/add-realm",
     component: NewRealmForm,
-    breadcrumb: t("realm:createRealm"),
+    breadcrumb: t("realm:createRealm")
   },
   {
     path: "/clients",
     component: ClientsSection,
-    breadcrumb: t("clients:clientList"),
+    breadcrumb: t("clients:clientList")
   },
   {
     path: "/clients/:id",
     component: ClientSettings,
-    breadcrumb: t("clients:clientSettings"),
+    breadcrumb: t("clients:clientSettings")
   },
   {
     path: "/add-client",
     component: NewClientForm,
-    breadcrumb: t("clients:createClient"),
+    breadcrumb: t("clients:createClient")
   },
   {
     path: "/import-client",
     component: ImportForm,
-    breadcrumb: t("clients:importClient"),
+    breadcrumb: t("clients:importClient")
   },
   {
     path: "/client-scopes",
     component: ClientScopesSection,
-    breadcrumb: t("client-scopes:clientScopeList"),
+    breadcrumb: t("client-scopes:clientScopeList")
   },
   {
     path: "/client-scopes/add-client-scopes",
     component: ClientScopeForm,
-    breadcrumb: t("client-scopes:createClientScope"),
+    breadcrumb: t("client-scopes:createClientScope")
   },
   {
     path: "/client-scopes/:id",
     component: ClientScopeForm,
-    breadcrumb: t("client-scopes:clientScopeDetails"),
+    breadcrumb: t("client-scopes:clientScopeDetails")
   },
   {
     path: "/roles",
     component: RealmRolesSection,
-    breadcrumb: t("roles:roleList"),
+    breadcrumb: t("roles:roleList")
   },
   {
     path: "/add-role",
     component: NewRoleForm,
-    breadcrumb: t("roles:createRole"),
+    breadcrumb: t("roles:createRole")
   },
   {
     path: "/users",
     component: UsersSection,
-    breadcrumb: t("users:title"),
+    breadcrumb: t("users:title")
   },
   {
     path: "/groups",
     component: GroupsSection,
-    breadcrumb: t("groups"),
+    breadcrumb: t("groups")
   },
   {
     path: "/sessions",
     component: SessionsSection,
-    breadcrumb: t("sessions:title"),
+    breadcrumb: t("sessions:title")
   },
   {
     path: "/events",
     component: EventsSection,
-    breadcrumb: t("events:title"),
+    breadcrumb: t("events:title")
   },
   {
     path: "/realm-settings",
     component: RealmSettingsSection,
-    breadcrumb: t("realmSettings"),
+    breadcrumb: t("realmSettings")
   },
   {
     path: "/authentication",
     component: AuthenticationSection,
-    breadcrumb: t("authentication"),
+    breadcrumb: t("authentication")
   },
   {
     path: "/identity-providers",
     component: IdentityProvidersSection,
-    breadcrumb: t("identityProviders"),
+    breadcrumb: t("identityProviders")
   },
   {
     path: "/user-federation",
     component: UserFederationSection,
-    breadcrumb: t("userFederation"),
+    breadcrumb: t("userFederation")
   },
   {
     path: "/",
     component: ClientsSection,
-    breadcrumb: t("common:home"),
+    breadcrumb: t("common:home")
   },
   {
     path: "",
     component: PageNotFoundSection,
-    breadcrumb: "",
-  },
+    breadcrumb: ""
+  }
 ];

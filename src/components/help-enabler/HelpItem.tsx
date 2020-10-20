@@ -19,7 +19,7 @@ export const HelpItem = ({ helpText, forLabel, forID }: HelpItemProps) => {
         <Popover bodyContent={helpText}>
           <button
             aria-label={t(`helpLabel`, { label: forLabel })}
-            onClick={(e) => e.preventDefault()}
+            onClick={e => e.preventDefault()}
             aria-describedby={forID}
             className="pf-c-form__group-label-help"
           >

@@ -11,7 +11,7 @@ describe("Confirmation dialog", () => {
         messageKey:
           "If you delete this client, all associated data will be removed.",
         continueButtonLabel: "Delete",
-        onConfirm: onConfirm,
+        onConfirm
       });
       return (
         <>

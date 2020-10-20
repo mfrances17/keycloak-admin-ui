@@ -7,8 +7,9 @@ export const sortProvider = (
   a: [string, ProviderRepresentation],
   b: [string, ProviderRepresentation]
 ) => {
-  let s1, s2;
-  if (a[1].order != b[1].order) {
+  let s1;
+  let s2;
+  if (a[1].order !== b[1].order) {
     s1 = b[1].order;
     s2 = a[1].order;
   } else {
@@ -29,6 +30,7 @@ export const exportClient = (client: ClientRepresentation): void => {
   delete clientCopy.id;
 
   if (clientCopy.protocolMappers) {
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < clientCopy.protocolMappers.length; i++) {
       delete clientCopy.protocolMappers[i].id;
     }
@@ -36,7 +38,7 @@ export const exportClient = (client: ClientRepresentation): void => {
 
   FileSaver.saveAs(
     new Blob([JSON.stringify(clientCopy, null, 2)], {
-      type: "application/json",
+      type: "application/json"
     }),
     clientCopy.clientId + ".json"
   );

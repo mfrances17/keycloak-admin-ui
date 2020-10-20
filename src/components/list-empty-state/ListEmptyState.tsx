@@ -6,7 +6,7 @@ import {
   Title,
   Button,
   ButtonVariant,
-  EmptyStateSecondaryActions,
+  EmptyStateSecondaryActions
 } from "@patternfly/react-core";
 import { PlusCircleIcon } from "@patternfly/react-icons";
 import { SearchIcon } from "@patternfly/react-icons";
@@ -34,39 +34,37 @@ export const ListEmptyState = ({
   hasIcon,
   isSearchVariant,
   primaryActionText,
-  secondaryActions,
-}: ListEmptyStateProps) => {
-  return (
-    <>
-      <EmptyState variant="large">
-        {hasIcon && isSearchVariant ? (
-          <EmptyStateIcon icon={SearchIcon} />
-        ) : (
-          <EmptyStateIcon icon={PlusCircleIcon} />
-        )}
-        <Title headingLevel="h4" size="lg">
-          {message}
-        </Title>
-        <EmptyStateBody>{instructions}</EmptyStateBody>
-        {primaryActionText && (
-          <Button variant="primary" onClick={onPrimaryAction}>
-            {primaryActionText}
-          </Button>
-        )}
-        {secondaryActions && (
-          <EmptyStateSecondaryActions>
-            {secondaryActions.map((action) => (
-              <Button
-                key={action.text}
-                variant={action.type || ButtonVariant.secondary}
-                onClick={action.onClick}
-              >
-                {action.text}
-              </Button>
-            ))}
-          </EmptyStateSecondaryActions>
-        )}
-      </EmptyState>
-    </>
-  );
-};
+  secondaryActions
+}: ListEmptyStateProps) => (
+  <>
+    <EmptyState variant="large">
+      {hasIcon && isSearchVariant ? (
+        <EmptyStateIcon icon={SearchIcon} />
+      ) : (
+        <EmptyStateIcon icon={PlusCircleIcon} />
+      )}
+      <Title headingLevel="h4" size="lg">
+        {message}
+      </Title>
+      <EmptyStateBody>{instructions}</EmptyStateBody>
+      {primaryActionText && (
+        <Button variant="primary" onClick={onPrimaryAction}>
+          {primaryActionText}
+        </Button>
+      )}
+      {secondaryActions && (
+        <EmptyStateSecondaryActions>
+          {secondaryActions.map(action => (
+            <Button
+              key={action.text}
+              variant={action.type || ButtonVariant.secondary}
+              onClick={action.onClick}
+            >
+              {action.text}
+            </Button>
+          ))}
+        </EmptyStateSecondaryActions>
+      )}
+    </EmptyState>
+  </>
+);

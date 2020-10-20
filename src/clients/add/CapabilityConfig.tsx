@@ -6,7 +6,7 @@ import {
   Checkbox,
   Grid,
   GridItem,
-  Form,
+  Form
 } from "@patternfly/react-core";
 import { UseFormMethods, Controller } from "react-hook-form";
 

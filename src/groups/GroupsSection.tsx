@@ -6,7 +6,7 @@ import { GroupsCreateModal } from "./GroupsCreateModal";
 import { GroupRepresentation } from "./models/groups";
 import {
   ServerGroupsArrayRepresentation,
-  ServerGroupMembersRepresentation,
+  ServerGroupMembersRepresentation
 } from "./models/server-info";
 import { TableToolbar } from "../components/table-toolbar/TableToolbar";
 import { ViewHeader } from "../components/view-header/ViewHeader";
@@ -19,7 +19,7 @@ import {
   PageSection,
   PageSectionVariants,
   Spinner,
-  ToolbarItem,
+  ToolbarItem
 } from "@patternfly/react-core";
 import "./GroupsSection.css";
 
@@ -124,7 +124,7 @@ export const GroupsSection = () => {
                       dropdownItems={[
                         <DropdownItem key="action" component="button">
                           {t("delete")}
-                        </DropdownItem>,
+                        </DropdownItem>
                       ]}
                     />
                   </ToolbarItem>

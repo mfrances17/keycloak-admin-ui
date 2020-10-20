@@ -6,7 +6,7 @@ import {
   NavItem,
   NavGroup,
   NavList,
-  PageSidebar,
+  PageSidebar
 } from "@patternfly/react-core";
 import { RealmSelector } from "./components/realm-selector/RealmSelector";
 import { DataLoader } from "./components/data-loader/DataLoader";
@@ -26,7 +26,9 @@ export const PageNav: React.FunctionComponent = () => {
   const history = useHistory();
 
   let initialItem = history.location.pathname;
-  if (initialItem === "/") initialItem = "/client-list";
+  if (initialItem === "/") {
+    initialItem = "/client-list";
+  }
 
   const [activeItem, setActiveItem] = useState(initialItem);
 
@@ -43,21 +45,19 @@ export const PageNav: React.FunctionComponent = () => {
     item.event.preventDefault();
   };
 
-  const makeNavItem = (title: string, path: string) => {
-    return (
-      <NavItem
-        id={"nav-item-" + path}
-        to={"/" + path}
-        isActive={activeItem === "/" + path}
-      >
-        {t(title)}
-      </NavItem>
-    );
-  };
+  const makeNavItem = (title: string, path: string) => (
+    <NavItem
+      id={"nav-item-" + path}
+      to={"/" + path}
+      isActive={activeItem === "/" + path}
+    >
+      {t(title)}
+    </NavItem>
+  );
 
   return (
     <DataLoader loader={realmLoader}>
-      {(realmList) => (
+      {realmList => (
         <PageSidebar
           nav={
             <Nav onSelect={onSelect}>

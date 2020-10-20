@@ -4,7 +4,7 @@ import {
   Form,
   Select,
   SelectVariant,
-  SelectOption,
+  SelectOption
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import { Controller, UseFormMethods } from "react-hook-form";
@@ -42,6 +42,7 @@ export const GeneralSettings = ({ form }: GeneralSettingsProps) => {
               id="kc-type"
               required
               onToggle={() => isOpen(!open)}
+              // eslint-disable-next-line no-shadow
               onSelect={(_, value, isPlaceholder) => {
                 onChange(isPlaceholder ? "" : (value as string));
                 isOpen(false);
@@ -52,7 +53,7 @@ export const GeneralSettings = ({ form }: GeneralSettingsProps) => {
               placeholderText={t("common:selectOne")}
               isOpen={open}
             >
-              {providers.map((option) => (
+              {providers.map(option => (
                 <SelectOption
                   selected={option === value}
                   key={option}

@@ -35,15 +35,15 @@ const initOptions = {
       ...sessions,
       ...events,
       ...storybook,
-      ...userFederation,
-    },
+      ...userFederation
+    }
   },
   lng: "en",
   fallbackLng: "en",
 
   interpolation: {
-    escapeValue: false,
-  },
+    escapeValue: false
+  }
 };
 
 i18n

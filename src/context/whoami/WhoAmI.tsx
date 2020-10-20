@@ -13,14 +13,19 @@ export class WhoAmI {
     private me?: WhoAmIRepresentation | undefined
   ) {
     if (this.me !== undefined && this.me.locale) {
-      i18n.changeLanguage(this.me.locale, (error) => {
-        if (error) console.log("Unable to set locale to " + this.me?.locale);
+      i18n.changeLanguage(this.me.locale, error => {
+        if (error) {
+          // eslint-disable-next-line no-console
+          console.log("Unable to set locale to " + this.me?.locale);
+        }
       });
     }
   }
 
   public getDisplayName(): string {
-    if (this.me === undefined) return "";
+    if (this.me === undefined) {
+      return "";
+    }
 
     return this.me.displayName;
   }
@@ -30,8 +35,12 @@ export class WhoAmI {
    */
   public getHomeRealm(): string {
     let realm: string | undefined = this.homeRealm;
-    if (realm === undefined) realm = this.me?.realm;
-    if (realm === undefined) realm = "master"; // this really can't happen in the real world
+    if (realm === undefined) {
+      realm = this.me?.realm;
+    }
+    if (realm === undefined) {
+      realm = "master";
+    } // this really can't happen in the real world
 
     return realm;
   }
@@ -40,8 +49,11 @@ export class WhoAmI {
     return this.me !== undefined && this.me.createRealm;
   }
 
+  // eslint-disable-next-line @typescript-eslint/array-type
   public getRealmAccess(): Readonly<{ [key: string]: ReadonlyArray<string> }> {
-    if (this.me === undefined) return {};
+    if (this.me === undefined) {
+      return {};
+    }
 
     return this.me.realm_access;
   }
@@ -55,18 +67,20 @@ export const WhoAmIContextProvider = ({ children }: WhoAmIProviderProps) => {
   const keycloak = useContext(KeycloakContext);
 
   const whoAmILoader = async () => {
-    if (keycloak === undefined) return undefined;
+    if (keycloak === undefined) {
+      return undefined;
+    }
 
     const realm = keycloak.realm();
 
     return await httpClient
       .doGet(`/admin/${realm}/console/whoami/`)
-      .then((r) => r.data as WhoAmIRepresentation);
+      .then(r => r.data as WhoAmIRepresentation);
   };
 
   return (
     <DataLoader loader={whoAmILoader}>
-      {(whoamirep) => (
+      {whoamirep => (
         <WhoAmIContext.Provider
           value={new WhoAmI(keycloak?.realm(), whoamirep.data)}
         >

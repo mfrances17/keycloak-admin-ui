@@ -33,7 +33,7 @@ export const ClientScopesSection = () => {
 
   const filterData = (search: string) => {
     setFilteredData(
-      rawData!.filter((group) =>
+      rawData!.filter(group =>
         group.name.toLowerCase().includes(search.toLowerCase())
       )
     );

@@ -5,7 +5,7 @@ import rolesMock from "../realm-roles/__tests__/mock-roles.json";
 
 export default {
   title: "Roles List",
-  component: RolesList,
+  component: RolesList
 } as Meta;
 
 export const RolesListExample = () => (

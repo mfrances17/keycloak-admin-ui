@@ -3,7 +3,7 @@ import {
   Table,
   TableHeader,
   TableBody,
-  TableVariant,
+  TableVariant
 } from "@patternfly/react-table";
 import { Button, AlertVariant } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
@@ -44,9 +44,9 @@ export const GroupsList = ({ list, refresh }: GroupsListProps) => {
           <div className="keycloak-admin--groups__member-count" key={index}>
             <UsersIcon key={`user-icon-${index}`} />
             {groupNumber}
-          </div>,
+          </div>
         ],
-        selected: false,
+        selected: false
       };
     });
 
@@ -76,7 +76,8 @@ export const GroupsList = ({ list, refresh }: GroupsListProps) => {
   const actions = [
     {
       title: t("moveTo"),
-      onClick: () => console.log("TO DO: Add move to functionality"),
+      // eslint-disable-next-line no-console
+      onClick: () => console.log("TO DO: Add move to functionality")
     },
     {
       title: t("common:Delete"),
@@ -93,8 +94,8 @@ export const GroupsList = ({ list, refresh }: GroupsListProps) => {
         } catch (error) {
           addAlert(`${t("clientDeleteError")} ${error}`, AlertVariant.danger);
         }
-      },
-    },
+      }
+    }
   ];
 
   return (

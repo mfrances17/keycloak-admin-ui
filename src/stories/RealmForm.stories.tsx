@@ -5,13 +5,11 @@ import { NewRealmForm } from "../realm/add/NewRealmForm";
 
 export default {
   title: "New realm form",
-  component: NewRealmForm,
+  component: NewRealmForm
 } as Meta;
 
-export const view = () => {
-  return (
-    <Page>
-      <NewRealmForm />
-    </Page>
-  );
-};
+export const view = () => (
+  <Page>
+    <NewRealmForm />
+  </Page>
+);

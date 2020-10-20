@@ -6,7 +6,7 @@ import {
   FormGroup,
   Modal,
   ModalVariant,
-  TextInput,
+  TextInput
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import { HttpClientContext } from "../context/http-service/HttpClientContext";
@@ -29,7 +29,7 @@ export const GroupsCreateModal = ({
   setIsCreateModalOpen,
   createGroupName,
   setCreateGroupName,
-  refresh,
+  refresh
 }: GroupsCreateModalProps) => {
   const { t } = useTranslation("groups");
   const httpClient = useContext(HttpClientContext)!;
@@ -38,6 +38,7 @@ export const GroupsCreateModal = ({
   const form = useForm();
   const { register, errors } = form;
 
+  // eslint-disable-next-line no-shadow
   const valueChange = (createGroupName: string) => {
     setCreateGroupName(createGroupName);
   };
@@ -46,7 +47,7 @@ export const GroupsCreateModal = ({
     if (await form.trigger()) {
       try {
         await httpClient.doPost(`/admin/realms/${realm}/groups`, {
-          name: createGroupName,
+          name: createGroupName
         });
         setIsCreateModalOpen(false);
         setCreateGroupName("");
@@ -71,7 +72,7 @@ export const GroupsCreateModal = ({
         actions={[
           <Button key="confirm" variant="primary" onClick={() => submitForm()}>
             {t("create")}
-          </Button>,
+          </Button>
         ]}
       >
         <Form isHorizontal>

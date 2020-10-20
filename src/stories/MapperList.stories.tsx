@@ -8,7 +8,7 @@ import { MapperList } from "../client-scopes/details/MapperList";
 
 export default {
   title: "Mapper List",
-  component: MapperList,
+  component: MapperList
 } as Meta;
 
 export const MapperListExample = () => (

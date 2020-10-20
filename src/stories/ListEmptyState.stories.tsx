@@ -2,7 +2,7 @@ import React from "react";
 import { Meta, Story } from "@storybook/react";
 import {
   ListEmptyState,
-  ListEmptyStateProps,
+  ListEmptyStateProps
 } from "../components/list-empty-state/ListEmptyState";
 
 function handleClick() {
@@ -11,10 +11,10 @@ function handleClick() {
 
 export default {
   title: "List empty state",
-  component: ListEmptyState,
+  component: ListEmptyState
 } as Meta;
 
-const Template: Story<ListEmptyStateProps> = (args) => (
+const Template: Story<ListEmptyStateProps> = args => (
   <ListEmptyState {...args} />
 );
 
@@ -23,5 +23,5 @@ View.args = {
   message: "No things",
   instructions: "You haven't created any things for this list.",
   primaryActionText: "Add it now!",
-  secondaryActions: [{ text: "Add a thing", onClick: handleClick }],
+  secondaryActions: [{ text: "Add a thing", onClick: handleClick }]
 };

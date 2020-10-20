@@ -6,7 +6,7 @@ import {
   InputGroup,
   TextInput,
   Button,
-  ButtonVariant,
+  ButtonVariant
 } from "@patternfly/react-core";
 import { SearchIcon } from "@patternfly/react-icons";
 import { useTranslation } from "react-i18next";
@@ -31,7 +31,7 @@ export const TableToolbar = ({
   inputGroupName,
   inputGroupPlaceholder,
   inputGroupOnChange,
-  inputGroupOnClick,
+  inputGroupOnClick
 }: TableToolbarProps) => {
   const { t } = useTranslation();
   return (

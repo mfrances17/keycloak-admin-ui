@@ -27,7 +27,7 @@ export const ServerInfoProvider = ({ children }: { children: ReactNode }) => {
   };
   return (
     <DataLoader loader={loader}>
-      {(serverInfo) => (
+      {serverInfo => (
         <ServerInfoContext.Provider value={serverInfo.data}>
           {children}
         </ServerInfoContext.Provider>

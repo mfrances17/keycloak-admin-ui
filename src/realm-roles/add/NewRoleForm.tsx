@@ -12,13 +12,13 @@ import {
   Divider,
   AlertVariant,
   TextArea,
-  ValidatedOptions,
+  ValidatedOptions
 } from "@patternfly/react-core";
 
 import { RoleRepresentation } from "../../model/role-model";
 import { HttpClientContext } from "../../context/http-service/HttpClientContext";
 import { useAlerts } from "../../components/alert/Alerts";
-import { Controller, useForm, FieldErrors } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { RealmContext } from "../../context/realm-context/RealmContext";
 
 export const NewRoleForm = () => {
@@ -40,6 +40,7 @@ export const NewRoleForm = () => {
     }
   };
 
+  // eslint-disable-next-line no-console
   console.log(errors);
 
   return (
@@ -65,7 +66,7 @@ export const NewRoleForm = () => {
             label={t("description")}
             fieldId="kc-role-description"
             validated={
-              Object.keys(errors).length != 0
+              Object.keys(errors).length !== 0
                 ? ValidatedOptions.error
                 : ValidatedOptions.default
             }

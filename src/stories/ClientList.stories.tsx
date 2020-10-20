@@ -6,7 +6,7 @@ import clientMock from "../clients/__tests__/mock-clients.json";
 
 export default {
   title: "Client List",
-  component: ClientList,
+  component: ClientList
 } as Meta;
 
 export const ClientListExample = () => (
