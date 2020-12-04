@@ -42,9 +42,9 @@ export const KeycloakCard = ({
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleCardMenuClick = (e:any) => {
+  const handleCardMenuClick = (e: any) => {
     e.stopPropagation();
-  }
+  };
 
   const openSettings = () => {
     history.push(`/user-federation/${id}`);
@@ -54,10 +54,7 @@ export const KeycloakCard = ({
   };
 
   return (
-    <Card 
-      isSelectable
-      onClick={openSettings}
-    >
+    <Card isSelectable onClick={openSettings}>
       <CardHeader>
         <CardActions>
           {dropdownItems && (
@@ -73,7 +70,7 @@ export const KeycloakCard = ({
         </CardActions>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
-      <CardBody/>
+      <CardBody />
       <CardFooter>
         <Flex>
           <FlexItem className="keycloak--keycloak-card__footer">
