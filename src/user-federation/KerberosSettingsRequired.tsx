@@ -221,7 +221,7 @@ export const KerberosSettingsRequired = () => {
           {" "}
           <Controller
             name="editMode"
-            defaultValue=""
+            defaultValue={t("common:selectOne")}
             control={control}
             render={({ onChange, value }) => (
               <Select

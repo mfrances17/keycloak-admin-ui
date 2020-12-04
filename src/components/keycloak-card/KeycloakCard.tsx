@@ -42,15 +42,22 @@ export const KeycloakCard = ({
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleCardMenuClick = (e:any) => {
+    e.stopPropagation();
+  }
+
   const openSettings = () => {
-    history.push(`/components/${id}`);
+    history.push(`/user-federation/${id}`);
     // debugging
     console.log(`Card ${title} was clicked!`);
     console.log(`Its ID is: ${id}`);
   };
 
   return (
-    <Card>
+    <Card 
+      isSelectable
+      onClick={openSettings}
+    >
       <CardHeader>
         <CardActions>
           {dropdownItems && (
@@ -58,6 +65,7 @@ export const KeycloakCard = ({
               isPlain
               position={"right"}
               toggle={<KebabToggle onToggle={onDropdownToggle} />}
+              onClick={(e) => handleCardMenuClick(e)}
               isOpen={isDropdownOpen}
               dropdownItems={dropdownItems}
             />
@@ -65,7 +73,7 @@ export const KeycloakCard = ({
         </CardActions>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
-      <CardBody onClick={openSettings} />
+      <CardBody/>
       <CardFooter>
         <Flex>
           <FlexItem className="keycloak--keycloak-card__footer">
