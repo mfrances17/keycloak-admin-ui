@@ -14,6 +14,7 @@ import ComponentRepresentation from "keycloak-admin/lib/defs/componentRepresenta
 import { FormAccess } from "../components/form-access/FormAccess";
 import { useAdminClient } from "../context/auth/AdminClient";
 import { useParams } from "react-router-dom";
+import { convertToFormValues } from "../util";
 
 export const KerberosSettingsRequired = () => {
   const { t } = useTranslation("user-federation");
@@ -26,28 +27,11 @@ export const KerberosSettingsRequired = () => {
   const setupForm = (component: ComponentRepresentation) => {
     Object.entries(component).map((entry) => {
       if (entry[0] === "config") {
-        setValue("serverPrincipal", entry[1].serverPrincipal);
-        setValue("keyTab", entry[1].keyTab);
-        setValue("debug", entry[1].debug[0] === "true");
-        setValue(
-          "allowPasswordAuthentication",
-          entry[1].allowPasswordAuthentication[0] === "true"
-        );
-        setValue(
-          "updateProfileFirstLogin",
-          entry[1].updateProfileFirstLogin[0] === "true"
-        );
-        setValue("editMode", entry[1].editMode);
-        setValue("kerberosRealm", entry[1].kerberosRealm);
-        // MF TODO - these two props do not seem to appear on new UI like old UI
-        // setValue("enabled", entry[1].enabled);
-        // setValue("priority", entry[1].priority);
+        convertToFormValues(entry[1], "config", setValue);
       } else {
         setValue(entry[0], entry[1]);
       }
     });
-    // TODO - keep for now to debug future save and show/hide functionality
-    console.log(component);
   };
 
   useEffect(() => {
@@ -100,7 +84,7 @@ export const KerberosSettingsRequired = () => {
             isRequired
             type="text"
             id="kc-kerberos-realm"
-            name="kerberosRealm"
+            name="config.kerberosRealm"
             ref={register}
           />
         </FormGroup>
@@ -121,7 +105,7 @@ export const KerberosSettingsRequired = () => {
             isRequired
             type="text"
             id="kc-server-principal"
-            name="serverPrincipal"
+            name="config.serverPrincipal"
             ref={register}
           />
         </FormGroup>
@@ -142,7 +126,7 @@ export const KerberosSettingsRequired = () => {
             isRequired
             type="text"
             id="kc-key-tab"
-            name="keyTab"
+            name="config.keyTab"
             ref={register}
           />
         </FormGroup>
@@ -161,7 +145,7 @@ export const KerberosSettingsRequired = () => {
         >
           {" "}
           <Controller
-            name="debug"
+            name="config.debug"
             defaultValue={false}
             control={control}
             render={({ onChange, value }) => (
@@ -190,7 +174,7 @@ export const KerberosSettingsRequired = () => {
           hasNoPaddingTop
         >
           <Controller
-            name="allowPasswordAuthentication"
+            name="config.allowPasswordAuthentication"
             defaultValue={false}
             control={control}
             render={({ onChange, value }) => (
@@ -220,7 +204,7 @@ export const KerberosSettingsRequired = () => {
         >
           {" "}
           <Controller
-            name="editMode"
+            name="config.editMode"
             defaultValue={t("common:selectOne")}
             control={control}
             render={({ onChange, value }) => (
@@ -263,7 +247,7 @@ export const KerberosSettingsRequired = () => {
           hasNoPaddingTop
         >
           <Controller
-            name="updateProfileFirstLogin"
+            name="config.updateProfileFirstLogin"
             defaultValue={false}
             control={control}
             render={({ onChange, value }) => (

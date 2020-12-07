@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { HelpItem } from "../components/help-enabler/HelpItem";
 import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-
+import { convertToFormValues } from "../util";
 import ComponentRepresentation from "keycloak-admin/lib/defs/componentRepresentation";
 import { FormAccess } from "../components/form-access/FormAccess";
 import { useAdminClient } from "../context/auth/AdminClient";
@@ -18,8 +18,7 @@ import { useParams } from "react-router-dom";
 export const KerberosSettingsCache = () => {
   const { t } = useTranslation("user-federation");
   const helpText = useTranslation("user-federation-help").t;
-  // TODO MF leave for future show/hide functionality
-  // let userFedCachePolicy = "MAX_LIFESPAN";
+
   const adminClient = useAdminClient();
   const { register, control, setValue } = useForm<ComponentRepresentation>();
   const { id } = useParams<{ id: string }>();
@@ -48,16 +47,12 @@ export const KerberosSettingsCache = () => {
   const setupForm = (component: ComponentRepresentation) => {
     Object.entries(component).map((entry) => {
       if (entry[0] === "config") {
-        setValue("cachePolicy", entry[1].cachePolicy);
-        setValue("evictionHour", entry[1].evictionHour);
-        setValue("evictionMinute", entry[1].evictionMinute);
-        setValue("evictionDay", convertToDays(entry[1].evictionDay[0]));
-        setValue("maxLifespan", entry[1].maxLifespan);
+        convertToFormValues(entry[1], "config", setValue);
+        setValue("config.evictionDay", convertToDays(entry[1].evictionDay[0]));
       } else {
         setValue(entry[0], entry[1]);
       }
     });
-    console.log(component);
   };
 
   useEffect(() => {
@@ -113,7 +108,7 @@ export const KerberosSettingsCache = () => {
           fieldId="kc-cache-policy"
         >
           <Controller
-            name="cachePolicy"
+            name="config.cachePolicy"
             defaultValue=""
             control={control}
             render={({ onChange, value }) => (
@@ -157,7 +152,7 @@ export const KerberosSettingsCache = () => {
           fieldId="kc-eviction-day"
         >
           <Controller
-            name="evictionDay"
+            name="config.evictionDay"
             defaultValue=""
             control={control}
             render={({ onChange, value }) => (
@@ -204,7 +199,7 @@ export const KerberosSettingsCache = () => {
           fieldId="kc-eviction-hour"
         >
           <Controller
-            name="evictionHour"
+            name="config.evictionHour"
             defaultValue=""
             control={control}
             render={({ onChange, value }) => (
@@ -239,7 +234,7 @@ export const KerberosSettingsCache = () => {
           fieldId="kc-eviction-minute"
         >
           <Controller
-            name="evictionMinute"
+            name="config.evictionMinute"
             defaultValue=""
             control={control}
             render={({ onChange, value }) => (
@@ -276,7 +271,7 @@ export const KerberosSettingsCache = () => {
             isRequired
             type="text"
             id="kc-max-lifespan"
-            name="maxLifespan"
+            name="config.maxLifespan"
             ref={register}
           />
         </FormGroup>
