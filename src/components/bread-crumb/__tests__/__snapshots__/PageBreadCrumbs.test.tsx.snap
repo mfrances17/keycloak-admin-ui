@@ -78,25 +78,11 @@ exports[`BreadCrumbs tests couple of crumbs 1`] = `
                 </svg>
               </AngleRightIcon>
             </span>
-            <Link
-              to="/clients/1234"
+            <span
+              key="/clients/1234"
             >
-              <LinkAnchor
-                href="/clients/1234"
-                navigate={[Function]}
-              >
-                <a
-                  href="/clients/1234"
-                  onClick={[Function]}
-                >
-                  <span
-                    key="/clients/1234"
-                  >
-                    Client details
-                  </span>
-                </a>
-              </LinkAnchor>
-            </Link>
+              Client details
+            </span>
           </li>
         </BreadcrumbItem>
       </ol>
