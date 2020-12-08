@@ -10,7 +10,7 @@ import { LdapSettingsGeneral } from "./LdapSettingsGeneral";
 import { LdapSettingsConnection } from "./LdapSettingsConnection";
 import { LdapSettingsSearching } from "./LdapSettingsSearching";
 
-export const UserFederationLdapSettingsTab = () => {
+export const UserFederationLdapSettings = () => {
   const { t } = useTranslation("user-federation");
 
   return (
