@@ -8,10 +8,10 @@ import {
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
-import { HelpItem } from "../components/help-enabler/HelpItem";
+import { HelpItem } from "../../components/help-enabler/HelpItem";
 import { useForm, Controller } from "react-hook-form";
 import ComponentRepresentation from "keycloak-admin/lib/defs/componentRepresentation";
-import { FormAccess } from "../components/form-access/FormAccess";
+import { FormAccess } from "../../components/form-access/FormAccess";
 
 export const LdapSettingsSearching = () => {
   const { t } = useTranslation("user-federation");

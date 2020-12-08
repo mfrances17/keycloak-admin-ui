@@ -1,10 +1,10 @@
 import { FormGroup, Switch } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import React from "react";
-import { HelpItem } from "../components/help-enabler/HelpItem";
+import { HelpItem } from "../../components/help-enabler/HelpItem";
 import { useForm, Controller } from "react-hook-form";
 import ComponentRepresentation from "keycloak-admin/lib/defs/componentRepresentation";
-import { FormAccess } from "../components/form-access/FormAccess";
+import { FormAccess } from "../../components/form-access/FormAccess";
 
 export const LdapSettingsKerberosIntegration = () => {
   const { t } = useTranslation("user-federation");
