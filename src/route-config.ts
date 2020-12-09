@@ -33,7 +33,7 @@ export type RouteDef = {
 
 type RoutesFn = (t: TFunction) => RouteDef[];
 
-export const routes: RoutesFn = (t: TFunction) => [
+export const routes: RoutesFn = (t: any) => [
   {
     path: "/add-realm",
     component: NewRealmForm,
@@ -164,6 +164,18 @@ export const routes: RoutesFn = (t: TFunction) => [
     path: "/user-federation",
     component: UserFederationSection,
     breadcrumb: t("userFederation"),
+    access: "view-realm",
+  },
+  {
+    path: "/user-federation/kerberos",
+    component: UserFederationSection,
+    breadcrumb: null,
+    access: "view-realm",
+  },
+  {
+    path: "/user-federation/ldap",
+    component: UserFederationSection,
+    breadcrumb: null,
     access: "view-realm",
   },
   {

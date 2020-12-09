@@ -255,6 +255,7 @@ export const LdapSettingsConnection = () => {
           fieldId="kc-console-bind-credentials"
           isRequired
         >
+          {/* TODO: MF The input group below throws a 'React does not recognize the `isDisabled` prop on a DOM element' error */}
           <InputGroup>
             <TextInput // TODO: Make password field switch to type=text with button
               isRequired
