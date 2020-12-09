@@ -20,7 +20,7 @@
 
     "connectionAndAuthenticationSettings": "Connection and authentication settings",
     "connectionURL": "Connection URL",
-    "enableStarttls": "Enable StartTLS",
+    "enableStartTls": "Enable StartTLS",
     "useTruststoreSpi": "Use Truststore SPI",
     "connectionPooling": "Connection pooling",
     "connectionTimeout": "Connection timeout",
