@@ -22,22 +22,28 @@ export const LdapSettingsSearching = () => {
   const helpText = useTranslation("user-federation-help").t;
   const [isEditModeDropdownOpen, setIsEditModeDropdownOpen] = useState(false);
   const { id } = useParams<{ id: string }>();
-
-  const [
-    isUserLdapFilterModeDropdownOpen,
-    setIsUserLdapFilterModeDropdownOpen,
-  ] = useState(false);
-
   const [isSearchScopeDropdownOpen, setIsSearchScopeDropdownOpen] = useState(
     false
   );
-
   const { register, control, setValue } = useForm<ComponentRepresentation>();
+
+  const convertSearchScopes = (scope: string) => {
+    switch (scope) {
+      case "1":
+      default:  
+        return "One Level";
+      case "2":
+        return "Subtree";
+    }
+  };
 
   const setupForm = (component: ComponentRepresentation) => {
     Object.entries(component).map((entry) => {
       if (entry[0] === "config") {
         convertToFormValues(entry[1], "config", setValue);
+        if (entry[1].searchScope) {
+          setValue("config.searchScope", convertSearchScopes(entry[1].searchScope[0]));
+        }
       } else {
         setValue(entry[0], entry[1]);
       }
@@ -219,32 +225,12 @@ export const LdapSettingsSearching = () => {
           }
           fieldId="kc-user-ldap-filter"
         >
-          <Controller
-            name="config.userLdapFilter"
-            defaultValue=""
-            control={control}
-            render={({ onChange, value }) => (
-              <Select
-                toggleId="kc-user-ldap-filter"
-                required
-                onToggle={() =>
-                  setIsUserLdapFilterModeDropdownOpen(
-                    !isUserLdapFilterModeDropdownOpen
-                  )
-                }
-                isOpen={isUserLdapFilterModeDropdownOpen}
-                onSelect={(_, value) => {
-                  onChange(value as string);
-                  setIsUserLdapFilterModeDropdownOpen(false);
-                }}
-                selections={value}
-                variant={SelectVariant.single}
-              >
-                <SelectOption key={0} value="Choose..." isPlaceholder />
-                <SelectOption key={1} value="to do " />
-              </Select>
-            )}
-          ></Controller>
+          <TextInput
+            type="text"
+            id="kc-user-ldap-filter"
+            name="config.customUserSearchFilter"
+            ref={register}
+          />
         </FormGroup>
         <FormGroup
           label={t("searchScope")}

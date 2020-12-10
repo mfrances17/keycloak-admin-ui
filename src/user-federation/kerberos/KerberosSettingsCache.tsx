@@ -48,7 +48,9 @@ export const KerberosSettingsCache = () => {
     Object.entries(component).map((entry) => {
       if (entry[0] === "config") {
         convertToFormValues(entry[1], "config", setValue);
-        setValue("config.evictionDay", convertToDays(entry[1].evictionDay[0]));
+        if (entry[1].evictionDay) {
+          setValue("config.evictionDay", convertToDays(entry[1].evictionDay[0]));
+        }
       } else {
         setValue(entry[0], entry[1]);
       }

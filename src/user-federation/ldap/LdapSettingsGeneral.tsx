@@ -27,6 +27,9 @@ export const LdapSettingsGeneral = () => {
     Object.entries(component).map((entry) => {
       if (entry[0] === "config") {
         convertToFormValues(entry[1], "config", setValue);
+        if (entry[1].vendor) {
+          setValue("config.vendor", convertVendorNames(entry[1].vendor[0]));
+        }
       } else {
         setValue(entry[0], entry[1]);
       }
@@ -41,6 +44,23 @@ export const LdapSettingsGeneral = () => {
       }
     })();
   }, []);
+
+  const convertVendorNames = (vendorName: string) => {
+    switch (vendorName) {
+      case "ad":
+        return "Active Directory";
+      case "rhds":
+        return "Red Hat Directory Server";
+      case "tivoli":
+        return "Tivoli";
+      case "edirectory":
+        return "Novell eDirectory";
+      case "other":
+        return "Other";
+      default:
+        return t("common:choose");
+    }
+  };
 
   return (
     <>
@@ -94,12 +114,12 @@ export const LdapSettingsGeneral = () => {
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption key={0} value="Choose..." isPlaceholder />
+                <SelectOption key={0} value={t("common:choose")} isPlaceholder />
                 <SelectOption key={1} value="Active Directory" />
                 <SelectOption key={2} value="Red Hat Directory Server" />
                 <SelectOption key={3} value="Tivoli" />
                 <SelectOption key={4} value="Novell eDirectory" />
-                <SelectOption key={5} value="other" />
+                <SelectOption key={5} value="Other" />
               </Select>
             )}
           ></Controller>

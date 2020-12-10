@@ -47,6 +47,7 @@ export const LdapSettingsSynchronization = () => {
     <>
       <FormAccess role="manage-realm" isHorizontal>
         <FormGroup
+          hasNoPaddingTop
           label={t("importUsers")}
           labelIcon={
             <HelpItem
@@ -56,7 +57,6 @@ export const LdapSettingsSynchronization = () => {
             />
           }
           fieldId="kc-import-users"
-          hasNoPaddingTop
         >
           <Controller
             name="config.importEnabled"
@@ -65,10 +65,12 @@ export const LdapSettingsSynchronization = () => {
             render={({ onChange, value }) => (
               <Switch
                 id={"kc-import-users"}
+                name="importEnabled"
+                label={t("common:on")}
+                labelOff={t("common:off")}
                 isChecked={value}
                 isDisabled={false}
                 onChange={onChange}
-                aria-label={t("importUsers") + " " + t("common:on")}
               />
             )}
           ></Controller>
@@ -92,6 +94,7 @@ export const LdapSettingsSynchronization = () => {
           />
         </FormGroup>
         <FormGroup
+          hasNoPaddingTop
           label={t("periodicFullSync")}
           labelIcon={
             <HelpItem
@@ -101,7 +104,6 @@ export const LdapSettingsSynchronization = () => {
             />
           }
           fieldId="kc-periodic-full-sync"
-          hasNoPaddingTop
         >
           <Controller
             name="config.fullSyncPeriod"
@@ -133,7 +135,7 @@ export const LdapSettingsSynchronization = () => {
         >
           <Controller
             // TODO MF: this value not found or returned
-            name="periodicChangedUsersSync"
+            name="config.periodicChangedUsersSync"
             defaultValue={false}
             control={control}
             render={({ onChange, value }) => (

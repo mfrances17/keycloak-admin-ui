@@ -26,6 +26,18 @@ export const LdapSettingsConnection = () => {
   const { register, control, setValue } = useForm<ComponentRepresentation>();
   const { id } = useParams<{ id: string }>();
 
+  const convertTruststoreSpiValues = (truststoreValue: string) => {
+    switch (truststoreValue) {
+      case "always":
+        return "Always";
+      case "never":
+        return "Never";
+      case "ldapsOnly":
+      default:
+        return "Only for ldaps";
+    }
+  };
+
   const [
     isTruststoreSpiDropdownOpen,
     setIsTruststoreSpiDropdownOpen,
@@ -37,6 +49,9 @@ export const LdapSettingsConnection = () => {
     Object.entries(component).map((entry) => {
       if (entry[0] === "config") {
         convertToFormValues(entry[1], "config", setValue);
+        if (entry[1].useTruststoreSpi) {
+          setValue("config.useTruststoreSpi", convertTruststoreSpiValues(entry[1].useTruststoreSpi[0]));
+        }
       } else {
         setValue(entry[0], entry[1]);
       }
@@ -103,6 +118,7 @@ export const LdapSettingsConnection = () => {
             )}
           ></Controller>
         </FormGroup>
+
         <FormGroup
           label={t("useTruststoreSpi")}
           labelIcon={
@@ -115,7 +131,7 @@ export const LdapSettingsConnection = () => {
           fieldId="kc-use-truststore-spi"
         >
           <Controller
-            name="useTruststoreSpi"
+            name="config.useTruststoreSpi"
             defaultValue=""
             control={control}
             render={({ onChange, value }) => (
@@ -134,10 +150,10 @@ export const LdapSettingsConnection = () => {
               >
                 <SelectOption
                   key={0}
-                  value="LDAP connection URL"
-                  isPlaceholder
+                  value="Always"
                 />
-                <SelectOption key={1} value="something else" />
+                <SelectOption key={1} value="Only for ldaps" />
+                <SelectOption key={2} value="Never" />
               </Select>
             )}
           ></Controller>
