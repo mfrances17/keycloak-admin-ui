@@ -28,9 +28,8 @@ export const KerberosSettingsRequired = () => {
     Object.entries(component).map((entry) => {
       if (entry[0] === "config") {
         convertToFormValues(entry[1], "config", setValue);
-      } else {
-        setValue(entry[0], entry[1]);
       }
+      setValue(entry[0], entry[1]);
     });
   };
 
@@ -153,7 +152,7 @@ export const KerberosSettingsRequired = () => {
                 id={"kc-debug"}
                 isDisabled={false}
                 onChange={onChange}
-                isChecked={value}
+                isChecked={value[0] === "true"}
                 label={t("common:on")}
                 labelOff={t("common:off")}
               />
@@ -182,7 +181,7 @@ export const KerberosSettingsRequired = () => {
                 id={"kc-allow-password-authentication"}
                 isDisabled={false}
                 onChange={onChange}
-                isChecked={value}
+                isChecked={value[0] === "true"}
                 label={t("common:on")}
                 labelOff={t("common:off")}
               />
@@ -255,7 +254,7 @@ export const KerberosSettingsRequired = () => {
                 id={"kc-update-first-login"}
                 isDisabled={false}
                 onChange={onChange}
-                isChecked={value}
+                isChecked={value[0] === "true"}
                 label={t("common:on")}
                 labelOff={t("common:off")}
               />

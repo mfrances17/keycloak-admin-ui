@@ -66,7 +66,7 @@ export const LdapSettingsKerberosIntegration = () => {
                 id={"kc-allow-kerberos-authentication"}
                 isDisabled={false}
                 onChange={onChange}
-                isChecked={value}
+                isChecked={value[0] === "true"}
                 label={t("common:on")}
                 labelOff={t("common:off")}
               />
@@ -94,7 +94,7 @@ export const LdapSettingsKerberosIntegration = () => {
                 id={"kc-use-kerberos-password-authentication"}
                 isDisabled={false}
                 onChange={onChange}
-                isChecked={value}
+                isChecked={value[0] === "true"}
                 label={t("common:on")}
                 labelOff={t("common:off")}
               />

@@ -35,14 +35,6 @@ export const LdapSettingsSynchronization = () => {
     })();
   }, []);
 
-  /*
-  **Synchronization settings**
-  importEnabled: ["true"]
-  batchSizeForSync: ["1000"]
-  fullSyncPeriod: ["604800"]
-  <Period changed users sync>
-*/
-
   return (
     <>
       <FormAccess role="manage-realm" isHorizontal>
@@ -68,7 +60,7 @@ export const LdapSettingsSynchronization = () => {
                 name="importEnabled"
                 label={t("common:on")}
                 labelOff={t("common:off")}
-                isChecked={value}
+                isChecked={value[0] === "true"}
                 isDisabled={false}
                 onChange={onChange}
               />
@@ -105,21 +97,12 @@ export const LdapSettingsSynchronization = () => {
           }
           fieldId="kc-periodic-full-sync"
         >
-          <Controller
+          <TextInput
+            type="text"
+            id="kc-batch-size"
             name="config.fullSyncPeriod"
-            defaultValue={false}
-            control={control}
-            render={({ onChange, value }) => (
-              <Switch
-                id={"kc-periodic-full-sync"}
-                isChecked={value}
-                isDisabled={false}
-                onChange={onChange}
-                label={t("common:on")}
-                labelOff={t("common:off")}
-              />
-            )}
-          ></Controller>
+            ref={register}
+          />
         </FormGroup>
         <FormGroup
           label={t("periodicChangedUsersSync")}
@@ -133,22 +116,12 @@ export const LdapSettingsSynchronization = () => {
           fieldId="kc-periodic-changed-users-sync"
           hasNoPaddingTop
         >
-          <Controller
-            // TODO MF: this value not found or returned
-            name="config.periodicChangedUsersSync"
-            defaultValue={false}
-            control={control}
-            render={({ onChange, value }) => (
-              <Switch
-                id={"kc-periodic-changed-users-sync"}
-                isChecked={value}
-                isDisabled={false}
-                onChange={onChange}
-                label={t("common:on")}
-                labelOff={t("common:off")}
-              />
-            )}
-          ></Controller>
+          <TextInput
+            type="text"
+            id="kc-batch-size"
+            name="config.changedSyncPeriod"
+            ref={register}
+          />
         </FormGroup>
       </FormAccess>
     </>

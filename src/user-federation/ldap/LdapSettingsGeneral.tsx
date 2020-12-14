@@ -114,7 +114,11 @@ export const LdapSettingsGeneral = () => {
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption key={0} value={t("common:choose")} isPlaceholder />
+                <SelectOption
+                  key={0}
+                  value={t("common:choose")}
+                  isPlaceholder
+                />
                 <SelectOption key={1} value="Active Directory" />
                 <SelectOption key={2} value="Red Hat Directory Server" />
                 <SelectOption key={3} value="Tivoli" />

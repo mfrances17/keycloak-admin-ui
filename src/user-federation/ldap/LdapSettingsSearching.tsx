@@ -30,7 +30,7 @@ export const LdapSettingsSearching = () => {
   const convertSearchScopes = (scope: string) => {
     switch (scope) {
       case "1":
-      default:  
+      default:
         return "One Level";
       case "2":
         return "Subtree";
@@ -42,7 +42,10 @@ export const LdapSettingsSearching = () => {
       if (entry[0] === "config") {
         convertToFormValues(entry[1], "config", setValue);
         if (entry[1].searchScope) {
-          setValue("config.searchScope", convertSearchScopes(entry[1].searchScope[0]));
+          setValue(
+            "config.searchScope",
+            convertSearchScopes(entry[1].searchScope[0])
+          );
         }
       } else {
         setValue(entry[0], entry[1]);
@@ -306,7 +309,7 @@ export const LdapSettingsSearching = () => {
             render={({ onChange, value }) => (
               <Switch
                 id={"kc-console-pagination"}
-                isChecked={value}
+                isChecked={value[0] === "true"}
                 isDisabled={false}
                 onChange={onChange}
                 label={t("common:on")}

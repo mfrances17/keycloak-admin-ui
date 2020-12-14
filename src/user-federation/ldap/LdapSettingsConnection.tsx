@@ -50,7 +50,10 @@ export const LdapSettingsConnection = () => {
       if (entry[0] === "config") {
         convertToFormValues(entry[1], "config", setValue);
         if (entry[1].useTruststoreSpi) {
-          setValue("config.useTruststoreSpi", convertTruststoreSpiValues(entry[1].useTruststoreSpi[0]));
+          setValue(
+            "config.useTruststoreSpi",
+            convertTruststoreSpiValues(entry[1].useTruststoreSpi[0])
+          );
         }
       } else {
         setValue(entry[0], entry[1]);
@@ -109,7 +112,7 @@ export const LdapSettingsConnection = () => {
             render={({ onChange, value }) => (
               <Switch
                 id={"kc-enable-start-tls"}
-                isChecked={value}
+                isChecked={value[0] === "true"}
                 isDisabled={false}
                 onChange={onChange}
                 label={t("common:on")}
@@ -148,10 +151,7 @@ export const LdapSettingsConnection = () => {
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption
-                  key={0}
-                  value="Always"
-                />
+                <SelectOption key={0} value="Always" />
                 <SelectOption key={1} value="Only for ldaps" />
                 <SelectOption key={2} value="Never" />
               </Select>
@@ -179,7 +179,7 @@ export const LdapSettingsConnection = () => {
                 id={"kc-connection-pooling"}
                 isDisabled={false}
                 onChange={onChange}
-                isChecked={value}
+                isChecked={value[0] === "true"}
                 label={t("common:on")}
                 labelOff={t("common:off")}
               />
