@@ -31,9 +31,9 @@ export const LdapSettingsSearching = () => {
     switch (scope) {
       case "1":
       default:
-        return "One Level";
+        return `${t("oneLevel")}`;
       case "2":
-        return "Subtree";
+        return `${t("subtree")}`;
     }
   };
 
@@ -61,20 +61,6 @@ export const LdapSettingsSearching = () => {
       }
     })();
   }, []);
-
-  /*
-  **LDAP searching and updating**
-  editMode: ["WRITABLE"]
-  usersDn: ["user-dn"]
-  usernameLDAPAttribute: ["uid"]
-  rdnLDAPAttribute: ["uid"]
-  uuidLDAPAttribute: ["entryUUID"]
-  userObjectClasses: ["inetOrgPerson, organizationalPerson"]
-  <User LDAP filter>
-  searchScope: ["1"]
-  readTimeout: ["600000"]
-  pagination: ["true"]
-*/
 
   return (
     <>
@@ -109,7 +95,11 @@ export const LdapSettingsSearching = () => {
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption key={0} value="Choose..." isPlaceholder />
+                <SelectOption
+                  key={0}
+                  value={t("common:choose")}
+                  isPlaceholder
+                />
                 <SelectOption key={1} value="RACT_ONLY" />
                 <SelectOption key={2} value="WRITABLE" />
                 <SelectOption key={3} value="UNSYNCED" />
@@ -265,9 +255,13 @@ export const LdapSettingsSearching = () => {
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption key={0} value="Choose..." isPlaceholder />
-                <SelectOption key={1} value="One Level" />
-                <SelectOption key={2} value="Subtree" />
+                <SelectOption
+                  key={0}
+                  value={t("common:choose")}
+                  isPlaceholder
+                />
+                <SelectOption key={1} value={t("oneLevel")} />
+                <SelectOption key={2} value={t("subtree")} />
               </Select>
             )}
           ></Controller>

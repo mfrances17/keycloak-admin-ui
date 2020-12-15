@@ -36,12 +36,6 @@ export const LdapSettingsKerberosIntegration = () => {
     })();
   }, []);
 
-  /*
-  **Kerberos integration**
-  allowKerberosAuthentication: ["true"]
-  useKerberosForPasswordAuthentication: ["true"]
-*/
-
   return (
     <>
       <FormAccess role="manage-realm" isHorizontal>

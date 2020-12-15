@@ -35,13 +35,6 @@ export const LdapSettingsAdvanced = () => {
     })();
   }, []);
 
-  /*
-  **Advanced settings**
-  usePasswordModifyExtendedOp: ["true"]
-  validatePasswordPolicy: ["true"]
-  trustEmail: ["true"]
-*/
-
   return (
     <>
       <FormAccess role="manage-realm" isHorizontal>

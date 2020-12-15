@@ -29,12 +29,12 @@ export const LdapSettingsConnection = () => {
   const convertTruststoreSpiValues = (truststoreValue: string) => {
     switch (truststoreValue) {
       case "always":
-        return "Always";
+        return `${t("always")}`;
       case "never":
-        return "Never";
+        return `${t("never")}`;
       case "ldapsOnly":
       default:
-        return "Only for ldaps";
+        return `${t("onlyLdaps")}`;
     }
   };
 
@@ -151,9 +151,9 @@ export const LdapSettingsConnection = () => {
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption key={0} value="Always" />
-                <SelectOption key={1} value="Only for ldaps" />
-                <SelectOption key={2} value="Never" />
+                <SelectOption key={0} value={t("always")} />
+                <SelectOption key={1} value={t("onlyLdaps")} />
+                <SelectOption key={2} value={t("never")} />
               </Select>
             )}
           ></Controller>

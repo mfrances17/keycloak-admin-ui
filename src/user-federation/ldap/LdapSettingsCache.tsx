@@ -100,15 +100,6 @@ export const LdapSettingsCache = () => {
     minuteOptions.push(<SelectOption key={index + 1} value={index} />);
   }
 
-  /*
-   **Cache settings**
-   cachePolicy: ["EVICT_DAILY"]
-   evictionDay: ["1"]
-   evictionHour: ["0"]
-   evictionMinute: ["1"]
-   maxLifespan: ["24"]
-*/
-
   return (
     <>
       {/* Cache settings */}
