@@ -1,4 +1,5 @@
 import {
+  AlertVariant,
   FormGroup,
   Select,
   SelectOption,
@@ -17,12 +18,14 @@ import {
   asyncStateFetch,
 } from "../../context/auth/AdminClient";
 import { useParams } from "react-router-dom";
+import { useAlerts } from "../../components/alert/Alerts";
 import _ from "lodash";
 import { WizardSectionHeader } from "../../components/wizard-section-header/WizardSectionHeader";
 
 export type KerberosSettingsCacheProps = {
   showSectionHeading?: boolean;
   showSectionDescription?: boolean;
+  // form: UseFormMethods;
 };
 
 export const KerberosSettingsCache = ({
@@ -41,6 +44,15 @@ export const KerberosSettingsCache = ({
     name: "config.cachePolicy",
   });
 
+  const { addAlert } = useAlerts();
+
+  useEffect(() => {
+    return asyncStateFetch(
+      () => adminClient.components.findOne({ id }),
+      (component) => setupForm(component)
+    );
+  }, []);
+
   const setupForm = (component: ComponentRepresentation) => {
     Object.entries(component).map((entry) => {
       setValue("config.cachePolicy", component.config?.cachePolicy);
@@ -52,12 +64,17 @@ export const KerberosSettingsCache = ({
     });
   };
 
-  useEffect(() => {
-    return asyncStateFetch(
-      () => adminClient.components.findOne({ id }),
-      (component) => setupForm(component)
-    );
-  }, []);
+  const save = async (component: ComponentRepresentation) => {
+    try {
+      await adminClient.components.update({ id }, component);
+      setupForm(component as ComponentRepresentation);
+      addAlert(t("roleSaveSuccess"), AlertVariant.success);
+    } catch (error) {
+      addAlert(`${t("roleSaveError")} '${error}'`, AlertVariant.danger);
+    }
+  };
+
+  const form = useForm<ComponentRepresentation>();
 
   const [isCachePolicyDropdownOpen, setIsCachePolicyDropdownOpen] = useState(
     false
@@ -98,7 +115,11 @@ export const KerberosSettingsCache = ({
       )}
 
       {/* Cache settings */}
-      <FormAccess role="manage-realm" isHorizontal>
+      <FormAccess
+        role="manage-realm"
+        isHorizontal
+        onSubmit={form.handleSubmit(save)}
+      >
         <FormGroup
           label={t("cachePolicy")}
           labelIcon={

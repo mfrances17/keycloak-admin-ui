@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
+  AlertVariant,
   FormGroup,
   Select,
   SelectOption,
   SelectVariant,
   Switch,
   TextInput,
-  Title,
+  // Title,
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import { HelpItem } from "../../components/help-enabler/HelpItem";
@@ -16,20 +17,24 @@ import { FormAccess } from "../../components/form-access/FormAccess";
 import { useAdminClient } from "../../context/auth/AdminClient";
 import { useParams } from "react-router-dom";
 import { convertToFormValues } from "../../util";
+import { useAlerts } from "../../components/alert/Alerts";
 import _ from "lodash";
 import { WizardSectionHeader } from "../../components/wizard-section-header/WizardSectionHeader";
 
 export type KerberosSettingsRequiredProps = {
   showSectionHeading?: boolean;
   showSectionDescription?: boolean;
+  // form: UseFormMethods;
 };
 
 export const KerberosSettingsRequired = ({
   showSectionHeading = false,
   showSectionDescription = false,
 }: KerberosSettingsRequiredProps) => {
+
   const { t } = useTranslation("user-federation");
   const helpText = useTranslation("user-federation-help").t;
+
   const adminClient = useAdminClient();
   const [isEditModeDropdownOpen, setIsEditModeDropdownOpen] = useState(false);
   const { register, control, setValue } = useForm<ComponentRepresentation>();
@@ -39,6 +44,17 @@ export const KerberosSettingsRequired = ({
     control: control,
     name: "config.allowPasswordAuthentication",
   });
+
+  const { addAlert } = useAlerts();
+
+  useEffect(() => {
+    (async () => {
+      const fetchedComponent = await adminClient.components.findOne({ id });
+      if (fetchedComponent) {
+        setupForm(fetchedComponent);
+      }
+    })();
+  }, []);
 
   const setupForm = (component: ComponentRepresentation) => {
     Object.entries(component).map((entry) => {
@@ -53,14 +69,17 @@ export const KerberosSettingsRequired = ({
     });
   };
 
-  useEffect(() => {
-    (async () => {
-      const fetchedComponent = await adminClient.components.findOne({ id });
-      if (fetchedComponent) {
-        setupForm(fetchedComponent);
-      }
-    })();
-  }, []);
+  const save = async (component: ComponentRepresentation) => {
+    try {
+      await adminClient.components.update({ id }, component);
+      setupForm(component as ComponentRepresentation);
+      addAlert(t("roleSaveSuccess"), AlertVariant.success);
+    } catch (error) {
+      addAlert(`${t("roleSaveError")} '${error}'`, AlertVariant.danger);
+    }
+  };
+
+  const form = useForm<ComponentRepresentation>();
 
   return (
     <>
@@ -73,7 +92,11 @@ export const KerberosSettingsRequired = ({
       )}
 
       {/* Required settings */}
-      <FormAccess role="manage-realm" isHorizontal>
+      <FormAccess
+        role="manage-realm"
+        isHorizontal
+        onSubmit={form.handleSubmit(save)}
+      >
         <FormGroup
           label={t("consoleDisplayName")}
           labelIcon={
