@@ -1,21 +1,15 @@
-import {
-  // ActionGroup,
-  // Button,
-  // Form,
-  PageSection,
-  // Title,
-} from "@patternfly/react-core";
-// import { useTranslation } from "react-i18next";
+import { ActionGroup, Button, Form, PageSection } from "@patternfly/react-core";
+import { useTranslation } from "react-i18next";
 import React from "react";
 import { KerberosSettingsRequired } from "./kerberos/KerberosSettingsRequired";
 import { KerberosSettingsCache } from "./kerberos/KerberosSettingsCache";
-// import { useHistory } from "react-router-dom";
-// import { useRealm } from "../context/realm-context/RealmContext";
+import { useHistory } from "react-router-dom";
+import { useRealm } from "../context/realm-context/RealmContext";
 
 export const UserFederationKerberosSettings = () => {
-  // const { t } = useTranslation("user-federation");
-  // const history = useHistory();
-  // const { realm } = useRealm();
+  const { t } = useTranslation("user-federation");
+  const history = useHistory();
+  const { realm } = useRealm();
 
   return (
     <>
@@ -24,11 +18,6 @@ export const UserFederationKerberosSettings = () => {
       </PageSection>
       <PageSection variant="light" isFilled>
         <KerberosSettingsCache showSectionHeading />
-        {/* Cache settings
-        <Title size={"xl"} headingLevel={"h2"} className="pf-u-mb-lg">
-          {t("cacheSettings")}
-        </Title>
-        <KerberosSettingsCache />
         <Form>
           <ActionGroup>
             <Button variant="primary" type="submit">
@@ -41,7 +30,7 @@ export const UserFederationKerberosSettings = () => {
               {t("common:cancel")}
             </Button>
           </ActionGroup>
-        </Form> */}
+        </Form>
       </PageSection>
     </>
   );

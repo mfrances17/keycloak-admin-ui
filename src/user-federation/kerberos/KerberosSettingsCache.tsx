@@ -25,7 +25,6 @@ import { WizardSectionHeader } from "../../components/wizard-section-header/Wiza
 export type KerberosSettingsCacheProps = {
   showSectionHeading?: boolean;
   showSectionDescription?: boolean;
-  // form: UseFormMethods;
 };
 
 export const KerberosSettingsCache = ({

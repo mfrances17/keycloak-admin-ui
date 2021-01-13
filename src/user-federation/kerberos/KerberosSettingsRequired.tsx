@@ -7,7 +7,6 @@ import {
   SelectVariant,
   Switch,
   TextInput,
-  // Title,
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import { HelpItem } from "../../components/help-enabler/HelpItem";
@@ -24,14 +23,12 @@ import { WizardSectionHeader } from "../../components/wizard-section-header/Wiza
 export type KerberosSettingsRequiredProps = {
   showSectionHeading?: boolean;
   showSectionDescription?: boolean;
-  // form: UseFormMethods;
 };
 
 export const KerberosSettingsRequired = ({
   showSectionHeading = false,
   showSectionDescription = false,
 }: KerberosSettingsRequiredProps) => {
-
   const { t } = useTranslation("user-federation");
   const helpText = useTranslation("user-federation-help").t;
 
