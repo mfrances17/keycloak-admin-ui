@@ -1,5 +1,4 @@
 import {
-  AlertVariant,
   FormGroup,
   Select,
   SelectOption,
@@ -8,72 +7,38 @@ import {
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import { HelpItem } from "../../components/help-enabler/HelpItem";
-import React, { useEffect, useState } from "react";
-import { convertToFormValues } from "../../util";
-import { useForm, Controller, useWatch } from "react-hook-form";
+import React, { useState } from "react";
+import {
+  SubmitHandler,
+  UseFormMethods,
+  Controller,
+  useWatch,
+} from "react-hook-form";
 import ComponentRepresentation from "keycloak-admin/lib/defs/componentRepresentation";
 import { FormAccess } from "../../components/form-access/FormAccess";
-import {
-  useAdminClient,
-  asyncStateFetch,
-} from "../../context/auth/AdminClient";
-import { useParams } from "react-router-dom";
-import { useAlerts } from "../../components/alert/Alerts";
 import _ from "lodash";
 import { WizardSectionHeader } from "../../components/wizard-section-header/WizardSectionHeader";
 
 export type KerberosSettingsCacheProps = {
+  form: UseFormMethods;
+  save: SubmitHandler<ComponentRepresentation>;
   showSectionHeading?: boolean;
   showSectionDescription?: boolean;
 };
 
 export const KerberosSettingsCache = ({
+  form,
+  save,
   showSectionHeading = false,
   showSectionDescription = false,
 }: KerberosSettingsCacheProps) => {
   const { t } = useTranslation("user-federation");
   const helpText = useTranslation("user-federation-help").t;
 
-  const adminClient = useAdminClient();
-  const { register, control, setValue } = useForm<ComponentRepresentation>();
-  const { id } = useParams<{ id: string }>();
-
   const cachePolicyType = useWatch({
-    control: control,
+    control: form.control,
     name: "config.cachePolicy",
   });
-
-  const { addAlert } = useAlerts();
-
-  useEffect(() => {
-    return asyncStateFetch(
-      () => adminClient.components.findOne({ id }),
-      (component) => setupForm(component)
-    );
-  }, []);
-
-  const setupForm = (component: ComponentRepresentation) => {
-    Object.entries(component).map((entry) => {
-      setValue("config.cachePolicy", component.config?.cachePolicy);
-      if (entry[0] === "config") {
-        convertToFormValues(entry[1], "config", setValue);
-      } else {
-        setValue(entry[0], entry[1]);
-      }
-    });
-  };
-
-  const save = async (component: ComponentRepresentation) => {
-    try {
-      await adminClient.components.update({ id }, component);
-      setupForm(component as ComponentRepresentation);
-      addAlert(t("roleSaveSuccess"), AlertVariant.success);
-    } catch (error) {
-      addAlert(`${t("roleSaveError")} '${error}'`, AlertVariant.danger);
-    }
-  };
-
-  const form = useForm<ComponentRepresentation>();
 
   const [isCachePolicyDropdownOpen, setIsCachePolicyDropdownOpen] = useState(
     false
@@ -133,7 +98,7 @@ export const KerberosSettingsCache = ({
           <Controller
             name="config.cachePolicy"
             defaultValue=""
-            control={control}
+            control={form.control}
             render={({ onChange, value }) => (
               <Select
                 toggleId="kc-cache-policy"
@@ -179,7 +144,7 @@ export const KerberosSettingsCache = ({
             <Controller
               name="config.evictionDay"
               defaultValue=""
-              control={control}
+              control={form.control}
               render={({ onChange, value }) => (
                 <Select
                   toggleId="kc-eviction-day"
@@ -246,7 +211,7 @@ export const KerberosSettingsCache = ({
               <Controller
                 name="config.evictionHour"
                 defaultValue=""
-                control={control}
+                control={form.control}
                 render={({ onChange, value }) => (
                   <Select
                     toggleId="kc-eviction-hour"
@@ -281,7 +246,7 @@ export const KerberosSettingsCache = ({
               <Controller
                 name="config.evictionMinute"
                 defaultValue=""
-                control={control}
+                control={form.control}
                 render={({ onChange, value }) => (
                   <Select
                     toggleId="kc-eviction-minute"
@@ -324,7 +289,7 @@ export const KerberosSettingsCache = ({
               type="text"
               id="kc-max-lifespan"
               name="config.maxLifespan"
-              ref={register}
+              ref={form.register}
             />
           </FormGroup>
         ) : (

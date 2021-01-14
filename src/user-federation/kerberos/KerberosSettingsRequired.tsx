@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  AlertVariant,
   FormGroup,
   Select,
   SelectOption,
@@ -9,74 +8,42 @@ import {
   TextInput,
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
-import { HelpItem } from "../../components/help-enabler/HelpItem";
-import { useForm, Controller, useWatch } from "react-hook-form";
+import {
+  SubmitHandler,
+  UseFormMethods,
+  Controller,
+  useWatch,
+} from "react-hook-form";
+
 import ComponentRepresentation from "keycloak-admin/lib/defs/componentRepresentation";
 import { FormAccess } from "../../components/form-access/FormAccess";
-import { useAdminClient } from "../../context/auth/AdminClient";
-import { useParams } from "react-router-dom";
-import { convertToFormValues } from "../../util";
-import { useAlerts } from "../../components/alert/Alerts";
+
+import { HelpItem } from "../../components/help-enabler/HelpItem";
 import _ from "lodash";
 import { WizardSectionHeader } from "../../components/wizard-section-header/WizardSectionHeader";
 
 export type KerberosSettingsRequiredProps = {
+  form: UseFormMethods;
+  save: SubmitHandler<ComponentRepresentation>;
   showSectionHeading?: boolean;
   showSectionDescription?: boolean;
 };
 
 export const KerberosSettingsRequired = ({
+  form,
+  save,
   showSectionHeading = false,
   showSectionDescription = false,
 }: KerberosSettingsRequiredProps) => {
   const { t } = useTranslation("user-federation");
   const helpText = useTranslation("user-federation-help").t;
 
-  const adminClient = useAdminClient();
   const [isEditModeDropdownOpen, setIsEditModeDropdownOpen] = useState(false);
-  const { register, control, setValue } = useForm<ComponentRepresentation>();
-  const { id } = useParams<{ id: string }>();
 
   const allowPassAuth = useWatch({
-    control: control,
+    control: form.control,
     name: "config.allowPasswordAuthentication",
   });
-
-  const { addAlert } = useAlerts();
-
-  useEffect(() => {
-    (async () => {
-      const fetchedComponent = await adminClient.components.findOne({ id });
-      if (fetchedComponent) {
-        setupForm(fetchedComponent);
-      }
-    })();
-  }, []);
-
-  const setupForm = (component: ComponentRepresentation) => {
-    Object.entries(component).map((entry) => {
-      setValue(
-        "config.allowPasswordAuthentication",
-        component.config?.allowPasswordAuthentication
-      );
-      if (entry[0] === "config") {
-        convertToFormValues(entry[1], "config", setValue);
-      }
-      setValue(entry[0], entry[1]);
-    });
-  };
-
-  const save = async (component: ComponentRepresentation) => {
-    try {
-      await adminClient.components.update({ id }, component);
-      setupForm(component as ComponentRepresentation);
-      addAlert(t("roleSaveSuccess"), AlertVariant.success);
-    } catch (error) {
-      addAlert(`${t("roleSaveError")} '${error}'`, AlertVariant.danger);
-    }
-  };
-
-  const form = useForm<ComponentRepresentation>();
 
   return (
     <>
@@ -111,7 +78,7 @@ export const KerberosSettingsRequired = ({
             type="text"
             id="kc-console-display-name"
             name="name"
-            ref={register}
+            ref={form.register}
           />
         </FormGroup>
 
@@ -132,7 +99,7 @@ export const KerberosSettingsRequired = ({
             type="text"
             id="kc-kerberos-realm"
             name="config.kerberosRealm"
-            ref={register}
+            ref={form.register}
           />
         </FormGroup>
 
@@ -153,7 +120,7 @@ export const KerberosSettingsRequired = ({
             type="text"
             id="kc-server-principal"
             name="config.serverPrincipal"
-            ref={register}
+            ref={form.register}
           />
         </FormGroup>
 
@@ -174,7 +141,7 @@ export const KerberosSettingsRequired = ({
             type="text"
             id="kc-key-tab"
             name="config.keyTab"
-            ref={register}
+            ref={form.register}
           />
         </FormGroup>
 
@@ -194,7 +161,7 @@ export const KerberosSettingsRequired = ({
           <Controller
             name="config.debug"
             defaultValue={false}
-            control={control}
+            control={form.control}
             render={({ onChange, value }) => (
               <Switch
                 id={"kc-debug"}
@@ -223,7 +190,7 @@ export const KerberosSettingsRequired = ({
           <Controller
             name="config.allowPasswordAuthentication"
             defaultValue={false}
-            control={control}
+            control={form.control}
             render={({ onChange, value }) => (
               <Switch
                 id={"kc-allow-password-authentication"}
@@ -253,7 +220,7 @@ export const KerberosSettingsRequired = ({
             <Controller
               name="config.editMode"
               defaultValue={t("common:selectOne")}
-              control={control}
+              control={form.control}
               render={({ onChange, value }) => (
                 <Select
                   toggleId="kc-edit-mode"
@@ -299,7 +266,7 @@ export const KerberosSettingsRequired = ({
           <Controller
             name="config.updateProfileFirstLogin"
             defaultValue={false}
-            control={control}
+            control={form.control}
             render={({ onChange, value }) => (
               <Switch
                 id={"kc-update-first-login"}
