@@ -288,7 +288,7 @@ export const KerberosSettingsCache = ({
               isRequired
               type="text"
               id="kc-max-lifespan"
-              name="config.maxLifespan"
+              name="config.maxLifespan[0]"
               ref={form.register}
             />
           </FormGroup>

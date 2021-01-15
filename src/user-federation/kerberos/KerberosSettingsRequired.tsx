@@ -73,6 +73,36 @@ export const KerberosSettingsRequired = ({
           fieldId="kc-console-display-name"
           isRequired
         >
+          {/* These hidden fields are required so data object written back matches data retrieved */}
+          <TextInput
+            hidden
+            type="text"
+            id="kc-console-display-name"
+            name="id"
+            ref={form.register}
+          />
+          <TextInput
+            hidden
+            type="text"
+            id="kc-console-display-name"
+            name="providerId"
+            ref={form.register}
+          />
+          <TextInput
+            hidden
+            type="text"
+            id="kc-console-display-name"
+            name="providerType"
+            ref={form.register}
+          />
+          <TextInput
+            hidden
+            type="text"
+            id="kc-console-display-name"
+            name="parentId"
+            ref={form.register}
+          />
+
           <TextInput
             isRequired
             type="text"
@@ -98,7 +128,7 @@ export const KerberosSettingsRequired = ({
             isRequired
             type="text"
             id="kc-kerberos-realm"
-            name="config.kerberosRealm"
+            name="config.kerberosRealm[0]"
             ref={form.register}
           />
         </FormGroup>
@@ -119,7 +149,7 @@ export const KerberosSettingsRequired = ({
             isRequired
             type="text"
             id="kc-server-principal"
-            name="config.serverPrincipal"
+            name="config.serverPrincipal[0]"
             ref={form.register}
           />
         </FormGroup>
@@ -140,7 +170,7 @@ export const KerberosSettingsRequired = ({
             isRequired
             type="text"
             id="kc-key-tab"
-            name="config.keyTab"
+            name="config.keyTab[0]"
             ref={form.register}
           />
         </FormGroup>
