@@ -8,27 +8,19 @@ import {
 import { useTranslation } from "react-i18next";
 import { HelpItem } from "../../components/help-enabler/HelpItem";
 import React, { useState } from "react";
-import {
-  SubmitHandler,
-  UseFormMethods,
-  Controller,
-  useWatch,
-} from "react-hook-form";
-import ComponentRepresentation from "keycloak-admin/lib/defs/componentRepresentation";
+import { UseFormMethods, Controller, useWatch } from "react-hook-form";
 import { FormAccess } from "../../components/form-access/FormAccess";
 import _ from "lodash";
 import { WizardSectionHeader } from "../../components/wizard-section-header/WizardSectionHeader";
 
 export type KerberosSettingsCacheProps = {
   form: UseFormMethods;
-  save: SubmitHandler<ComponentRepresentation>;
   showSectionHeading?: boolean;
   showSectionDescription?: boolean;
 };
 
 export const KerberosSettingsCache = ({
   form,
-  save,
   showSectionHeading = false,
   showSectionDescription = false,
 }: KerberosSettingsCacheProps) => {
@@ -79,11 +71,7 @@ export const KerberosSettingsCache = ({
       )}
 
       {/* Cache settings */}
-      <FormAccess
-        role="manage-realm"
-        isHorizontal
-        onSubmit={form.handleSubmit(save)}
-      >
+      <FormAccess role="manage-realm" isHorizontal>
         <FormGroup
           label={t("cachePolicy")}
           labelIcon={

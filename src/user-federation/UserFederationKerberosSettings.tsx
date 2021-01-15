@@ -65,10 +65,10 @@ export const UserFederationKerberosSettings = () => {
   return (
     <>
       <PageSection variant="light">
-        <KerberosSettingsRequired form={form} save={save} showSectionHeading />
+        <KerberosSettingsRequired form={form} showSectionHeading />
       </PageSection>
       <PageSection variant="light" isFilled>
-        <KerberosSettingsCache form={form} save={save} showSectionHeading />
+        <KerberosSettingsCache form={form} showSectionHeading />
         <Form onSubmit={form.handleSubmit(save)}>
           <ActionGroup>
             <Button variant="primary" type="submit">

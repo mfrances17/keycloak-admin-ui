@@ -8,14 +8,8 @@ import {
   TextInput,
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
-import {
-  SubmitHandler,
-  UseFormMethods,
-  Controller,
-  useWatch,
-} from "react-hook-form";
+import { UseFormMethods, Controller, useWatch } from "react-hook-form";
 
-import ComponentRepresentation from "keycloak-admin/lib/defs/componentRepresentation";
 import { FormAccess } from "../../components/form-access/FormAccess";
 
 import { HelpItem } from "../../components/help-enabler/HelpItem";
@@ -24,14 +18,12 @@ import { WizardSectionHeader } from "../../components/wizard-section-header/Wiza
 
 export type KerberosSettingsRequiredProps = {
   form: UseFormMethods;
-  save: SubmitHandler<ComponentRepresentation>;
   showSectionHeading?: boolean;
   showSectionDescription?: boolean;
 };
 
 export const KerberosSettingsRequired = ({
   form,
-  save,
   showSectionHeading = false,
   showSectionDescription = false,
 }: KerberosSettingsRequiredProps) => {
@@ -56,11 +48,7 @@ export const KerberosSettingsRequired = ({
       )}
 
       {/* Required settings */}
-      <FormAccess
-        role="manage-realm"
-        isHorizontal
-        onSubmit={form.handleSubmit(save)}
-      >
+      <FormAccess role="manage-realm" isHorizontal>
         <FormGroup
           label={t("consoleDisplayName")}
           labelIcon={
