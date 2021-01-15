@@ -14,13 +14,21 @@ export const UserFederationKerberosWizard = () => {
     {
       name: t("requiredSettings"),
       component: (
-        <KerberosSettingsRequired form={form} showSectionHeading showSectionDescription />
+        <KerberosSettingsRequired
+          form={form}
+          showSectionHeading
+          showSectionDescription
+        />
       ),
     },
     {
       name: t("cacheSettings"),
       component: (
-        <KerberosSettingsCache form={form} showSectionHeading showSectionDescription />
+        <KerberosSettingsCache
+          form={form}
+          showSectionHeading
+          showSectionDescription
+        />
       ),
       nextButtonText: t("common:finish"), // TODO: needs to disable until cache policy is valid
     },
