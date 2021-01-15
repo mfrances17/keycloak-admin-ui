@@ -78,6 +78,9 @@
     "oneLevel": "One Level",
     "subtree": "Subtree",
 
+    "saveSuccess": "User federation successfully saved",
+    "saveError": "User federation could not be saved: {error}",
+
     "learnMore": "Learn more",
     "addNewProvider": "Add new provider",
     "userFedDeletedSuccess": "The user federation provider has been deleted.",

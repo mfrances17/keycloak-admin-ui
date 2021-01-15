@@ -56,9 +56,9 @@ export const UserFederationKerberosSettings = () => {
     try {
       await adminClient.components.update({ id }, component);
       setupForm(component as ComponentRepresentation);
-      addAlert(t("roleSaveSuccess"), AlertVariant.success);
+      addAlert(t("saveSuccess"), AlertVariant.success);
     } catch (error) {
-      addAlert(`${t("roleSaveError")} '${error}'`, AlertVariant.danger);
+      addAlert(`${t("saveError")} '${error}'`, AlertVariant.danger);
     }
   };
 
