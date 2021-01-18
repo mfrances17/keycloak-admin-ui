@@ -34,31 +34,7 @@ export const UserFederationLdapSettings = () => {
   const { realm } = useRealm();
 
   const { id } = useParams<{ id: string }>();
-
   const { addAlert } = useAlerts();
-
-  // const { control, setValue } = useForm<ComponentRepresentation>();
-
-  const convertToDays = (num: string) => {
-    switch (num) {
-      case "1":
-        return t("common:Sunday");
-      case "2":
-        return t("common:Monday");
-      case "3":
-        return t("common:Tuesday");
-      case "4":
-        return t("common:Wednesday");
-      case "5":
-        return t("common:Thursday");
-      case "6":
-        return t("common:Friday");
-      case "7":
-        return t("common:Saturday");
-      default:
-        return t("common:selectOne");
-    }
-  };
 
   const convertVendorNames = (vendorName: string) => {
     switch (vendorName) {
@@ -112,12 +88,6 @@ export const UserFederationLdapSettings = () => {
     Object.entries(component).map((entry) => {
       if (entry[0] === "config") {
         convertToFormValues(entry[1], "config", form.setValue);
-        if (entry[1].evictionDay) {
-          form.setValue(
-            "config.evictionDay",
-            convertToDays(entry[1].evictionDay[0])
-          );
-        }
         if (entry[1].vendor) {
           form.setValue(
             "config.vendor",
