@@ -73,45 +73,49 @@ export const LdapSettingsSynchronization = ({
           <TextInput
             type="text"
             id="kc-batch-size"
-            name="config.batchSizeForSync"
+            name="config.batchSizeForSync[0]"
             ref={form.register}
           />
         </FormGroup>
+
+        {/* Enter -1 to switch off, otherwise enter value */}
         <FormGroup
           hasNoPaddingTop
-          label={t("periodicFullSync")}
+          label={t("fullSyncPeriod")}
           labelIcon={
             <HelpItem
-              helpText={helpText("periodicFullSyncHelp")}
-              forLabel={t("periodicFullSync")}
-              forID="kc-periodic-full-sync"
+              helpText={helpText("fullSyncPeriodHelp")}
+              forLabel={t("fullSyncPeriod")}
+              forID="kc-full-sync-period"
             />
           }
-          fieldId="kc-periodic-full-sync"
+          fieldId="kc-full-sync-period"
         >
           <TextInput
             type="text"
-            id="kc-batch-size"
-            name="config.fullSyncPeriod"
+            id="kc-full-sync-period"
+            name="config.fullSyncPeriod[0]"
             ref={form.register}
           />
         </FormGroup>
+
+        {/* Enter -1 to switch off, otherwise enter value */}
         <FormGroup
-          label={t("periodicChangedUsersSync")}
+          label={t("changedUsersSyncPeriod")}
           labelIcon={
             <HelpItem
-              helpText={helpText("periodicChangedUsersSyncHelp")}
-              forLabel={t("periodicChangedUsersSync")}
-              forID="kc-periodic-changed-users-sync"
+              helpText={helpText("changedUsersSyncHelp")}
+              forLabel={t("changedUsersSyncPeriod")}
+              forID="kc-changed-users-sync-period"
             />
           }
-          fieldId="kc-periodic-changed-users-sync"
+          fieldId="kc-changed-users-sync-period"
           hasNoPaddingTop
         >
           <TextInput
             type="text"
-            id="kc-batch-size"
-            name="config.changedSyncPeriod"
+            id="kc-changed-users-sync-period"
+            name="config.changedSyncPeriod[0]"
             ref={form.register}
           />
         </FormGroup>

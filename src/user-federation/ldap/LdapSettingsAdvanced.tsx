@@ -44,8 +44,8 @@ export const LdapSettingsAdvanced = ({
           hasNoPaddingTop
         >
           <Controller
-            name="config.usePasswordModifyExtendedOp"
-            defaultValue={false}
+            name="config.usePasswordModifyExtendedOp[0]"
+            defaultValue={"false"}
             control={form.control}
             render={({ onChange, value }) => (
               <Switch
@@ -74,7 +74,7 @@ export const LdapSettingsAdvanced = ({
         >
           <Controller
             name="config.validatePasswordPolicy"
-            defaultValue={false}
+            defaultValue={"false"}
             control={form.control}
             render={({ onChange, value }) => (
               <Switch
@@ -103,7 +103,7 @@ export const LdapSettingsAdvanced = ({
         >
           <Controller
             name="config.trustEmail"
-            defaultValue={false}
+            defaultValue={"false"}
             control={form.control}
             render={({ onChange, value }) => (
               <Switch

@@ -33,7 +33,9 @@
     "importUsersHelp": "Import users",
     "batchSizeHelp": "Count of LDAP users to be imported from LDAP to Keycloak within a single transaction",
     "periodicFullSyncHelp": "Whether periodic full synchronization of LDAP users to Keycloak should be enabled or not",
+    "fullSyncPeriodHelp": "Period for full synchronization in seconds",
     "periodicChangedUsersSyncHelp": "Whether periodic synchronization of changed or newly created LDAP users to Keycloak should be enabled or not",
+    "changedUsersSyncHelp": "Period for synchronization of changed or newly created LDAP users in seconds",
 
     "ldapKerberosSettingsDescription": "This section contains options useful for the Kerberos integration. This is used only when the LDAP server is used together with Kerberos/SPNEGO for user authentication.",
     "allowKerberosAuthenticationHelp": "Enable/disable HTTP authentication of users with SPNEGO/Kerberos tokens. The data about authenticated users will be provisioned from this LDAP server.",

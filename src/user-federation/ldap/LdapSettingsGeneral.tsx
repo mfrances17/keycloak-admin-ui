@@ -50,11 +50,40 @@ export const LdapSettingsGeneral = ({
           fieldId="kc-console-display-name"
           isRequired
         >
+          {/* These hidden fields are required so data object written back matches data retrieved */}
+          <TextInput
+            hidden
+            type="text"
+            id="kc-console-id"
+            name="id"
+            ref={form.register}
+          />
           <TextInput
             isRequired
             type="text"
             id="kc-console-display-name"
             name="name"
+            ref={form.register}
+          />
+          <TextInput
+            hidden
+            type="text"
+            id="kc-console-provider-id"
+            name="providerId"
+            ref={form.register}
+          />
+          <TextInput
+            hidden
+            type="text"
+            id="kc-console-provider-type"
+            name="providerType"
+            ref={form.register}
+          />
+          <TextInput
+            hidden
+            type="text"
+            id="kc-console-parentId"
+            name="parentId"
             ref={form.register}
           />
         </FormGroup>
@@ -71,7 +100,7 @@ export const LdapSettingsGeneral = ({
           isRequired
         >
           <Controller
-            name="config.vendor"
+            name="config.vendor[0]"
             defaultValue=""
             control={form.control}
             render={({ onChange, value }) => (
@@ -92,11 +121,21 @@ export const LdapSettingsGeneral = ({
                   value={t("common:choose")}
                   isPlaceholder
                 />
-                <SelectOption key={1} value="Active Directory" />
-                <SelectOption key={2} value="Red Hat Directory Server" />
-                <SelectOption key={3} value="Tivoli" />
-                <SelectOption key={4} value="Novell eDirectory" />
-                <SelectOption key={5} value="Other" />
+                <SelectOption key={1} value="ad">
+                  Active Directory
+                </SelectOption>
+                <SelectOption key={2} value="rhds">
+                  Red Hat Directory Server
+                </SelectOption>
+                <SelectOption key={3} value="tivoli">
+                  Tivoli
+                </SelectOption>
+                <SelectOption key={4} value="edirectory">
+                  Novell eDirectory
+                </SelectOption>
+                <SelectOption key={5} value="other">
+                  Other
+                </SelectOption>
               </Select>
             )}
           ></Controller>

@@ -53,14 +53,16 @@ export const LdapSettingsCache = ({
     <SelectOption key={0} value={t("common:selectOne")} isPlaceholder />,
   ];
   for (let index = 1; index <= 24; index++) {
-    hourOptions.push(<SelectOption key={index + 1} value={index} />);
+    hourOptions.push(<SelectOption key={index + 1} value={index.toString()} />);
   }
 
   const minuteOptions = [
     <SelectOption key={0} value={t("common:selectOne")} isPlaceholder />,
   ];
   for (let index = 1; index <= 60; index++) {
-    minuteOptions.push(<SelectOption key={index + 1} value={index} />);
+    minuteOptions.push(
+      <SelectOption key={index + 1} value={index.toString()} />
+    );
   }
 
   return (
@@ -103,7 +105,6 @@ export const LdapSettingsCache = ({
                 selections={value}
                 variant={SelectVariant.single}
               >
-                {/* <SelectOption key={0} value="Choose..." isPlaceholder /> */}
                 <SelectOption
                   key={0}
                   value={t("common:selectOne")}
@@ -197,7 +198,7 @@ export const LdapSettingsCache = ({
               fieldId="kc-eviction-hour"
             >
               <Controller
-                name="config.evictionHour"
+                name="config.evictionHour[0]"
                 defaultValue=""
                 control={form.control}
                 render={({ onChange, value }) => (
@@ -231,7 +232,7 @@ export const LdapSettingsCache = ({
               fieldId="kc-eviction-minute"
             >
               <Controller
-                name="config.evictionMinute"
+                name="config.evictionMinute[0]"
                 defaultValue=""
                 control={form.control}
                 render={({ onChange, value }) => (
@@ -275,7 +276,7 @@ export const LdapSettingsCache = ({
               isRequired
               type="text"
               id="kc-max-lifespan"
-              name="config.maxLifespan"
+              name="config.maxLifespan[0]"
               ref={form.register}
             />
           </FormGroup>

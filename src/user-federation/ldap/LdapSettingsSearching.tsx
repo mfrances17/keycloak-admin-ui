@@ -55,7 +55,7 @@ export const LdapSettingsSearching = ({
           fieldId="kc-edit-mode"
         >
           <Controller
-            name="config.editMode"
+            name="config.editMode[0]"
             defaultValue=""
             control={form.control}
             render={({ onChange, value }) => (
@@ -101,7 +101,7 @@ export const LdapSettingsSearching = ({
             isRequired
             type="text"
             id="kc-console-users-dn"
-            name="config.usersDn"
+            name="config.usersDn[0]"
             ref={form.register}
           />
         </FormGroup>
@@ -121,7 +121,7 @@ export const LdapSettingsSearching = ({
             isRequired
             type="text"
             id="kc-username-ldap-attribute"
-            name="config.usernameLDAPAttribute"
+            name="config.usernameLDAPAttribute[0]"
             ref={form.register}
           />
         </FormGroup>
@@ -141,7 +141,7 @@ export const LdapSettingsSearching = ({
             isRequired
             type="text"
             id="kc-rdn-ldap-attribute"
-            name="config.rdnLDAPAttribute"
+            name="config.rdnLDAPAttribute[0]"
             ref={form.register}
           />
         </FormGroup>
@@ -161,7 +161,7 @@ export const LdapSettingsSearching = ({
             isRequired
             type="text"
             id="kc-uuid-ldap-attribute"
-            name="config.uuidLDAPAttribute"
+            name="config.uuidLDAPAttribute[0]"
             ref={form.register}
           />
         </FormGroup>
@@ -181,7 +181,7 @@ export const LdapSettingsSearching = ({
             isRequired
             type="text"
             id="kc-user-object-classes"
-            name="config.userObjectClasses"
+            name="config.userObjectClasses[0]"
             ref={form.register}
           />
         </FormGroup>
@@ -199,10 +199,11 @@ export const LdapSettingsSearching = ({
           <TextInput
             type="text"
             id="kc-user-ldap-filter"
-            name="config.customUserSearchFilter"
+            name="config.customUserSearchFilter[0]"
             ref={form.register}
           />
         </FormGroup>
+
         <FormGroup
           label={t("searchScope")}
           labelIcon={
@@ -215,7 +216,7 @@ export const LdapSettingsSearching = ({
           fieldId="kc-search-scope"
         >
           <Controller
-            name="config.searchScope"
+            name="config.searchScope[0]"
             defaultValue=""
             control={form.control}
             render={({ onChange, value }) => (
@@ -238,8 +239,12 @@ export const LdapSettingsSearching = ({
                   value={t("common:choose")}
                   isPlaceholder
                 />
-                <SelectOption key={1} value={t("oneLevel")} />
-                <SelectOption key={2} value={t("subtree")} />
+                <SelectOption key={1} value="1">
+                  {t("oneLevel")}
+                </SelectOption>
+                <SelectOption key={2} value="2">
+                  {t("subtree")}
+                </SelectOption>
               </Select>
             )}
           ></Controller>
@@ -258,7 +263,7 @@ export const LdapSettingsSearching = ({
           <TextInput
             type="text"
             id="kc-read-timeout"
-            name="config.readTimeout"
+            name="config.readTimeout[0]"
             ref={form.register}
           />
         </FormGroup>

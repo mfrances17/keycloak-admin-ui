@@ -36,50 +36,13 @@ export const UserFederationLdapSettings = () => {
   const { id } = useParams<{ id: string }>();
   const { addAlert } = useAlerts();
 
-  const convertVendorNames = (vendorName: string) => {
-    switch (vendorName) {
-      case "ad":
-        return "Active Directory";
-      case "rhds":
-        return "Red Hat Directory Server";
-      case "tivoli":
-        return "Tivoli";
-      case "edirectory":
-        return "Novell eDirectory";
-      case "other":
-        return "Other";
-      default:
-        return t("common:choose");
-    }
-  };
-
-  const convertSearchScopes = (scope: string) => {
-    switch (scope) {
-      case "1":
-      default:
-        return `${t("oneLevel")}`;
-      case "2":
-        return `${t("subtree")}`;
-    }
-  };
-
-  const convertTruststoreSpiValues = (truststoreValue: string) => {
-    switch (truststoreValue) {
-      case "always":
-        return `${t("always")}`;
-      case "never":
-        return `${t("never")}`;
-      case "ldapsOnly":
-      default:
-        return `${t("onlyLdaps")}`;
-    }
-  };
-
   useEffect(() => {
     (async () => {
       const fetchedComponent = await adminClient.components.findOne({ id });
       if (fetchedComponent) {
         setupForm(fetchedComponent);
+        console.log(`COMPONENT PULLED IN`);
+        console.log(fetchedComponent);
       }
     })();
   }, []);
@@ -88,24 +51,6 @@ export const UserFederationLdapSettings = () => {
     Object.entries(component).map((entry) => {
       if (entry[0] === "config") {
         convertToFormValues(entry[1], "config", form.setValue);
-        if (entry[1].vendor) {
-          form.setValue(
-            "config.vendor",
-            convertVendorNames(entry[1].vendor[0])
-          );
-        }
-        if (entry[1].searchScope) {
-          form.setValue(
-            "config.searchScope",
-            convertSearchScopes(entry[1].searchScope[0])
-          );
-        }
-        if (entry[1].useTruststoreSpi) {
-          form.setValue(
-            "config.useTruststoreSpi",
-            convertTruststoreSpiValues(entry[1].useTruststoreSpi[0])
-          );
-        }
       } else {
         form.setValue(entry[0], entry[1]);
       }
@@ -113,6 +58,9 @@ export const UserFederationLdapSettings = () => {
   };
 
   const save = async (component: ComponentRepresentation) => {
+    console.log(`COMPONENT SAVED OUT`);
+    console.log(component);
+
     try {
       await adminClient.components.update({ id }, component);
       setupForm(component as ComponentRepresentation);

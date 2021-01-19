@@ -65,7 +65,7 @@ export const LdapSettingsConnection = ({
             isRequired
             type="text"
             id="kc-console-connection-url"
-            name="config.connectionUrl"
+            name="config.connectionUrl[0]"
             ref={form.register}
           />
         </FormGroup>
@@ -82,8 +82,8 @@ export const LdapSettingsConnection = ({
           hasNoPaddingTop
         >
           <Controller
-            name="config.startTls"
-            defaultValue={false}
+            name="config.startTls[0]"
+            defaultValue={"false"}
             control={form.control}
             render={({ onChange, value }) => (
               <Switch
@@ -97,6 +97,7 @@ export const LdapSettingsConnection = ({
             )}
           ></Controller>
         </FormGroup>
+
         <FormGroup
           label={t("useTruststoreSpi")}
           labelIcon={
@@ -109,7 +110,7 @@ export const LdapSettingsConnection = ({
           fieldId="kc-use-truststore-spi"
         >
           <Controller
-            name="config.useTruststoreSpi"
+            name="config.useTruststoreSpi[0]"
             defaultValue=""
             control={form.control}
             render={({ onChange, value }) => (
@@ -126,9 +127,15 @@ export const LdapSettingsConnection = ({
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption key={0} value={t("always")} />
-                <SelectOption key={1} value={t("onlyLdaps")} />
-                <SelectOption key={2} value={t("never")} />
+                <SelectOption key={0} value="always">
+                  {t("always")}
+                </SelectOption>
+                <SelectOption key={1} value="ldapsOnly">
+                  {t("onlyLdaps")}
+                </SelectOption>
+                <SelectOption key={2} value="never">
+                  {t("never")}
+                </SelectOption>
               </Select>
             )}
           ></Controller>
@@ -175,7 +182,7 @@ export const LdapSettingsConnection = ({
           <TextInput
             type="text"
             id="kc-console-connection-timeout"
-            name="config.connectionTimeout"
+            name="config.connectionTimeout[0]"
             ref={form.register}
           />
         </FormGroup>
@@ -192,7 +199,7 @@ export const LdapSettingsConnection = ({
           isRequired
         >
           <Controller
-            name="config.authType"
+            name="config.authType[0]"
             defaultValue=""
             control={form.control}
             render={({ onChange, value }) => (
@@ -230,7 +237,7 @@ export const LdapSettingsConnection = ({
           <TextInput
             type="text"
             id="kc-console-bind-dn"
-            name="config.bindDn"
+            name="config.bindDn[0]"
             ref={form.register}
           />
         </FormGroup>
@@ -251,7 +258,7 @@ export const LdapSettingsConnection = ({
               isRequired
               type="password"
               id="kc-console-bind-credentials"
-              name="config.bindCredential"
+              name="config.bindCredential[0]"
               ref={form.register}
             />
             <Button
