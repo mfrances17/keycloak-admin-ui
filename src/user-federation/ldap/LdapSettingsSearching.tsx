@@ -73,14 +73,9 @@ export const LdapSettingsSearching = ({
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption
-                  key={0}
-                  value={t("common:choose")}
-                  isPlaceholder
-                />
-                <SelectOption key={1} value="RACT_ONLY" />
-                <SelectOption key={2} value="WRITABLE" />
-                <SelectOption key={3} value="UNSYNCED" />
+                <SelectOption key={0} value="RACT_ONLY" isPlaceholder />
+                <SelectOption key={1} value="WRITABLE" />
+                <SelectOption key={2} value="UNSYNCED" />
               </Select>
             )}
           ></Controller>
@@ -102,8 +97,20 @@ export const LdapSettingsSearching = ({
             type="text"
             id="kc-console-users-dn"
             name="config.usersDn[0]"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: `${t("validateUsersDn")}`,
+              },
+            })}
           />
+          {form.errors.config &&
+            form.errors.config.usersDn &&
+            form.errors.config.usersDn[0] && (
+              <div className="error">
+                {form.errors.config.usersDn[0].message}
+              </div>
+            )}
         </FormGroup>
         <FormGroup
           label={t("usernameLdapAttribute")}
@@ -122,8 +129,20 @@ export const LdapSettingsSearching = ({
             type="text"
             id="kc-username-ldap-attribute"
             name="config.usernameLDAPAttribute[0]"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: `${t("validateUsernameLDAPAttribute")}`,
+              },
+            })}
           />
+          {form.errors.config &&
+            form.errors.config.usernameLDAPAttribute &&
+            form.errors.config.usernameLDAPAttribute[0] && (
+              <div className="error">
+                {form.errors.config.usernameLDAPAttribute[0].message}
+              </div>
+            )}
         </FormGroup>
         <FormGroup
           label={t("rdnLdapAttribute")}
@@ -142,8 +161,20 @@ export const LdapSettingsSearching = ({
             type="text"
             id="kc-rdn-ldap-attribute"
             name="config.rdnLDAPAttribute[0]"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: `${t("validateRdnLdapAttribute")}`,
+              },
+            })}
           />
+          {form.errors.config &&
+            form.errors.config.rdnLDAPAttribute &&
+            form.errors.config.rdnLDAPAttribute[0] && (
+              <div className="error">
+                {form.errors.config.rdnLDAPAttribute[0].message}
+              </div>
+            )}
         </FormGroup>
         <FormGroup
           label={t("uuidLdapAttribute")}
@@ -162,8 +193,20 @@ export const LdapSettingsSearching = ({
             type="text"
             id="kc-uuid-ldap-attribute"
             name="config.uuidLDAPAttribute[0]"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: `${t("validateUuidLDAPAttribute")}`,
+              },
+            })}
           />
+          {form.errors.config &&
+            form.errors.config.uuidLDAPAttribute &&
+            form.errors.config.uuidLDAPAttribute[0] && (
+              <div className="error">
+                {form.errors.config.uuidLDAPAttribute[0].message}
+              </div>
+            )}
         </FormGroup>
         <FormGroup
           label={t("userObjectClasses")}
@@ -182,8 +225,20 @@ export const LdapSettingsSearching = ({
             type="text"
             id="kc-user-object-classes"
             name="config.userObjectClasses[0]"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: `${t("validateUserObjectClasses")}`,
+              },
+            })}
           />
+          {form.errors.config &&
+            form.errors.config.userObjectClasses &&
+            form.errors.config.userObjectClasses[0] && (
+              <div className="error">
+                {form.errors.config.userObjectClasses[0].message}
+              </div>
+            )}
         </FormGroup>
         <FormGroup
           label={t("userLdapFilter")}
@@ -234,15 +289,10 @@ export const LdapSettingsSearching = ({
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption
-                  key={0}
-                  value={t("common:choose")}
-                  isPlaceholder
-                />
-                <SelectOption key={1} value="1">
+                <SelectOption key={0} value="1" isPlaceholder>
                   {t("oneLevel")}
                 </SelectOption>
-                <SelectOption key={2} value="2">
+                <SelectOption key={1} value="2">
                   {t("subtree")}
                 </SelectOption>
               </Select>

@@ -66,8 +66,20 @@ export const LdapSettingsConnection = ({
             type="text"
             id="kc-console-connection-url"
             name="config.connectionUrl[0]"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: `${t("validateConnectionUrl")}`,
+              },
+            })}
           />
+          {form.errors.config &&
+            form.errors.config.connectionUrl &&
+            form.errors.config.connectionUrl[0] && (
+              <div className="error">
+                {form.errors.config.connectionUrl[0].message}
+              </div>
+            )}
         </FormGroup>
         <FormGroup
           label={t("enableStartTls")}
@@ -259,7 +271,12 @@ export const LdapSettingsConnection = ({
               type="password"
               id="kc-console-bind-credentials"
               name="config.bindCredential[0]"
-              ref={form.register}
+              ref={form.register({
+                required: {
+                  value: true,
+                  message: `${t("validateBindCredentials")}`,
+                },
+              })}
             />
             <Button
               variant="control"
@@ -268,6 +285,13 @@ export const LdapSettingsConnection = ({
               <EyeIcon />
             </Button>
           </InputGroup>
+          {form.errors.config &&
+            form.errors.config.bindCredential &&
+            form.errors.config.bindCredential[0] && (
+              <div className="error">
+                {form.errors.config.bindCredential[0].message}
+              </div>
+            )}
         </FormGroup>
         <FormGroup fieldId="kc-test-button">
           {" "}

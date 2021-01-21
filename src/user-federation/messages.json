@@ -94,6 +94,13 @@
     "validateRealm":"You must enter a realm",
     "validateServerPrincipal":"You must enter a server principal",
     "validateKeyTab": "You must enter a key tab",
+    "validateConnectionUrl": "You must enter a connection URL",
+    "validateBindCredentials": "You must enter bind credentials",
+    "validateUuidLDAPAttribute": "You must enter a UUID LDAP attribute",
+    "validateUserObjectClasses": "You must enter one or more user object classes",
+    "validateUsersDn": "You must enter users DN",
+    "validateUsernameLDAPAttribute": "You must enter a username LDAP attribute",
+    "validateRdnLdapAttribute": "You must enter an RDN LDAP attribute",
 
     "id": "ID",
     "mapperType": "Mapper type",

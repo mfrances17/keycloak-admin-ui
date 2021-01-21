@@ -63,7 +63,12 @@ export const LdapSettingsGeneral = ({
             type="text"
             id="kc-console-display-name"
             name="name"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: `${t("validateName")}`,
+              },
+            })}
           />
           <TextInput
             hidden
@@ -86,6 +91,9 @@ export const LdapSettingsGeneral = ({
             name="parentId"
             ref={form.register}
           />
+          {form.errors.name && (
+            <div className="error">{form.errors.name.message}</div>
+          )}
         </FormGroup>
         <FormGroup
           label={t("vendor")}
@@ -116,24 +124,19 @@ export const LdapSettingsGeneral = ({
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption
-                  key={0}
-                  value={t("common:choose")}
-                  isPlaceholder
-                />
-                <SelectOption key={1} value="ad">
+                <SelectOption key={0} value="ad" isPlaceholder>
                   Active Directory
                 </SelectOption>
-                <SelectOption key={2} value="rhds">
+                <SelectOption key={1} value="rhds">
                   Red Hat Directory Server
                 </SelectOption>
-                <SelectOption key={3} value="tivoli">
+                <SelectOption key={2} value="tivoli">
                   Tivoli
                 </SelectOption>
-                <SelectOption key={4} value="edirectory">
+                <SelectOption key={3} value="edirectory">
                   Novell eDirectory
                 </SelectOption>
-                <SelectOption key={5} value="other">
+                <SelectOption key={4} value="other">
                   Other
                 </SelectOption>
               </Select>
