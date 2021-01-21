@@ -99,7 +99,7 @@ export const KerberosSettingsRequired = ({
             ref={form.register({
               required: {
                 value: true,
-                message: "You must enter a name",
+                message: `${t("validateName")}`,
               },
             })}
           />
@@ -128,7 +128,7 @@ export const KerberosSettingsRequired = ({
             ref={form.register({
               required: {
                 value: true,
-                message: "You must enter a realm",
+                message: `${t("validateRealm")}`,
               },
             })}
           />
@@ -161,7 +161,7 @@ export const KerberosSettingsRequired = ({
             ref={form.register({
               required: {
                 value: true,
-                message: "You must enter a server principal",
+                message: `${t("validateServerPrincipal")}`,
               },
             })}
           />
@@ -194,7 +194,7 @@ export const KerberosSettingsRequired = ({
             ref={form.register({
               required: {
                 value: true,
-                message: "You must enter a key tab",
+                message: `${t("validateKeyTab")}`,
               },
             })}
           />
