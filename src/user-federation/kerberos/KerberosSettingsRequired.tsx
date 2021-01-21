@@ -96,8 +96,16 @@ export const KerberosSettingsRequired = ({
             type="text"
             id="kc-console-display-name"
             name="name"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: "You must enter a name",
+              },
+            })}
           />
+          {form.errors.name && (
+            <div className="error">{form.errors.name.message}</div>
+          )}
         </FormGroup>
 
         <FormGroup
@@ -117,8 +125,20 @@ export const KerberosSettingsRequired = ({
             type="text"
             id="kc-kerberos-realm"
             name="config.kerberosRealm[0]"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: "You must enter a realm",
+              },
+            })}
           />
+          {form.errors.config &&
+            form.errors.config.kerberosRealm &&
+            form.errors.config.kerberosRealm[0] && (
+              <div className="error">
+                {form.errors.config.kerberosRealm[0].message}
+              </div>
+            )}
         </FormGroup>
 
         <FormGroup
@@ -138,8 +158,20 @@ export const KerberosSettingsRequired = ({
             type="text"
             id="kc-server-principal"
             name="config.serverPrincipal[0]"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: "You must enter a server principal",
+              },
+            })}
           />
+          {form.errors.config &&
+            form.errors.config.serverPrincipal &&
+            form.errors.config.serverPrincipal[0] && (
+              <div className="error">
+                {form.errors.config.serverPrincipal[0].message}
+              </div>
+            )}
         </FormGroup>
 
         <FormGroup
@@ -159,8 +191,20 @@ export const KerberosSettingsRequired = ({
             type="text"
             id="kc-key-tab"
             name="config.keyTab[0]"
-            ref={form.register}
+            ref={form.register({
+              required: {
+                value: true,
+                message: "You must enter a key tab",
+              },
+            })}
           />
+          {form.errors.config &&
+            form.errors.config.keyTab &&
+            form.errors.config.keyTab[0] && (
+              <div className="error">
+                {form.errors.config.keyTab[0].message}
+              </div>
+            )}
         </FormGroup>
 
         <FormGroup
@@ -232,13 +276,15 @@ export const KerberosSettingsRequired = ({
                 forID="kc-edit-mode"
               />
             }
+            isRequired
             fieldId="kc-edit-mode"
           >
             {" "}
             <Controller
-              name="config.editMode"
-              defaultValue={t("common:selectOne")}
+              name="config.editMode[0]"
+              defaultValue="READ_ONLY"
               control={form.control}
+              rules={{ required: true }}
               render={({ onChange, value }) => (
                 <Select
                   toggleId="kc-edit-mode"
@@ -254,13 +300,8 @@ export const KerberosSettingsRequired = ({
                   selections={value}
                   variant={SelectVariant.single}
                 >
-                  <SelectOption
-                    key={0}
-                    value={t("common:selectOne")}
-                    isPlaceholder
-                  />
-                  <SelectOption key={1} value="READ_ONLY" />
-                  <SelectOption key={2} value="UNSYNCED" />
+                  <SelectOption key={0} value="READ_ONLY" isPlaceholder />
+                  <SelectOption key={1} value="UNSYNCED" />
                 </Select>
               )}
             ></Controller>

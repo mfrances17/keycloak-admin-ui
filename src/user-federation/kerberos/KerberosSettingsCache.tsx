@@ -46,18 +46,16 @@ export const KerberosSettingsCache = ({
     false
   );
 
-  const hourOptions = [
-    <SelectOption key={0} value={t("common:selectOne")} isPlaceholder />,
-  ];
-  for (let index = 1; index <= 24; index++) {
-    hourOptions.push(<SelectOption key={index + 1} value={[`${index}`]} />);
+  const hourOptions = [<SelectOption key={0} value={[`${1}`]} isPlaceholder />];
+  for (let index = 2; index <= 24; index++) {
+    hourOptions.push(<SelectOption key={index - 1} value={[`${index}`]} />);
   }
 
   const minuteOptions = [
-    <SelectOption key={0} value={t("common:selectOne")} isPlaceholder />,
+    <SelectOption key={0} value={[`${1}`]} isPlaceholder />,
   ];
-  for (let index = 1; index <= 60; index++) {
-    minuteOptions.push(<SelectOption key={index + 1} value={[`${index}`]} />);
+  for (let index = 2; index <= 60; index++) {
+    minuteOptions.push(<SelectOption key={index - 1} value={[`${index}`]} />);
   }
 
   return (
@@ -102,16 +100,11 @@ export const KerberosSettingsCache = ({
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption
-                  key={0}
-                  value={t("common:selectOne")}
-                  isPlaceholder
-                />
-                <SelectOption key={1} value={["DEFAULT"]} />
-                <SelectOption key={2} value={["EVICT_DAILY"]} />
-                <SelectOption key={3} value={["EVICT_WEEKLY"]} />
-                <SelectOption key={4} value={["MAX_LIFESPAN"]} />
-                <SelectOption key={5} value={["NO_CACHE"]} />
+                <SelectOption key={0} value={["DEFAULT"]} isPlaceholder />
+                <SelectOption key={1} value={["EVICT_DAILY"]} />
+                <SelectOption key={2} value={["EVICT_WEEKLY"]} />
+                <SelectOption key={3} value={["MAX_LIFESPAN"]} />
+                <SelectOption key={4} value={["NO_CACHE"]} />
               </Select>
             )}
           ></Controller>
@@ -127,6 +120,7 @@ export const KerberosSettingsCache = ({
                 forID="kc-eviction-day"
               />
             }
+            isRequired
             fieldId="kc-eviction-day"
           >
             <Controller
@@ -148,30 +142,25 @@ export const KerberosSettingsCache = ({
                   selections={value}
                   variant={SelectVariant.single}
                 >
-                  <SelectOption
-                    key={0}
-                    value={t("common:selectOne")}
-                    isPlaceholder
-                  />
-                  <SelectOption key={1} value={["1"]}>
+                  <SelectOption key={0} value={["1"]} isPlaceholder>
                     {t("common:Sunday")}
                   </SelectOption>
-                  <SelectOption key={2} value={["2"]}>
+                  <SelectOption key={1} value={["2"]}>
                     {t("common:Monday")}
                   </SelectOption>
-                  <SelectOption key={3} value={["3"]}>
+                  <SelectOption key={2} value={["3"]}>
                     {t("common:Tuesday")}
                   </SelectOption>
-                  <SelectOption key={4} value={["4"]}>
+                  <SelectOption key={3} value={["4"]}>
                     {t("common:Wednesday")}
                   </SelectOption>
-                  <SelectOption key={5} value={["5"]}>
+                  <SelectOption key={4} value={["5"]}>
                     {t("common:Thursday")}
                   </SelectOption>
-                  <SelectOption key={6} value={["6"]}>
+                  <SelectOption key={5} value={["6"]}>
                     {t("common:Friday")}
                   </SelectOption>
-                  <SelectOption key={7} value={["7"]}>
+                  <SelectOption key={6} value={["7"]}>
                     {t("common:Saturday")}
                   </SelectOption>
                 </Select>
@@ -194,6 +183,7 @@ export const KerberosSettingsCache = ({
                   forID="kc-eviction-hour"
                 />
               }
+              isRequired
               fieldId="kc-eviction-hour"
             >
               <Controller
@@ -229,6 +219,7 @@ export const KerberosSettingsCache = ({
                   forID="kc-eviction-minute"
                 />
               }
+              isRequired
               fieldId="kc-eviction-minute"
             >
               <Controller
@@ -270,6 +261,7 @@ export const KerberosSettingsCache = ({
                 forID="kc-max-lifespan"
               />
             }
+            isRequired
             fieldId="kc-max-lifespan"
           >
             <TextInput
