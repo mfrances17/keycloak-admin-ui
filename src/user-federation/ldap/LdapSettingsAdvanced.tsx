@@ -44,7 +44,7 @@ export const LdapSettingsAdvanced = ({
           hasNoPaddingTop
         >
           <Controller
-            name="config.usePasswordModifyExtendedOp[0]"
+            name="config.usePasswordModifyExtendedOp"
             defaultValue={"false"}
             control={form.control}
             render={({ onChange, value }) => (

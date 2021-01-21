@@ -41,8 +41,6 @@ export const UserFederationLdapSettings = () => {
       const fetchedComponent = await adminClient.components.findOne({ id });
       if (fetchedComponent) {
         setupForm(fetchedComponent);
-        console.log(`COMPONENT PULLED IN`);
-        console.log(fetchedComponent);
       }
     })();
   }, []);
@@ -58,9 +56,6 @@ export const UserFederationLdapSettings = () => {
   };
 
   const save = async (component: ComponentRepresentation) => {
-    console.log(`COMPONENT SAVED OUT`);
-    console.log(component);
-
     try {
       await adminClient.components.update({ id }, component);
       setupForm(component as ComponentRepresentation);

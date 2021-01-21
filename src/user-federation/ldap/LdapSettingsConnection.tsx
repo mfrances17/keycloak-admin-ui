@@ -82,7 +82,7 @@ export const LdapSettingsConnection = ({
           hasNoPaddingTop
         >
           <Controller
-            name="config.startTls[0]"
+            name="config.startTls"
             defaultValue={"false"}
             control={form.control}
             render={({ onChange, value }) => (
