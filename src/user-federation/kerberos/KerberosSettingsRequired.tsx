@@ -65,28 +65,28 @@ export const KerberosSettingsRequired = ({
           <TextInput
             hidden
             type="text"
-            id="kc-console-display-name"
+            id="kc-console-id"
             name="id"
             ref={form.register}
           />
           <TextInput
             hidden
             type="text"
-            id="kc-console-display-name"
+            id="kc-console-providerId"
             name="providerId"
             ref={form.register}
           />
           <TextInput
             hidden
             type="text"
-            id="kc-console-display-name"
+            id="kc-console-providerType"
             name="providerType"
             ref={form.register}
           />
           <TextInput
             hidden
             type="text"
-            id="kc-console-display-name"
+            id="kc-console-parentId"
             name="parentId"
             ref={form.register}
           />
@@ -94,7 +94,7 @@ export const KerberosSettingsRequired = ({
           <TextInput
             isRequired
             type="text"
-            id="kc-console-display-name"
+            id="kc-console-name"
             name="name"
             ref={form.register({
               required: {
