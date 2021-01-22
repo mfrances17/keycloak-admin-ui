@@ -125,7 +125,7 @@ export const KerberosSettingsCache = ({
           >
             <Controller
               name="config.evictionDay"
-              defaultValue={["Sunday"]}
+              defaultValue={[t("common:Sunday")]}
               control={form.control}
               render={({ onChange, value }) => (
                 <Select
