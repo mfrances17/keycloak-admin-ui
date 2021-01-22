@@ -84,7 +84,7 @@ export const LdapSettingsCache = ({
         >
           <Controller
             name="config.cachePolicy"
-            defaultValue=""
+            defaultValue={["DEFAULT"]}
             control={form.control}
             render={({ onChange, value }) => (
               <Select
@@ -125,7 +125,7 @@ export const LdapSettingsCache = ({
           >
             <Controller
               name="config.evictionDay"
-              defaultValue=""
+              defaultValue={[t("common:Sunday")]}
               control={form.control}
               render={({ onChange, value }) => (
                 <Select
@@ -187,7 +187,7 @@ export const LdapSettingsCache = ({
             >
               <Controller
                 name="config.evictionHour"
-                defaultValue=""
+                defaultValue={["1"]}
                 control={form.control}
                 render={({ onChange, value }) => (
                   <Select
@@ -222,7 +222,7 @@ export const LdapSettingsCache = ({
             >
               <Controller
                 name="config.evictionMinute"
-                defaultValue=""
+                defaultValue={["1"]}
                 control={form.control}
                 render={({ onChange, value }) => (
                   <Select
