@@ -73,7 +73,7 @@ export const LdapSettingsSearching = ({
                 selections={value}
                 variant={SelectVariant.single}
               >
-                <SelectOption key={0} value="RACT_ONLY" isPlaceholder />
+                <SelectOption key={0} value="READ_ONLY" isPlaceholder />
                 <SelectOption key={1} value="WRITABLE" />
                 <SelectOption key={2} value="UNSYNCED" />
               </Select>
