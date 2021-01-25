@@ -45,7 +45,7 @@ export const LdapSettingsAdvanced = ({
         >
           <Controller
             name="config.usePasswordModifyExtendedOp"
-            defaultValue={"false"}
+            defaultValue={["false"]}
             control={form.control}
             render={({ onChange, value }) => (
               <Switch

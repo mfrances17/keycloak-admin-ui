@@ -95,7 +95,7 @@ export const LdapSettingsConnection = ({
         >
           <Controller
             name="config.startTls"
-            defaultValue={"false"}
+            defaultValue={["false"]}
             control={form.control}
             render={({ onChange, value }) => (
               <Switch
