@@ -36,6 +36,7 @@ export const LdapSettingsConnection = ({
   ] = useState(false);
 
   const [isBindTypeDropdownOpen, setIsBindTypeDropdownOpen] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   return (
     <>
@@ -266,9 +267,9 @@ export const LdapSettingsConnection = ({
           isRequired
         >
           <InputGroup>
-            <TextInput // TODO: Make password field switch to type=text with button
+            <TextInput
               isRequired
-              type="password"
+              type={isPasswordVisible ? "text" : "password"}
               id="kc-console-bind-credentials"
               name="config.bindCredential[0]"
               ref={form.register({
@@ -281,6 +282,7 @@ export const LdapSettingsConnection = ({
             <Button
               variant="control"
               aria-label="show password button for bind credentials"
+              onClick={() => setIsPasswordVisible(!isPasswordVisible)}
             >
               <EyeIcon />
             </Button>
