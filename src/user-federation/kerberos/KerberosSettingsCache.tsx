@@ -46,16 +46,42 @@ export const KerberosSettingsCache = ({
     false
   );
 
-  const hourOptions = [<SelectOption key={0} value={[`${1}`]} isPlaceholder />];
-  for (let index = 2; index <= 24; index++) {
-    hourOptions.push(<SelectOption key={index - 1} value={[`${index}`]} />);
+  const hourOptions = [
+    <SelectOption key={0} value={[`${0}`]} isPlaceholder>
+      {[`0${0}`]}
+    </SelectOption>,
+  ];
+  let hourDisplay = "";
+  for (let index = 1; index < 24; index++) {
+    if (index < 10) {
+      hourDisplay = `0${index}`;
+    } else {
+      hourDisplay = `${index}`;
+    }
+    hourOptions.push(
+      <SelectOption key={index} value={[`${index}`]}>
+        {hourDisplay}
+      </SelectOption>
+    );
   }
 
   const minuteOptions = [
-    <SelectOption key={0} value={[`${1}`]} isPlaceholder />,
+    <SelectOption key={0} value={[`${0}`]} isPlaceholder>
+      {[`0${0}`]}
+    </SelectOption>,
   ];
-  for (let index = 2; index <= 60; index++) {
-    minuteOptions.push(<SelectOption key={index - 1} value={[`${index}`]} />);
+  let minuteDisplay = "";
+  for (let index = 1; index < 60; index++) {
+    if (index < 10) {
+      minuteDisplay = `0${index}`;
+    } else {
+      minuteDisplay = `${index}`;
+    }
+    minuteOptions.push(
+      <SelectOption key={index} value={[`${index}`]}>
+        {minuteDisplay}
+      </SelectOption>
+    );
   }
 
   return (
@@ -124,7 +150,7 @@ export const KerberosSettingsCache = ({
             fieldId="kc-eviction-day"
           >
             <Controller
-              name="config.evictionDay"
+              name="config.evictionDay[0]"
               defaultValue={[t("common:Sunday")]}
               control={form.control}
               render={({ onChange, value }) => (
@@ -142,25 +168,25 @@ export const KerberosSettingsCache = ({
                   selections={value}
                   variant={SelectVariant.single}
                 >
-                  <SelectOption key={0} value={["1"]} isPlaceholder>
+                  <SelectOption key={0} value="1" isPlaceholder>
                     {t("common:Sunday")}
                   </SelectOption>
-                  <SelectOption key={1} value={["2"]}>
+                  <SelectOption key={1} value="2">
                     {t("common:Monday")}
                   </SelectOption>
-                  <SelectOption key={2} value={["3"]}>
+                  <SelectOption key={2} value="3">
                     {t("common:Tuesday")}
                   </SelectOption>
-                  <SelectOption key={3} value={["4"]}>
+                  <SelectOption key={3} value="4">
                     {t("common:Wednesday")}
                   </SelectOption>
-                  <SelectOption key={4} value={["5"]}>
+                  <SelectOption key={4} value="5">
                     {t("common:Thursday")}
                   </SelectOption>
-                  <SelectOption key={5} value={["6"]}>
+                  <SelectOption key={5} value="6">
                     {t("common:Friday")}
                   </SelectOption>
-                  <SelectOption key={6} value={["7"]}>
+                  <SelectOption key={6} value="7">
                     {t("common:Saturday")}
                   </SelectOption>
                 </Select>
@@ -188,7 +214,7 @@ export const KerberosSettingsCache = ({
             >
               <Controller
                 name="config.evictionHour"
-                defaultValue={["1"]}
+                defaultValue={["0"]}
                 control={form.control}
                 render={({ onChange, value }) => (
                   <Select
@@ -224,7 +250,7 @@ export const KerberosSettingsCache = ({
             >
               <Controller
                 name="config.evictionMinute"
-                defaultValue={["1"]}
+                defaultValue={["0"]}
                 control={form.control}
                 render={({ onChange, value }) => (
                   <Select
