@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
 import { HelpItem } from "../../components/help-enabler/HelpItem";
 import { Controller, UseFormMethods } from "react-hook-form";
-import { EyeIcon } from "@patternfly/react-icons";
+import { EyeIcon, EyeSlashIcon } from "@patternfly/react-icons";
 import { FormAccess } from "../../components/form-access/FormAccess";
 import { WizardSectionHeader } from "../../components/wizard-section-header/WizardSectionHeader";
 
@@ -284,7 +284,7 @@ export const LdapSettingsConnection = ({
               aria-label="show password button for bind credentials"
               onClick={() => setIsPasswordVisible(!isPasswordVisible)}
             >
-              <EyeIcon />
+              {!isPasswordVisible ? <EyeIcon /> : <EyeSlashIcon />}
             </Button>
           </InputGroup>
           {form.errors.config &&
