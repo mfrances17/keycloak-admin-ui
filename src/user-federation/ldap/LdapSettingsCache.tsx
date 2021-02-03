@@ -288,7 +288,6 @@ export const LdapSettingsCache = ({
             fieldId="kc-max-lifespan"
           >
             <TextInput
-              isRequired
               type="text"
               id="kc-max-lifespan"
               name="config.maxLifespan[0]"

@@ -287,11 +287,9 @@ export const KerberosSettingsCache = ({
                 forID="kc-max-lifespan"
               />
             }
-            isRequired
             fieldId="kc-max-lifespan"
           >
             <TextInput
-              isRequired
               type="text"
               id="kc-max-lifespan"
               name="config.maxLifespan[0]"
