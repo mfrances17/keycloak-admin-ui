@@ -151,7 +151,7 @@ export const LdapSettingsCache = ({
           >
             <Controller
               name="config.evictionDay[0]"
-              defaultValue={[t("common:Sunday")]}
+              defaultValue={"1"}
               control={form.control}
               render={({ onChange, value }) => (
                 <Select
