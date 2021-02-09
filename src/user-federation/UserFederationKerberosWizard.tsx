@@ -2,7 +2,7 @@ import { Wizard } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import React from "react";
 import { KerberosSettingsRequired } from "./kerberos/KerberosSettingsRequired";
-import { KerberosSettingsCache } from "./kerberos/KerberosSettingsCache";
+import { SettingsCache } from "./shared/SettingsCache";
 import ComponentRepresentation from "keycloak-admin/lib/defs/componentRepresentation";
 import { useForm } from "react-hook-form";
 
@@ -24,7 +24,7 @@ export const UserFederationKerberosWizard = () => {
     {
       name: t("cacheSettings"),
       component: (
-        <KerberosSettingsCache
+        <SettingsCache
           form={form}
           showSectionHeading
           showSectionDescription
