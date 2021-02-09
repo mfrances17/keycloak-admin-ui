@@ -92,14 +92,11 @@ exports[`<FormAccess /> render normal form 1`] = `
                 "fieldArrayNamesRef": Object {
                   "current": Set {},
                 },
-                "fieldArrayValuesRef": Object {
-                  "current": Object {},
-                },
                 "fieldsRef": Object {
                   "current": Object {
                     "consentRequired": Object {
                       "ref": Object {
-                        "focus": [Function],
+                        "focus": undefined,
                         "name": "consentRequired",
                       },
                     },
@@ -118,18 +115,6 @@ exports[`<FormAccess /> render normal form 1`] = `
                 "fieldsWithValidationRef": Object {
                   "current": Object {},
                 },
-                "formState": Object {
-                  "dirtyFields": Object {},
-                  "errors": Object {},
-                  "isDirty": false,
-                  "isSubmitSuccessful": false,
-                  "isSubmitted": false,
-                  "isSubmitting": false,
-                  "isValid": false,
-                  "isValidating": false,
-                  "submitCount": 0,
-                  "touched": Object {},
-                },
                 "formStateRef": Object {
                   "current": Object {
                     "dirtyFields": Object {},
@@ -139,13 +124,14 @@ exports[`<FormAccess /> render normal form 1`] = `
                     "isSubmitted": false,
                     "isSubmitting": false,
                     "isValid": false,
-                    "isValidating": false,
                     "submitCount": 0,
                     "touched": Object {},
                   },
                 },
                 "getValues": [Function],
-                "isFormDirty": [Function],
+                "isWatchAllRef": Object {
+                  "current": false,
+                },
                 "mode": Object {
                   "isOnAll": false,
                   "isOnBlur": false,
@@ -159,21 +145,16 @@ exports[`<FormAccess /> render normal form 1`] = `
                 },
                 "readFormStateRef": Object {
                   "current": Object {
-                    "constructor": true,
-                    "dirtyFields": true,
-                    "errors": true,
-                    "isDirty": true,
-                    "isSubmitSuccessful": true,
-                    "isSubmitted": true,
-                    "isSubmitting": true,
-                    "isValid": true,
-                    "isValidating": true,
-                    "submitCount": true,
-                    "touched": true,
+                    "dirtyFields": false,
+                    "isDirty": false,
+                    "isSubmitting": false,
+                    "isValid": false,
+                    "touched": false,
                   },
                 },
                 "register": [Function],
                 "removeFieldEventListener": [Function],
+                "renderWatchedInputs": [Function],
                 "resetFieldArrayFunctionRef": Object {
                   "current": Object {},
                 },
@@ -185,7 +166,6 @@ exports[`<FormAccess /> render normal form 1`] = `
                 "trigger": [Function],
                 "unregister": [Function],
                 "updateFormState": [Function],
-                "updateWatchedValue": [Function],
                 "useWatchFieldsRef": Object {
                   "current": Object {},
                 },
@@ -196,6 +176,9 @@ exports[`<FormAccess /> render normal form 1`] = `
                   "current": Object {},
                 },
                 "validateResolver": undefined,
+                "watchFieldsRef": Object {
+                  "current": Set {},
+                },
                 "watchInternal": [Function],
               }
             }

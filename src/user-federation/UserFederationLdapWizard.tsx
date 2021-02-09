@@ -81,11 +81,7 @@ export const UserFederationLdapWizard = () => {
       name: t("cacheSettings"),
       id: "ldapCacheSettingsStep",
       component: (
-        <SettingsCache
-          form={form}
-          showSectionHeading
-          showSectionDescription
-        />
+        <SettingsCache form={form} showSectionHeading showSectionDescription />
       ),
     },
     {
