@@ -18,6 +18,8 @@ import { MultiLineInput } from "../components/multi-line-input/MultiLineInput";
 import { FormAccess } from "../components/form-access/FormAccess";
 import { HelpItem } from "../components/help-enabler/HelpItem";
 
+import "../common-styles.css";
+
 type ClientSettingsProps = {
   save: () => void;
 };
@@ -143,7 +145,7 @@ export const ClientSettings = ({ save }: ClientSettingsProps) => {
               ref={register}
             />
           </FormGroup>
-          <ActionGroup>
+          <ActionGroup className="nonscroll-action-group">
             <Button variant="primary" onClick={save}>
               {t("common:save")}
             </Button>

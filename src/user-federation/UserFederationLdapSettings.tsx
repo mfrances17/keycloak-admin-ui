@@ -31,6 +31,8 @@ import { ViewHeader } from "../components/view-header/ViewHeader";
 import { useHistory, useParams } from "react-router-dom";
 import { ScrollForm } from "../components/scroll-form/ScrollForm";
 
+import "../common-styles.css";
+
 type LdapSettingsHeaderProps = {
   onChange: (value: string) => void;
   value: string;
@@ -296,7 +298,7 @@ export const UserFederationLdapSettings = () => {
           <LdapSettingsAdvanced form={form} />
         </ScrollForm>
         <Form onSubmit={form.handleSubmit(save)}>
-          <ActionGroup>
+          <ActionGroup className="nonscroll-action-group">
             <Button
               isDisabled={!form.formState.isDirty}
               variant="primary"
