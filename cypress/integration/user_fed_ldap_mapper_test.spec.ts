@@ -36,12 +36,11 @@ const firstUserObjClasses = "inetOrgPerson, organizationalPerson";
 const addProviderMenu = "Add new provider";
 const providerCreatedSuccess = "User federation provider successfully created";
 const mapperCreatedSuccess = "Mapping successfully created";
+const mapperUpdatedSuccess = "Mapping successfully updated";
 const providerDeleteSuccess = "The user federation provider has been deleted.";
 const providerDeleteTitle = "Delete user federation provider?";
-// const savedSuccessMessage = "User federation provider successfully saved";
 const mapperDeletedSuccess = "Mapping successfully deleted";
 const mapperDeleteTitle = "Delete mapping?";
-// const disableModalTitle = "Disable user federation provider?";
 
 const groupName = "my-mappers-group";
 
@@ -64,10 +63,7 @@ const lastNameMapper = "last name";
 const modifyDateMapper = "modify date";
 const usernameMapper = "username";
 const firstNameMapper = "first name";
-
-
-
-
+const MsadAccountControlsMapper = "MSAD account controls";
 
 describe("User Fed LDAP mapper tests", () => {
   beforeEach(() => {
@@ -127,7 +123,7 @@ describe("User Fed LDAP mapper tests", () => {
     modalUtils.checkModalTitle(mapperDeleteTitle).confirmModal();
     masthead.checkNotificationMessage(mapperDeletedSuccess);
     listingPage.itemExist(creationDateMapper, false);
-  
+
     listingPage.itemExist(emailMapper).deleteItem(emailMapper);
     modalUtils.checkModalTitle(mapperDeleteTitle).confirmModal();
     masthead.checkNotificationMessage(mapperDeletedSuccess);
@@ -153,20 +149,51 @@ describe("User Fed LDAP mapper tests", () => {
     masthead.checkNotificationMessage(mapperDeletedSuccess);
     listingPage.itemExist(firstNameMapper, false);
 
-    // listingPage.itemExist(msadLdsUserAcctMapper).deleteItem(msadLdsUserAcctMapper);
-    // modalUtils.checkModalTitle(mapperDeleteTitle).confirmModal();
-    // masthead.checkNotificationMessage(mapperDeletedSuccess);
-    // listingPage.itemExist(msadLdsUserAcctMapper, false);
+    listingPage
+      .itemExist(MsadAccountControlsMapper)
+      .deleteItem(MsadAccountControlsMapper);
+    modalUtils.checkModalTitle(mapperDeleteTitle).confirmModal();
+    masthead.checkNotificationMessage(mapperDeletedSuccess);
   });
 
-  // create one of every kind (8) mappers
-  it("Create user account control mapper", () => {
+  // create mapper
+  it("Create certificate ldap mapper", () => {
+    providersPage.clickExistingCard(ldapName);
+    providersPage.goToMappers();
+    providersPage.createNewMapper(certLdapMapper);
+    providersPage.save("ldap-mapper");
+    masthead.checkNotificationMessage(mapperCreatedSuccess);
+    listingPage.itemExist(certLdapMapper, true);
+  });
+
+  // update mapper
+  it("Update certificate ldap mapper", () => {
     providersPage.clickExistingCard(ldapName);
     providersPage.goToMappers();
 
+    listingPage.goToItemDetails(`${certLdapMapper}-test`);
+    providersPage.updateMapper(certLdapMapper);
+
+    providersPage.save("ldap-mapper");
+    masthead.checkNotificationMessage(mapperUpdatedSuccess);
+  });
+
+  // delete mapper
+  it("Delete certificate ldap mapper", () => {
+    providersPage.clickExistingCard(ldapName);
+    providersPage.goToMappers();
+
+    listingPage.deleteItem(`${certLdapMapper}-test`);
+    modalUtils.checkModalTitle(mapperDeleteTitle).confirmModal();
+    masthead.checkNotificationMessage(mapperDeletedSuccess);
+  });
+
+  // create one of every kind of non-group/role mapper (8)
+  it("Create user account control mapper", () => {
+    providersPage.clickExistingCard(ldapName);
+    providersPage.goToMappers();
     providersPage.createNewMapper(msadUserAcctMapper);
     providersPage.save("ldap-mapper");
-
     masthead.checkNotificationMessage(mapperCreatedSuccess);
     listingPage.itemExist(msadUserAcctMapper, true);
   });
@@ -174,21 +201,26 @@ describe("User Fed LDAP mapper tests", () => {
   it("Create msad lds user account control mapper", () => {
     providersPage.clickExistingCard(ldapName);
     providersPage.goToMappers();
-
     providersPage.createNewMapper(msadLdsUserAcctMapper);
     providersPage.save("ldap-mapper");
-
     masthead.checkNotificationMessage(mapperCreatedSuccess);
     listingPage.itemExist(msadLdsUserAcctMapper, true);
+  });
+
+  it("Create certificate ldap mapper", () => {
+    providersPage.clickExistingCard(ldapName);
+    providersPage.goToMappers();
+    providersPage.createNewMapper(certLdapMapper);
+    providersPage.save("ldap-mapper");
+    masthead.checkNotificationMessage(mapperCreatedSuccess);
+    listingPage.itemExist(certLdapMapper, true);
   });
 
   it("Create user attribute ldap mapper", () => {
     providersPage.clickExistingCard(ldapName);
     providersPage.goToMappers();
-
     providersPage.createNewMapper(userAttLdapMapper);
     providersPage.save("ldap-mapper");
-
     masthead.checkNotificationMessage(mapperCreatedSuccess);
     listingPage.itemExist(userAttLdapMapper, true);
   });
@@ -196,32 +228,17 @@ describe("User Fed LDAP mapper tests", () => {
   it("Create hardcoded attribute mapper", () => {
     providersPage.clickExistingCard(ldapName);
     providersPage.goToMappers();
-
     providersPage.createNewMapper(hcAttMapper);
     providersPage.save("ldap-mapper");
-
     masthead.checkNotificationMessage(mapperCreatedSuccess);
     listingPage.itemExist(hcAttMapper, true);
-  });
-
-  it("Create certificate ldap mapper", () => {
-    providersPage.clickExistingCard(ldapName);
-    providersPage.goToMappers();
-
-    providersPage.createNewMapper(certLdapMapper);
-    providersPage.save("ldap-mapper");
-
-    masthead.checkNotificationMessage(mapperCreatedSuccess);
-    listingPage.itemExist(certLdapMapper, true);
   });
 
   it("Create full name ldap mapper", () => {
     providersPage.clickExistingCard(ldapName);
     providersPage.goToMappers();
-
     providersPage.createNewMapper(fullNameLdapMapper);
     providersPage.save("ldap-mapper");
-
     masthead.checkNotificationMessage(mapperCreatedSuccess);
     listingPage.itemExist(fullNameLdapMapper, true);
   });
@@ -229,10 +246,8 @@ describe("User Fed LDAP mapper tests", () => {
   it("Create hardcoded ldap group mapper", () => {
     providersPage.clickExistingCard(ldapName);
     providersPage.goToMappers();
-
     providersPage.createNewMapper(hcLdapGroupMapper);
     providersPage.save("ldap-mapper");
-
     masthead.checkNotificationMessage(mapperCreatedSuccess);
     listingPage.itemExist(hcLdapGroupMapper, true);
   });
@@ -240,51 +255,11 @@ describe("User Fed LDAP mapper tests", () => {
   it("Create hardcoded ldap attribute mapper", () => {
     providersPage.clickExistingCard(ldapName);
     providersPage.goToMappers();
-
     providersPage.createNewMapper(hcLdapAttMapper);
     providersPage.save("ldap-mapper");
-
     masthead.checkNotificationMessage(mapperCreatedSuccess);
     listingPage.itemExist(hcLdapAttMapper, true);
   });
-
-    // update and cancel mapper
-    it("Update and cancel mapper", () => {
-    //   providersPage.clickExistingCard(ldapName);
-    //   providersPage.goToMappers();
-  
-    //   listingPage.clickRowDetails();
-  
-    //   providersPage.createNewMapper();
-    //   providersPage.save("ldap-mapper");
-  
-    //   masthead.checkNotificationMessage(mapperCreatedSuccess);
-    //   listingPage.itemExist(, true);
-    });
-  
-    // update and save mapper
-    it("Update and save mapper", () => {
-    //   providersPage.clickExistingCard(ldapName);
-    //   providersPage.goToMappers();
-  
-  
-    //   providersPage.createNewMapper();
-    //   providersPage.save("ldap-mapper");
-  
-    //   masthead.checkNotificationMessage(mapperCreatedSuccess);
-    //   listingPage.itemExist(, true);
-    });
-  
-    // delete mapper
-    it("Delete mapper", () => {
-      providersPage.clickExistingCard(ldapName);
-      providersPage.goToMappers();
-  
-      listingPage.deleteItem(msadLdsUserAcctMapper);
-      modalUtils.checkModalTitle(mapperDeleteTitle).confirmModal();
-      masthead.checkNotificationMessage(mapperDeletedSuccess);
-      listingPage.itemExist(msadLdsUserAcctMapper, false);
-    });
 
   // *** test cleanup ***
   it("Cleanup - delete group", () => {
@@ -298,5 +273,4 @@ describe("User Fed LDAP mapper tests", () => {
     modalUtils.checkModalTitle(providerDeleteTitle).confirmModal();
     masthead.checkNotificationMessage(providerDeleteSuccess);
   });
-
 });

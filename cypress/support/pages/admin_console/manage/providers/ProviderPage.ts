@@ -113,7 +113,6 @@ export default class ProviderPage {
     // this.hcLdapRoleMapper = "hardcoded-ldap-role-mapper";
 
     this.groupName = "my-mappers-group";
-
   }
 
   changeCacheTime(unit: string, time: string) {
@@ -236,7 +235,6 @@ export default class ProviderPage {
   }
 
   goToMappers() {
-    // click Mappers tab
     cy.get(`[data-testid="ldap-mappers-tab"]`).click();
   }
 
@@ -244,17 +242,12 @@ export default class ProviderPage {
     const userModelAttValue = "firstName";
     const ldapAttValue = "cn";
 
-    // click Add Mapper
     cy.get(`[data-testid="add-mapper-btn"]`).click();
     cy.wait(1000);
 
-    // click mapper type select drop-down
     cy.get("#kc-providerId").click();
-
-    // click specific mapper in the list
     cy.get("#kc-providerId + ul").contains(mapperType).click();
 
-    // enter a name in the Name field
     cy.get(`[data-testid="ldap-mapper-name"]`).type(`${mapperType}-test`);
 
     switch (mapperType) {
@@ -288,6 +281,51 @@ export default class ProviderPage {
       //   break;
       default:
         console.log("Invalid mapper type.");
+        break;
+    }
+  }
+
+  updateMapper(mapperType: string) {
+    const userModelAttValue = "lastName";
+    const ldapAttValue = "sn";
+
+    switch (mapperType) {
+      case this.msadUserAcctMapper:
+      case this.msadLdsUserAcctMapper:
+        break;
+      case this.userAttLdapMapper:
+      case this.certLdapMapper:
+        cy.get(`[${this.userModelAttInput}]`).clear();
+        cy.get(`[${this.userModelAttInput}]`).type(userModelAttValue);
+        cy.get(`[${this.ldapAttInput}]`).clear();
+        cy.get(`[${this.ldapAttInput}]`).type(ldapAttValue);
+        break;
+      case this.hcAttMapper:
+        cy.get(`[${this.userModelAttNameInput}]`).clear();
+        cy.get(`[${this.userModelAttNameInput}]`).type(userModelAttValue);
+        cy.get(`[${this.attValueInput}]`).clear();
+        cy.get(`[${this.attValueInput}]`).type(ldapAttValue);
+        break;
+      case this.fullNameLdapMapper:
+        cy.get(`[${this.ldapFullNameAttInput}]`).clear();
+        cy.get(`[${this.ldapFullNameAttInput}]`).type(ldapAttValue);
+        break;
+      case this.hcLdapAttMapper:
+        cy.get(`[${this.ldapAttNameInput}]`).clear();
+        cy.get(`[${this.ldapAttNameInput}]`).type(userModelAttValue);
+        cy.get(`[${this.ldapAttValueInput}]`).clear;
+        cy.get(`[${this.ldapAttValueInput}]`).type(ldapAttValue);
+        break;
+      // case this.hcLdapGroupMapper:
+      //   break;
+      // case this.groupLdapMapper:
+      //   break;
+      // case this.roleMapper:
+      //   break;
+      // case this.hcLdapRoleMapper:
+      //   break;
+      default:
+        console.log("Invalid mapper name.");
         break;
     }
   }
