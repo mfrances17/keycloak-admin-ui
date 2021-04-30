@@ -9,3 +9,7 @@
 .error {
   color: red;
 }
+
+.keycloak-empty-state-card:hover {
+  cursor: pointer;
+}
