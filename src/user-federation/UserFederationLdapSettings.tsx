@@ -295,7 +295,7 @@ export const UserFederationLdapSettings = () => {
               <LdapSettingsGeneral form={form} />
               <LdapSettingsConnection form={form} />
               <LdapSettingsSearching form={form} />
-              <LdapSettingsSynchronization form={form} />
+              <LdapSettingsSynchronization form={form} fullSync={true} changedSync={true}/>
               <LdapSettingsKerberosIntegration form={form} />
               <SettingsCache form={form} />
               <LdapSettingsAdvanced form={form} />
