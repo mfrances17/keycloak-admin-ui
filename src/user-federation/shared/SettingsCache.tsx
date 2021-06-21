@@ -4,6 +4,7 @@ import {
   SelectOption,
   SelectVariant,
   TextInput,
+  TimePicker,
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
@@ -35,6 +36,15 @@ export const SettingsCache = ({
     false
   );
 
+  const [hour, setHour] = useState("00");
+
+  const [minute, setMinute] = useState("00");
+
+  const logLoadedValues = () => {
+    const values = form.getValues();
+    console.log(values);
+  };
+
   const cachePolicyType = useWatch({
     control: form.control,
     name: "config.cachePolicy",
@@ -48,6 +58,10 @@ export const SettingsCache = ({
   const [isEvictionDayDropdownOpen, setIsEvictionDayDropdownOpen] = useState(
     false
   );
+
+  const convertTimeToValues = () => {};
+
+  const convertValuesToTime = () => {};
 
   const hourOptions = [
     <SelectOption key={0} value={[`${0}`]} isPlaceholder>
@@ -85,6 +99,9 @@ export const SettingsCache = ({
         {minuteDisplay}
       </SelectOption>
     );
+  
+  
+  
   }
 
   return (
@@ -161,11 +178,13 @@ export const SettingsCache = ({
                   required
                   onToggle={() =>
                     setIsEvictionDayDropdownOpen(!isEvictionDayDropdownOpen)
+                    
                   }
                   isOpen={isEvictionDayDropdownOpen}
                   onSelect={(_, value) => {
                     onChange(value as string);
                     setIsEvictionDayDropdownOpen(false);
+                    logLoadedValues();
                   }}
                   selections={value}
                   variant={SelectVariant.single}
@@ -236,6 +255,7 @@ export const SettingsCache = ({
                 )}
               ></Controller>
             </FormGroup>
+
             <FormGroup
               label={t("evictionMinute")}
               labelIcon={
@@ -270,6 +290,27 @@ export const SettingsCache = ({
                   >
                     {minuteOptions}
                   </Select>
+                )}
+              ></Controller>
+            </FormGroup>
+            <FormGroup
+              label="Time picker test"
+              labelIcon={
+                <HelpItem
+                  helpText={helpText("evictionMinuteHelp")}
+                  forLabel={t("evictionMinute")}
+                  forID="kc-eviction-minute"
+                />
+              }
+              isRequired
+              fieldId="kc-eviction-minute"
+            >
+              <Controller
+                name="evictionTime"
+                defaultValue={["00:00"]}
+                control={form.control}
+                render={() => (
+                  <TimePicker time={`${hour}:${minute}`} is24Hour></TimePicker>
                 )}
               ></Controller>
             </FormGroup>
