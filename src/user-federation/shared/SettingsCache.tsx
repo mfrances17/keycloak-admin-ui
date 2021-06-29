@@ -95,9 +95,6 @@ export const SettingsCache = ({
         {minuteDisplay}
       </SelectOption>
     );
-  
-  
-  
   }
 
   return (
@@ -174,7 +171,6 @@ export const SettingsCache = ({
                   required
                   onToggle={() =>
                     setIsEvictionDayDropdownOpen(!isEvictionDayDropdownOpen)
-                    
                   }
                   isOpen={isEvictionDayDropdownOpen}
                   onSelect={(_, value) => {
@@ -305,9 +301,7 @@ export const SettingsCache = ({
                 name="evictionTime"
                 defaultValue={["00:00"]}
                 control={form.control}
-                render={() => (
-                  <TimePicker is24Hour></TimePicker>
-                )}
+                render={() => <TimePicker is24Hour></TimePicker>}
               ></Controller>
             </FormGroup>
           </>

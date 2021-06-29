@@ -232,13 +232,13 @@ export const routes: RoutesFn = (t: TFunction) => [
     access: "view-realm",
   },
   {
-    path: "/:realm/user-federation/kerberos/:id",
+    path: "/:realm/user-federation/kerberos/new",
     component: UserFederationKerberosSettings,
-    breadcrumb: t("common:settings"),
+    breadcrumb: t("user-federation:addOneKerberos"),
     access: "view-realm",
   },
   {
-    path: "/:realm/user-federation/kerberos/new",
+    path: "/:realm/user-federation/kerberos/:id",
     component: UserFederationKerberosSettings,
     breadcrumb: t("common:settings"),
     access: "view-realm",

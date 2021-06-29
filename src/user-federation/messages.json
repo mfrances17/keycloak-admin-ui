@@ -6,6 +6,7 @@
     "getStarted": "To get started, select a provider from the list below.",
     "providers": "Add providers",
     "addKerberos": "Add Kerberos providers",
+    "addOneKerberos": "Add Kerberos provider",
     "addLdap": "Add LDAP providers",
     "addOneLdap": "Add LDAP provider",
     "addKerberosWizardTitle": "Add Kerberos user federation provider",

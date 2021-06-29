@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   ActionGroup,
   AlertVariant,
@@ -17,14 +17,16 @@ import type ComponentRepresentation from "keycloak-admin/lib/defs/componentRepre
 
 import { Controller, useForm } from "react-hook-form";
 import { useConfirmDialog } from "../components/confirm-dialog/ConfirmDialog";
-import { useAdminClient } from "../context/auth/AdminClient";
+import { useAdminClient, useFetch } from "../context/auth/AdminClient";
 import { useAlerts } from "../components/alert/Alerts";
 import { useTranslation } from "react-i18next";
 import { ViewHeader } from "../components/view-header/ViewHeader";
 import { useHistory, useParams } from "react-router-dom";
 
-type myComponentRepresentation = ComponentRepresentation & {
+type kerberosComponentRepresentation = ComponentRepresentation & {
+  config?: {
     evictionTime?: string | string[] | undefined;
+  };
 };
 
 type KerberosSettingsHeaderProps = {
@@ -51,11 +53,12 @@ const KerberosSettingsHeader = ({
       save();
     },
   });
+
   return (
     <>
       <DisableConfirm />
-      {id === "new" ? (
-        <ViewHeader titleKey="Kerberos" />
+      {!id ? (
+        <ViewHeader titleKey={t("addOneKerberos")} />
       ) : (
         <ViewHeader
           titleKey="Kerberos"
@@ -85,37 +88,63 @@ const KerberosSettingsHeader = ({
 
 export const UserFederationKerberosSettings = () => {
   const { t } = useTranslation("user-federation");
-  const form = useForm<myComponentRepresentation>({ mode: "onChange" });
+  const form = useForm<ComponentRepresentation>({ mode: "onChange" });
   const history = useHistory();
   const adminClient = useAdminClient();
   const { realm } = useRealm();
 
   const { id } = useParams<{ id: string }>();
-
   const { addAlert } = useAlerts();
 
-  useEffect(() => {
-    (async () => {
-      if (id !== "new") {
-        const fetchedComponent = await adminClient.components.findOne({ id });
-        if (fetchedComponent) {
-          setupForm(fetchedComponent);
-        }
+  useFetch(
+    async () => {
+      if (id) {
+        return await adminClient.components.findOne({ id });
       }
-    })();
-  }, []);
+      return undefined;
+    },
+    (fetchedComponent) => {
+      if (fetchedComponent) {
+        setupForm(fetchedComponent);
+      }
+    },
+    []
+  );
 
+  // useEffect(() => {
+  //   (async () => {
+  //     if (id !== "new") {
+  //       const fetchedComponent = await adminClient.components.findOne({ id });
+  //       if (fetchedComponent) {
+  //         console.log(`Fetched component from useEffect on an existing (not new) kerberos provider:`);
+  //         console.log(fetchedComponent);
 
-const combineTime = (hour: string | string[] | undefined, minute: string | string[] | undefined) => {
-  console.log(`hour is: ${hour} minute is: ${minute}`);
-  console.log(`${hour}:${minute}`);
-  return `${hour}:${minute}`;
-}
+  //         console.log(`And an individual component (evictionHour) from that provider:`);
+  //         console.log(fetchedComponent?.config?.evictionHour);
 
+  //         form.setValue("evictionTime", "hi");
+  //         setupForm(fetchedComponent);
+  //       }
+  //     }
+  //   })();
+  // }, []);
 
+  const combineTime = (
+    hour: string | string[] | undefined,
+    minute: string | string[] | undefined
+  ) => {
+    console.log(`hour is: ${hour} minute is: ${minute}`);
+    console.log(`${hour}:${minute}`);
+    return `${hour}:${minute}`;
+  };
 
-  const setupForm = (component: myComponentRepresentation) => {
+  const setupForm = (component: ComponentRepresentation) => {
     form.reset();
+
+    if (component.config && component.config.evictionTime) {
+      component.config.evictionTime = "hi";
+    }
+
     Object.entries(component).map((entry) => {
       form.setValue(
         "config.allowPasswordAuthentication",
@@ -132,27 +161,24 @@ const combineTime = (hour: string | string[] | undefined, minute: string | strin
         convertToFormValues(entry[1], "config", form.setValue);
       }
       form.setValue(entry[0], entry[1]);
+
+      console.log(`Form after setting it up with setupForm:`);
+      console.log(form.getValues());
     });
   };
 
   const save = async (component: ComponentRepresentation) => {
     try {
-      if (id) {
-        if (id === "new") {
-          await adminClient.components.create(component);
-          history.push(`/${realm}/user-federation`);
-        } else {
-          await adminClient.components.update({ id }, component);
-        }
+      if (!id) {
+        await adminClient.components.create(component);
+        history.push(`/${realm}/user-federation`);
+      } else {
+        await adminClient.components.update({ id }, component);
       }
-      setupForm(component as ComponentRepresentation);
-      addAlert(
-        t(id === "new" ? "createSuccess" : "saveSuccess"),
-        AlertVariant.success
-      );
+      addAlert(t(id ? "saveSuccess" : "createSuccess"), AlertVariant.success);
     } catch (error) {
       addAlert(
-        `${t(id === "new" ? "createError" : "saveError")} '${error}'`,
+        t(id ? "saveError" : "createError", { error }),
         AlertVariant.danger
       );
     }
