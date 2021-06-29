@@ -59,10 +59,6 @@ export const SettingsCache = ({
     false
   );
 
-  const convertTimeToValues = () => {};
-
-  const convertValuesToTime = () => {};
-
   const hourOptions = [
     <SelectOption key={0} value={[`${0}`]} isPlaceholder>
       {[`0${0}`]}
@@ -310,7 +306,7 @@ export const SettingsCache = ({
                 defaultValue={["00:00"]}
                 control={form.control}
                 render={() => (
-                  <TimePicker time={`${hour}:${minute}`} is24Hour></TimePicker>
+                  <TimePicker is24Hour></TimePicker>
                 )}
               ></Controller>
             </FormGroup>

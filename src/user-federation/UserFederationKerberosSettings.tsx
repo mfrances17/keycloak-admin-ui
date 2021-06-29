@@ -23,6 +23,10 @@ import { useTranslation } from "react-i18next";
 import { ViewHeader } from "../components/view-header/ViewHeader";
 import { useHistory, useParams } from "react-router-dom";
 
+type myComponentRepresentation = ComponentRepresentation & {
+    evictionTime?: string | string[] | undefined;
+};
+
 type KerberosSettingsHeaderProps = {
   onChange: (value: string) => void;
   value: string;
@@ -81,7 +85,7 @@ const KerberosSettingsHeader = ({
 
 export const UserFederationKerberosSettings = () => {
   const { t } = useTranslation("user-federation");
-  const form = useForm<ComponentRepresentation>({ mode: "onChange" });
+  const form = useForm<myComponentRepresentation>({ mode: "onChange" });
   const history = useHistory();
   const adminClient = useAdminClient();
   const { realm } = useRealm();
@@ -101,13 +105,29 @@ export const UserFederationKerberosSettings = () => {
     })();
   }, []);
 
-  const setupForm = (component: ComponentRepresentation) => {
+
+const combineTime = (hour: string | string[] | undefined, minute: string | string[] | undefined) => {
+  console.log(`hour is: ${hour} minute is: ${minute}`);
+  console.log(`${hour}:${minute}`);
+  return `${hour}:${minute}`;
+}
+
+
+
+  const setupForm = (component: myComponentRepresentation) => {
     form.reset();
     Object.entries(component).map((entry) => {
       form.setValue(
         "config.allowPasswordAuthentication",
         component.config?.allowPasswordAuthentication
       );
+
+      form.setValue(
+        "evictionTime",
+        // combineTime(component.config?.evictionHour, component.config?.evictionMinute)
+        "10:18"
+      );
+
       if (entry[0] === "config") {
         convertToFormValues(entry[1], "config", form.setValue);
       }
