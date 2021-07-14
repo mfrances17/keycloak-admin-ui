@@ -84,7 +84,7 @@ export default {
     allowedClockSkew: "Allowed clock skew",
     forwardParameters: "Forwarded query parameters",
     generalSettings: "General settings",
-    oidcSettings: "OpenId Connect settings",
+    oidcSettings: "OpenID Connect settings",
     advancedSettings: "Advanced settings",
     storeTokens: "Store tokens",
     trustEmail: "Trust Email",
